@@ -5,19 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pesonal Portfolio Website</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/926a3d59c8.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="header">
         <div class="container">
             <nav>
                 <img src="images/logo.png" class="logo">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Portfolio</a></li>
-                    <li><a href="#">Contact</a></li>
+                <ul id = "sidemenu">
+                    <li><a href="#header">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <!-- <li><a href="#">Services</a></li> -->
+                    <!-- <li><a href="#">Portfolio</a></li> -->
+                    <li><a href="#resume">Resume</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
                 </ul>
+                <i class="fa-solid fa-bars" onclick="openmenu()"></i>
             </nav>
             <div class="header-text">
                 <p>Software Engineer/Data Scientist</p>
@@ -26,6 +30,7 @@
         </div>
     </div>
 
+    <!-- about -->
     <div id="about">
         <div class="container">
             <div class="row">
@@ -38,20 +43,141 @@
                         Computer Science and Data Science. </p>
 
                     <div class="tab-titles">
-                        <p class = "tab-links active">Skills</p>
-                        <p class = "tab-links">Experience</p>
-                        <p class = "tab-links">Education</p>
+                        <p class = "tab-links active-link" onclick="opentab('skills')" >Skills</p>
+                        <p class = "tab-links" onclick="opentab('experience')">Experience</p>
+                        <p class = "tab-links" onclick="opentab('education')">Education</p>
                     </div>
-                    <div class="tab-contents">
+                    <div class="tab-contents active-tab" id = "skills">
                         <ul>
                             <li><span>AI Engineering</span><br>Prompt engineering AI</li>
                             <li><span>Web Development</span><br>Web app Development</li>
                             <li><span>Data Science</span><br>data wrangling, reading and processing</li>
                         </ul>
                     </div>
+                    <div class="tab-contents" id = "experience">
+                        <ul>
+                            <li><span>Aug 2023 - Current</span><br>AI Software Engineer at Venu AI</li>
+                            <li><span>Jun 2023 - Sept 2023</span><br>Research Intern at Edsolab</li>
+                        </ul>
+                    </div>
+                    <div class="tab-contents" id = "education">
+                        <ul>
+                            <li><span>Sept 2023 - Current</span><br>BA Computer Science and Data Science from the University of British Columbia</li>
+                            <li><span>Sept 2021 - May 2023</span><br>IB Diploma from GEMS Modern Academy</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- services
+    <div id="services">
+        <div class="container">
+            <h1 class ="sub-title">My Services</h1>
+            <div class="services-list">
+                <div>
+                    <h2>Web Design</h2>
+                    <p>Lorer ea ectus amet</p>
+                    <a href="#"> learn more</a>
+                </div>
+                <div>
+                    <h2>App Design</h2>
+                    <p>Lorer ea ectus amet</p>
+                    <a href="#"> learn more</a>
+                </div>
+            </div>
+        </div>
+    </div> 
+    
+    Portfolio
+    <div id="portfolio">
+        <div class="container">
+            <h1 class ="sub-title">My Work</h1>
+        </div>
+    </div> -->
+
+
+     <!-- CV/Resume -->
+     <div id="resume" class="resume">
+            <a href="images/Zaid_Resume.pdf" download class="btn">RESUME</a>
+    </div>
+
+
+    <!-- Contact -->
+    <div id="contact">
+        <div class="container">
+            <div class="contact-right">
+                <h1 class = "sub-title">Contact Me</h1>
+                <form name = "submit-to-google-sheet">
+                    <input type="text" name ="Name" placeholder="Your Name" required>
+                    <input type="email" name ="Email" placeholder="Your Email" required>
+                    <textarea name="Message" rows="6" placeholder ="Your Message"></textarea>
+                    <button type="sumbit" class="btn-2">Submit</button>
+                </form>
+                <span id="msg"></span>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="section left">
+                <p><i class="fa-solid fa-phone"></i> +971 54 3971600</p>
+            </div>
+            <div class="section center">
+                <p> <i class="fa-solid fa-envelope"></i> zaidsayedbusiness@gmail.com</p>
+            </div>
+            <div class="section right">
+                <p>Copyright © Zaid, 2024</p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        var tablinks = document.getElementsByClassName("tab-links");
+        var tabcontents = document.getElementsByClassName("tab-contents");
+
+        function opentab(tabname) {
+            for(tablink of tablinks){
+                tablink.classList.remove("active-link");
+            }
+            for(tabcontent of tabcontents){
+                tabcontent.classList.remove("active-tab");
+            }
+            event.currentTarget.classList.add("active-link");
+            document.getElementById(tabname).classList.add("active-tab");
+        }
+    </script>
+
+    <script>
+        var sidem = document.getElementById("sidemenu");
+
+        function openmenu(){
+            sidem.style.right = "0";
+        }
+        function closemenu(){
+            sidem.style.right = "-140px";
+        }
+    </script>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycby1vZzv79Xex50FJk1kjpzVY0cJQUWyrU-S9ob54KoWCaC6bCLnGLgPk7_cpzTbeAsKeQ/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg = document.getElementById("msg")
+    
+        form.addEventListener('submit', e => {
+        e.preventDefault()
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                msg.innerHTML= "Message sent successfully."
+                setTimeout(function(){
+                    msg.innerHTML = ""
+                }, 5000)
+                form.reset()
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+    
 </body>
 </html>
