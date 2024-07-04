@@ -105,6 +105,9 @@ nav ul li a:hover::after{
     flex-basis:60%;
 }
 
+.about-2 p{
+    margin-top: 6px;
+}
 .sub-title{
     font-size: 45px;
     font-weight: 550;
@@ -145,7 +148,7 @@ nav ul li a:hover::after{
 }
 .tab-contents ul li span{
     color:  #c3c30b;
-    font-size: 14px;
+    font-size: 15px;
 }
 .tab-contents{
     display: none;
