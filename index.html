@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,10 +8,13 @@
     <title>Personal Portfolio Website</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/926a3d59c8.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
 </head>
 <body>
     <div id="header">
         <div class="container">
+            <div id="particles-js"></div>
             <nav>
                 <img src="images/logo.png" class="logo">
                 <ul id = "sidemenu">
@@ -24,8 +29,13 @@
                 <i class="fa-solid fa-bars" onclick="openmenu()"></i>
             </nav>
             <div class="header-text">
-                <p>Software Engineer/Data Scientist</p>
+                <!-- <p>Software Engineer/Data Scientist</p>
                 <h1>Hey, I'm <span>Zaid</span> <br> Sophomore at the <br>University of British Columbia</h1>
+             -->
+                <h1>Zaid Sayed</h1>
+                <h2>AI & Data Science Enthusiast</h2>
+                <p>Software Engineer | Data Scientist</p>
+                <p>Exploring AI, Building the Future</p>
             </div>
         </div>
     </div>
@@ -182,6 +192,20 @@
             })
             .catch(error => console.error('Error!', error.message))
         })
+    </script>
+
+    <script>
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#FFD700" },  /* Yellow particles */
+                shape: { type: "circle" },
+                opacity: { value: 0.7 },
+                size: { value: 3 },
+                move: { enable: true, speed: 2 },
+                line_linked: { enable: true, distance: 150, color: "#FFD700", opacity: 0.4 }
+            }
+        });
     </script>
     
 </body>

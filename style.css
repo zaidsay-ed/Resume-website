@@ -17,9 +17,10 @@ body{
 #header{
     width: 100%;
     height: 100vh;
-    background-image: url("images/dp-pic.png");
+    /* background-image: url("images/dp-pic.png"); */
     background-size: cover;
     background-position: center;
+    
 }
 
 nav{
@@ -31,6 +32,15 @@ nav{
 
 .container{
     padding: 10px 10%;
+}
+
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
 
 .logo{
@@ -67,13 +77,34 @@ nav ul li a:hover::after{
 }
 
 .header-text{
-    margin-top: 20%;
-    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: rgb(7, 11, 0.5); /* Semi-transparent background box */
+    padding: 20px 40px;
+    border-radius: 10px;
 }
 
 .header-text h1{
-    margin-top: 20px;
-    font-size: 50px;
+    font-size: 60px;
+    font-weight: 800;
+    color: #FFD700;
+    text-shadow: 0 0 15px rgba(231, 231, 16, 0.8), 0 0 20px rgba(0, 255, 255, 0.6);
+    
+}
+
+.header-text h2 {
+    font-size: 45px;
+    color: white;
+    opacity: 0.9;
+}
+
+.header-text p {
+    font-size: 24px;
+            font-style: italic;
+            color: #ffffff;
 }
 
 .header-text h1 span{
@@ -300,7 +331,7 @@ nav .fa-solid{
 
 @media only screen and (max-width:600px) {
     #header{
-        background-image: url("images/phone-dp.png");
+        /* background-image: url("images/phone-dp.png"); */
         }
         .header-text{
             margin-top: 100%;
@@ -312,7 +343,7 @@ nav .fa-solid{
         .header-text p{
             font-size: 9px;
         }
-        nav .fa-solid{
+        nav .fa-solid{ 
             display: block;
             font-size: 25px;
         }
