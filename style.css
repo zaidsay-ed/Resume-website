@@ -9,7 +9,8 @@ html{
     scroll-behavior:smooth;
 }
 body{
-    background:#080808;
+    /* background:#080808; */
+    background: linear-gradient(135deg, #0a0a0a, #070404);
     color: #fff;
 }
 
@@ -77,6 +78,8 @@ nav ul li a:hover::after{
 
 .header-text h1 span{
     color: #e7e710;
+    /* color: #FFD700; Yellow */
+    text-shadow: 2px 2px 5px #00FFFF; /* Cyan Glow */
 }
 
 
@@ -240,6 +243,20 @@ form input, form textarea{
     font-size:18px;
     border-radius: 6px;
 }
+/* form input, form textarea {
+    background: #1a1a1a;
+    border: 1px solid #444;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+} */
+
+/* form input:focus, form textarea:focus {
+    border-color: #FFD700;
+    box-shadow: 0 0 10px #FFD700;
+} */
+
 
 .copyright{
     width:100%;
