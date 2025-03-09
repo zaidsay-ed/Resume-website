@@ -21,6 +21,7 @@ body{
     background-size: cover;
     background-position: center;
     
+    
 }
 
 nav{
@@ -28,6 +29,13 @@ nav{
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(10, 10, 10, 0.9);
+    
 }
 
 .container{
@@ -143,9 +151,13 @@ nav ul li a:hover::after{
     margin-top: 6px;
 }
 .sub-title{
-    font-size: 45px;
+    /* font-size: 45px;
     font-weight: 550;
-    color:#fff;
+    color:#fff; */
+    font-size: 50px;
+    color: #f7f7f3;
+    text-shadow: 2px 2px 5px #00FFFF; /* Cyan Glow */
+    margin-bottom: 20px;
 }
 
 .tab-titles{
@@ -192,6 +204,50 @@ nav ul li a:hover::after{
 }
 
 
+ /* Projects Section */
+ #projects {
+    text-align: center;
+    padding: 80px 10%;
+    background: rgba(0, 0, 0, 0.8);
+}
+#projects h2 {
+    font-size: 50px;
+    color: #f2f1ec;
+    text-shadow: 2px 2px 5px #00FFFF; /* Cyan Glow */
+    margin-bottom: 20px;
+}
+.project-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+.project-card {
+    background: #111;
+    border: 2px solid #FFD700;
+    padding: 20px;
+    width: 300px;
+    border-radius: 15px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+.project-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #FFD700;
+}
+.project-card h3 {
+    color: #FFD700;
+    font-size: 24px;
+}
+.project-card p {
+    color: #fff;
+    font-size: 16px;
+    opacity: 0.8;
+    margin-top: 4px;
+    line-height: 1.4;
+}
 
 /* ---services---
 #services{
@@ -329,26 +385,31 @@ nav .fa-solid{
     display:none;
 }
 
-@media only screen and (max-width:600px) {
-    #header{
-        /* background-image: url("images/phone-dp.png"); */
-        }
+ @media only screen and (max-width:600px) {
         .header-text{
-            margin-top: 100%;
+            margin-top: 20%;
             font-size: 16px;
         }
         .header-text h1{
-            font-size: 14px;
+            font-size: 35px;
+            padding-bottom: 10px;
+            font-style: italic;
+        }
+        .header-text h2{
+            font-size: 60px;
+            padding-bottom: 10px;
+            text-shadow: 2px 2px 5px #00FFFF; /* Cyan Glow */
         }
         .header-text p{
-            font-size: 9px;
+            font-size: 15px;
         }
         nav .fa-solid{ 
             display: block;
-            font-size: 25px;
+            font-size: 30px;
+            
         }
         nav ul{
-            background:#e6e604 ;
+            background:#c3c30b;;
             position: fixed;
             top: 0;
             right: -140px;
@@ -357,6 +418,7 @@ nav .fa-solid{
             padding-top: 50px;
             z-index: 2;
             transition: 0.5s;
+
         }
         nav ul li{
             display: block;
@@ -388,11 +450,27 @@ nav .fa-solid{
         }
         .copyright{
             font-size: 10px;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 12px 10px;
         }
-    }
 
-    #msg{
+        .copyright .section {
+            margin-bottom: 10px;
+            font-size: 18px;
+        } 
+        
+    } 
+
+
+
+    
+
+    #msg {
         color: #61b752;
         margin-top: -65px;
         display: block;
+
+
     }
