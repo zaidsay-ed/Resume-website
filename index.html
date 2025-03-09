@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/926a3d59c8.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
 </head>
 <body>
@@ -33,7 +35,7 @@
                 <!-- <p>Software Engineer/Data Scientist</p>
                 <h1>Hey, I'm <span>Zaid</span> <br> Sophomore at the <br>University of British Columbia</h1>
              -->
-                <h1>Zaid Sayed</h1>
+                <h1><span id="typed"></span></h1>
                 <h2>AI & Data Science Enthusiast</h2>
                 <p>Software Engineer | Data Scientist</p>
                 <p>Exploring AI, Building the Future</p>
@@ -239,6 +241,40 @@
             }
         });
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        // Animate header text
+        gsap.from(".header-text", { 
+            duration: 1.5, 
+            opacity: 0, 
+            y: -50, 
+            ease: "power2.out" 
+        });
+
+        // Animate project cards (if any)
+        gsap.from(".project-card", { 
+            duration: 1, 
+            opacity: 0, 
+            y: 30, 
+            ease: "power2.out", 
+            stagger: 0.2 
+        });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        var typed = new Typed("#typed", {
+            strings: ["Zaid Sayed"],
+            typeSpeed: 80,   // Adjust the typing speed (in milliseconds)
+            backSpeed: 50,    // If you want to simulate deleting text, adjust the backspace speed
+            loop: false       // Set to true if you want it to loop repeatedly
+        });
+        });
+    </script>
+  
+  
     
 </body>
 </html>
