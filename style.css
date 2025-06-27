@@ -207,7 +207,7 @@ nav ul li a:hover::after{
  /* Projects Section */
  #projects {
     text-align: center;
-    padding: 80px 10%;
+    padding: 60px 10%;
     background: rgba(0, 0, 0, 0.8);
 }
 #projects h2 {
@@ -220,17 +220,19 @@ nav ul li a:hover::after{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: start; 
     gap: 20px;
 }
 .project-card {
     background: #111;
     border: 2px solid #FFD700;
     padding: 20px;
-    width: 300px;
+    width: 300px;           /* Fixed width for consistency */
+    min-height: 350px;   
     border-radius: 15px;
     text-align: center;
     transition: transform 0.3s ease-in-out;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     margin-right: 10px;
 }
 .project-card:hover {
@@ -240,6 +242,7 @@ nav ul li a:hover::after{
 .project-card h3 {
     color: #FFD700;
     font-size: 24px;
+    margin-top: 0;
 }
 .project-card p {
     color: #fff;
@@ -391,7 +394,7 @@ nav .fa-solid{
             font-size: 16px;
         }
         .header-text h1{
-            font-size: 35px;
+            font-size: 34px;
             padding-bottom: 10px;
             font-style: italic;
         }
