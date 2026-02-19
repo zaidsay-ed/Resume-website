@@ -205,52 +205,184 @@ nav ul li a:hover::after{
 
 
  /* Projects Section */
- #projects {
+ 
+#projects {
     text-align: center;
-    padding: 60px 10%;
+    padding: 80px 0 60px 0;
     background: rgba(0, 0, 0, 0.8);
+    /* Extra top margin to separate from section above */
+    margin-top: 40px;
 }
-#projects h2 {
+
+.projects-title {
     font-size: 50px;
     color: #f2f1ec;
-    text-shadow: 2px 2px 5px #00FFFF; /* Cyan Glow */
-    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px #00FFFF;
+    margin: 0 0 40px 0;
+    font-weight: 700;
 }
-.project-list {
+
+/* Outer row: [arrow] [window] [arrow] */
+.pc-outer {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: start; 
-    gap: 20px;
+    align-items: center;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 10px;
+    box-sizing: border-box;
 }
-.project-card {
+
+/* The clipping window — ONLY this clips */
+.pc-window {
+    flex: 1;
+    overflow: hidden;           /* clips cards */
+    min-width: 0;               /* critical flex fix */
+}
+
+/* The moving strip */
+.pc-track {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;       /* equal height cards */
+    gap: 20px;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+/* Individual card */
+.pc-card {
+    /* 3 cards visible: (100% - 2 gaps of 20px) / 3 */
+    flex: 0 0 calc((100% - 40px) / 3);
+    min-width: 0;
+    box-sizing: border-box;
+
     background: #111;
     border: 2px solid #FFD700;
-    padding: 20px;
-    width: 300px;           /* Fixed width for consistency */
-    min-height: 350px;   
     border-radius: 15px;
+    padding: 24px 20px;
     text-align: center;
-    transition: transform 0.3s ease-in-out;
-    /* margin-top: 10px; */
-    margin-right: 10px;
+
+    /* column flex to push button to bottom */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    transition: box-shadow 0.3s ease;
 }
-.project-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px #FFD700;
+
+.pc-card:hover {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.45);
 }
-.project-card h3 {
+
+.pc-card h3 {
     color: #FFD700;
-    font-size: 24px;
-    margin-top: 0;
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0 0 14px 0;
+    line-height: 1.3;
 }
-.project-card p {
+
+.pc-card p {
     color: #fff;
-    font-size: 16px;
-    opacity: 0.8;
-    margin-top: 4px;
-    line-height: 1.4;
+    font-size: 14.5px;
+    opacity: 0.85;
+    line-height: 1.55;
+    flex: 1;                    /* fills space, pushes button down */
+    margin: 0;
 }
+
+.pc-link {
+    display: inline-block;
+    margin-top: 20px;           /* space above button */
+    padding: 8px 16px;
+    color: #FFD700;
+    border: 1px solid #FFD700;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.pc-link:hover {
+    background: #FFD700;
+    color: #000;
+    box-shadow: 0 0 10px #FFD700;
+}
+
+.pc-link i { margin-right: 6px; }
+
+/* Arrow buttons */
+.pc-arrow {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: transparent;
+    border: 2px solid #FFD700;
+    color: #FFD700;
+    font-size: 34px;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 12px;
+    padding-bottom: 2px;
+    user-select: none;
+}
+
+.pc-arrow:hover:not(:disabled) {
+    background: #FFD700;
+    color: #000;
+    box-shadow: 0 0 14px rgba(255,215,0,0.6);
+}
+
+.pc-arrow:disabled {
+    opacity: 0.2;
+    cursor: default;
+}
+
+/* Dots */
+.pc-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.pc-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    background: #555;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.pc-dot.active {
+    background: #FFD700;
+    transform: scale(1.35);
+    box-shadow: 0 0 6px #FFD700;
+}
+
+/* Responsive */
+@media (max-width: 860px) {
+    .pc-card { flex: 0 0 calc((100% - 20px) / 2); }
+}
+@media (max-width: 560px) {
+    .pc-card { flex: 0 0 100%; }
+    .pc-arrow { width: 36px; height: 36px; font-size: 26px; margin: 0 6px; }
+}
+
+
+
+
 
 /* ---services---
 #services{
@@ -465,7 +597,6 @@ nav .fa-solid{
         } 
         
     } 
-
 
 
     

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Portfolio Website</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://kit.fontawesome.com/926a3d59c8.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -53,7 +54,7 @@
                 <div class="about-2">
                     <h1 class ="sub-title">About Me</h1>
                     <p>I am a student at UBC, majoring in Computer Science and Data Science. 
-                        Furthermore, I am currently Ta'ing for a CS Course at UBC - Models of Computating, whilst working or projects and wideing my skillset. 
+                        Furthermore, I am currently TA'ing for a CS Course at UBC - Models of Computating, whilst working on projects and widening my skillset. 
                         My interests span from developing cool products, analyzing peculiar data and managing business operations.
                         I am actively looking for opportunities to bridge my interests and gain experience in the various prevalent fields present out there.</p>
 
@@ -81,7 +82,7 @@
                     </div>
                     <div class="tab-contents" id = "education">
                         <ul>
-                            <li><span>Sept 2023 - Current""</span><br> Bachelors in Computer Science and Data Science from the University of British Columbia <br> <i> <font size = '3'> International Student Scholarship Winner - 2024</font> </i> </li>
+                            <li><span>Sept 2023 - Current</span><br> Bachelors in Computer Science and Data Science from the University of British Columbia <br> <i> <font size = '3'> International Student Scholarship Winner - 2024</font> </i> </li>
                             <li><span>Sept 2021 - May 2023</span><br>IB Diploma from GEMS Modern Academy</li>
                         </ul>
                     </div>
@@ -90,37 +91,58 @@
         </div>
     </div>
 
-    <div id="projects">
-        <h2>My Projects</h2>
-        <div class="project-list">
-            <div class="project-card">
-                <h3>Maternal Health Risk Classifier</h3>
-                <p>Developed a classifier using R and the KNN algorithm in Jupyter Notebook to assess maternal health risks. The model was evaluated with a confusion matrix to ensure accuracy by processing test data from a recognized ML repository.</p>
-            </div>
-            <div class="project-card">
-                <h3>Finance Budget Tracker</h3>
-                <p>A Java application built with JSwing that enables users to track earnings, expenditures, and cash flow. It uses JSON for data persistence and includes unit tests with JUnit for reliable performance.
-                </p>
-            </div>
-            <div class="project-card">
-                <h3>Sudoku Solver</h3>
-                <p>A Python-based solver that implements a backtracking algorithm with recursion and depth-first search. This project uses arrays and constraint propagation to efficiently solve Sudoku puzzles.
-                </p>
-            </div>
-            <div class="project-card">
-                <h3>Resume Parser</h3>
-                <p>
-                    An automated resume parser built with Python, leveraging NLP techniques using spaCy/NLTK and regular expressions. It extracts key candidate information with over 95% accuracy.
-                </p>
-            </div>
-            <div class="project-card">
-                <h3>AI Email Assistant</h3>
-                <p>
-                    Built an interactive web application using React, TypeScript, and the Ionic Framework. Integrated the Gmail API with OAuth for secure email access and utilized the OpenAI API with prompt engineering to generate instant email responses, reducing manual effort.
-                </p>
-            </div>
+    
+
+<div id="projects">
+  <h2 class="projects-title">My Projects</h2>
+
+  <div class="pc-outer">
+    <button class="pc-arrow pc-prev" id="pcPrev">&#8249;</button>
+    <div class="pc-window" id="pcWindow">
+      <div class="pc-track" id="pcTrack">
+
+        <div class="pc-card">
+          <h3>Maternal Health Risk Classifier</h3>
+          <p>Developed a classifier using R and the KNN algorithm in Jupyter Notebook to assess maternal health risks. Evaluated with a confusion matrix using test data from a recognized ML repository.</p>
+          <a href="https://github.com/zaidsay-ed/Maternal-Health-Risk-Classifier-Model" class="pc-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
         </div>
+
+        <div class="pc-card">
+          <h3>Credit Card Default Prediction</h3>
+          <p>Built an end-to-end ML pipeline in Python to predict credit card default risk. Includes data preprocessing, feature engineering, model training, evaluation, and explainability.</p>
+          <a href="https://github.com/zaidsay-ed/credit-card-default-prediction" class="pc-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+        </div>
+
+        <div class="pc-card">
+          <h3>Finance Budget Tracker</h3>
+          <p>A Java application built with JSwing to track earnings, expenditures, and cash flow. Uses JSON for data persistence and JUnit for unit testing.</p>
+          <a href="https://github.com/zaidsay-ed/Budget-Tracker/tree/main" class="pc-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+        </div>
+
+        <div class="pc-card">
+          <h3>Sudoku Solver</h3>
+          <p>A Python solver using backtracking, recursion, and depth-first search with constraint propagation to efficiently solve any Sudoku puzzle.</p>
+          <a href="https://github.com/zaidsay-ed/sudoku-solver/tree/main" class="pc-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+        </div>
+
+        <div class="pc-card">
+          <h3>Resume Parser</h3>
+          <p>An automated resume parser in Python using spaCy/NLTK and regular expressions to extract key candidate information with over 95% accuracy.</p>
+        </div>
+
+        <div class="pc-card">
+          <h3>AI Email Assistant</h3>
+          <p>A React + TypeScript + Ionic web app integrating Gmail API (OAuth) and OpenAI API with prompt engineering to auto-generate email replies.</p>
+          <a href="https://github.com/zaidsay-ed/email-responder" class="pc-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+        </div>
+
+      </div>
     </div>
+    <button class="pc-arrow pc-next" id="pcNext">&#8250;</button>
+  </div>
+
+  <div class="pc-dots" id="pcDots"></div>
+</div>
     <!-- services
     <div id="services">
         <div class="container">
@@ -150,7 +172,7 @@
 
      <!-- CV/Resume -->
      <div id="resume" class="resume">
-            <a href="images/Zaid_s_Resume.pdf" download class="btn">RESUME</a>
+            <a href="images/Zaid_Resume.pdf" download class="btn">RESUME</a>
     </div>
 
 
@@ -275,7 +297,75 @@
         });
     </script>
   
-  
+
+</style>
+
+
+<!-- ====== REPLACE YOUR OLD CAROUSEL SCRIPT WITH THIS ====== -->
+<script>
+(function () {
+    const track  = document.getElementById('pcTrack');
+    const window_ = document.getElementById('pcWindow');
+    const prev   = document.getElementById('pcPrev');
+    const next   = document.getElementById('pcNext');
+    const dotsEl = document.getElementById('pcDots');
+    const cards  = Array.from(track.querySelectorAll('.pc-card'));
+    let idx = 0;
+
+    function visibleCount() {
+        const w = window.innerWidth;
+        if (w <= 560) return 1;
+        if (w <= 860) return 2;
+        return 3;
+    }
+
+    function pageCount() {
+        return Math.ceil(cards.length / visibleCount());
+    }
+
+    function buildDots() {
+        dotsEl.innerHTML = '';
+        for (let i = 0; i < pageCount(); i++) {
+            const d = document.createElement('button');
+            d.className = 'pc-dot' + (i === idx ? ' active' : '');
+            d.onclick = () => go(i);
+            dotsEl.appendChild(d);
+        }
+    }
+
+    function go(newIdx) {
+        idx = Math.max(0, Math.min(newIdx, pageCount() - 1));
+
+        // Card width is computed from the actual rendered card
+        const cardW = cards[0].getBoundingClientRect().width;
+        const gap   = 20;
+        const vis   = visibleCount();
+        const offset = idx * vis * (cardW + gap);
+
+        track.style.transform = `translateX(-${offset}px)`;
+
+        prev.disabled = idx === 0;
+        next.disabled = idx >= pageCount() - 1;
+
+        dotsEl.querySelectorAll('.pc-dot').forEach((d, i) => {
+            d.classList.toggle('active', i === idx);
+        });
+    }
+
+    prev.addEventListener('click', () => go(idx - 1));
+    next.addEventListener('click', () => go(idx + 1));
+
+    function init() {
+        idx = 0;
+        buildDots();
+        go(0);
+    }
+
+    window.addEventListener('resize', init);
+    // Small delay so browser has painted and card widths are real
+    setTimeout(init, 50);
+})();
+</script>
     
 </body>
 </html>
