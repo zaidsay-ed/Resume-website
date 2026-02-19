@@ -39,57 +39,103 @@
                 <h1><span id="typed"></span></h1>
                 <h2>AI & Data Science Enthusiast</h2>
                 <p>Software Engineer | Data Scientist</p>
-                <p>Exploring AI, Building the Future</p>
+                <span id="typed-subtitle"></span>
             </div>
         </div>
     </div>
 
     <!-- about -->
-    <div id="about">
-        <div class="container">
+    
+<div id="about">
+    <div class="container">
+        <div class="about-glass reveal">
             <div class="row">
-                <div class="about-1">
-                    <img src="images/dp.jpg" alt="">
+                <div class="about-1 reveal-left">
+                    <img src="images/dp.jpg" alt="Zaid Sayed">
                 </div>
-                <div class="about-2">
-                    <h1 class ="sub-title">About Me</h1>
-                    <p>I am a student at UBC, majoring in Computer Science and Data Science. 
-                        Furthermore, I am currently TA'ing for a CS Course at UBC - Models of Computating, whilst working on projects and widening my skillset. 
-                        My interests span from developing cool products, analyzing peculiar data and managing business operations.
-                        I am actively looking for opportunities to bridge my interests and gain experience in the various prevalent fields present out there.</p>
+                <div class="about-2 reveal-right">
+                    <h1 class="sub-title">About Me</h1>
+                    <p>I'm a Computer Science and Data Science student at UBC, currently TAing for Models of Computing while working on projects and widening my skillset. My interests span AI product development, data analysis, and business operations, and I'm actively seeking opportunities to bridge them all.</p>
 
                     <div class="tab-titles">
-                        <p class = "tab-links active-link" onclick="opentab('skills')" >Skills</p>
-                        <p class = "tab-links" onclick="opentab('experience')">Experience</p>
-                        <p class = "tab-links" onclick="opentab('education')">Education</p>
+                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                        <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                        <p class="tab-links" onclick="opentab('education')">Education</p>
                     </div>
-                    <div class="tab-contents active-tab" id = "skills">
+
+                    <!-- Skills tab (unchanged) -->
+                    <div class="tab-contents active-tab" id="skills">
                         <ul>
-                            <li><span>AI Development</span><br>Prompt engineering <br>Dataset training <br>LLM optimization</li>
-                            <li><span>Web App Development</span><br>Frontend - HTML, JavaScript and CSS <br> Backend - SQL, Java and Python</li>
-                            <li><span>Data Science</span><br>Data wrangling, reading and processing - R and SQL<br> Version control - github <br>Effective visualizations <br> Machine learning algorithms - KNN and Linear regression</li>
-                            <li><span>Graphic Designer</span><br>Adobe Photoshop</li>
+                            <li><span>AI Development</span><br>Prompt engineering · Dataset training · LLM optimization</li>
+                            <li><span>Web App Development</span><br>Frontend: HTML, JavaScript, CSS &nbsp;|&nbsp; Backend: SQL, Java, Python</li>
+                            <li><span>Data Science</span><br>Data wrangling &amp; processing (R, SQL) · Visualizations · ML (KNN, Linear Regression) · Version control (GitHub)</li>
+                            <li><span>Graphic Design</span><br>Adobe Photoshop</li>
                         </ul>
                     </div>
-                    <div class="tab-contents" id = "experience">
+
+                    <!-- ── Experience tab — TIMELINE ── -->
+                    <div class="tab-contents" id="experience">
+                        <div class="timeline" id="experienceTimeline">
+                            
+                            <div class="tl-item">
+                                <div class="tl-date">Aug 2025 - Present</div>
+                                <div class="tl-role">Resident Advisor</div>
+                                <div class="tl-company">University of British Columbia</div>
+                            </div>
+
+                            <div class="tl-item">
+                                <div class="tl-date">Sep 2024 - Present</div>
+                                <div class="tl-role">Undergraduate Teaching Assistant</div>
+                                <div class="tl-company">University of British Columbia · Models of Computing</div>
+                            </div>
+
+                            <div class="tl-item">
+                                <div class="tl-date">May 2025 — Jun 2025</div>
+                                <div class="tl-role">IT Intern</div>
+                                <div class="tl-company">Grant Thornton</div>
+                            </div>
+
+                            <div class="tl-item">
+                                <div class="tl-date">Jan 2023 - Aug 2024</div>
+                                <div class="tl-role">AI Program Manager</div>
+                                <div class="tl-company">Venu AI</div>
+                            </div>
+
+                            <div class="tl-item">
+                                <div class="tl-date">Aug 2022 - Jan 2023</div>
+                                <div class="tl-role">AI Software Engineer</div>
+                                <div class="tl-company">Venu AI</div>
+                            </div>
+
+                            <div class="tl-item">
+                                <div class="tl-date">Jun 2023 - Sep 2023</div>
+                                <div class="tl-role">STEM Research Intern</div>
+                                <div class="tl-company">Edsolab</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Education tab (unchanged) -->
+                    <div class="tab-contents" id="education">
                         <ul>
-                            <li><span>Sep 2024 - Current</span><br>Undergrad Teaching Assistant at the University of British Columbia</li>
-                            <li><span>May 2025 - Jun 2025</span><br>IT Intern at Grant Thornton</li>
-                            <li><span>Jan 2023 - Aug 2024</span><br>AI Program Manager at Venu AI</li>
-                            <li><span>Aug 2023 - Jan 2023</span><br>AI Software Engineer at Venu AI</li>
-                            <li><span>Jun 2023 - Sept 2023</span><br>STEM Research Intern at Edsolab</li>
+                            <li>
+                                <span>Sep 2023 - Present</span><br>
+                                Bachelors - Computer Science &amp; Data Science · University of British Columbia<br>
+                                <i><font size="3">International Student Scholarship Winner - 2024</font></i>
+                            </li>
+                            <li>
+                                <span>Sep 2021 - May 2023</span><br>
+                                IB Diploma · GEMS Modern Academy
+                            </li>
                         </ul>
                     </div>
-                    <div class="tab-contents" id = "education">
-                        <ul>
-                            <li><span>Sept 2023 - Current</span><br> Bachelors in Computer Science and Data Science from the University of British Columbia <br> <i> <font size = '3'> International Student Scholarship Winner - 2024</font> </i> </li>
-                            <li><span>Sept 2021 - May 2023</span><br>IB Diploma from GEMS Modern Academy</li>
-                        </ul>
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+</div>
 
     
 
@@ -192,7 +238,7 @@
         </div>
         <div class="copyright">
             <div class="section left">
-                <p><i class="fa-solid fa-phone"></i> +1 236 9714983</p>
+                <p><i class="fa-solid fa-phone"></i> +1 236 9717782</p>
             </div>
             <div class="section center">
                 <p> <i class="fa-solid fa-envelope"></i> zaidsayedbusiness@gmail.com</p>
@@ -367,5 +413,100 @@
 })();
 </script>
     
+
+<script>
+// ── Typed.js subtitle cycling ──────────────────────────────────────────
+document.addEventListener("DOMContentLoaded", function () {
+    if (document.getElementById("typed-subtitle")) {
+        new Typed("#typed-subtitle", {
+            strings: [
+                "Building AI that matters.",
+                "Turning data into decisions.",
+                "Junior @ UBC · CS &amp; Data Science.",
+                "Exploring AI, Building the Future."
+            ],
+            typeSpeed: 55,
+            backSpeed: 30,
+            backDelay: 2000,
+            loop: true,
+            smartBackspace: true
+        });
+    }
+});
+
+// ── Scroll Reveal ──────────────────────────────────────────────────────
+(function () {
+    const selectors = '.reveal, .reveal-left, .reveal-right, .reveal-stagger';
+
+    function checkVisibility() {
+        document.querySelectorAll(selectors).forEach(el => {
+            const rect = el.getBoundingClientRect();
+            const inView = rect.top < window.innerHeight * 0.88;
+            if (inView) el.classList.add('visible');
+        });
+    }
+
+    window.addEventListener('scroll', checkVisibility, { passive: true });
+    window.addEventListener('resize', checkVisibility);
+    // Run once on load
+    setTimeout(checkVisibility, 100);
+})();
+
+// ── Timeline reveal (staggered, triggered when tab opens) ──────────────
+function animateTimeline() {
+    const items = document.querySelectorAll('.tl-item');
+    items.forEach((item, i) => {
+        setTimeout(() => item.classList.add('visible'), i * 120);
+    });
+}
+
+// Hook into your existing opentab function
+const _origOpenTab = window.opentab;
+// Patch: re-declare opentab to also trigger timeline animation
+var tablinks    = document.getElementsByClassName("tab-links");
+var tabcontents = document.getElementsByClassName("tab-contents");
+
+function opentab(tabname) {
+    for (let tablink of tablinks) tablink.classList.remove("active-link");
+    for (let tabcontent of tabcontents) tabcontent.classList.remove("active-tab");
+    event.currentTarget.classList.add("active-link");
+    document.getElementById(tabname).classList.add("active-tab");
+    if (tabname === 'experience') {
+        // reset then animate
+        document.querySelectorAll('.tl-item').forEach(el => el.classList.remove('visible'));
+        setTimeout(animateTimeline, 50);
+    }
+}
+
+// ── Project cards scroll stagger ───────────────────────────────────────
+// Add reveal class to carousel cards dynamically
+document.addEventListener("DOMContentLoaded", function() {
+    const projectSection = document.getElementById('projects');
+    if (projectSection) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.pc-card, .project-card').forEach((card, i) => {
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, i * 100);
+                    });
+                    observer.disconnect();
+                }
+            });
+        }, { threshold: 0.1 });
+        observer.observe(projectSection);
+
+        // Set initial state
+        document.querySelectorAll('.pc-card, .project-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+    }
+});
+</script>
+
 </body>
 </html>

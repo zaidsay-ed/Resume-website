@@ -127,6 +127,15 @@ nav ul li a:hover::after{
     padding: 80px 0;
     color: #ababab;
 }
+.about-glass {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 24px;
+    padding: 48px 40px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+}
 
 .row{
     display:flex;
@@ -201,6 +210,127 @@ nav ul li a:hover::after{
 }
 .tab-contents.active-tab{
     display:block;
+}
+
+
+
+/* ── Scroll reveal base state ── */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+.reveal-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Stagger children */
+.reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:translateY(0); transition-delay: 0.05s; }
+.reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:translateY(0); transition-delay: 0.15s; }
+.reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:translateY(0); transition-delay: 0.25s; }
+.reveal-stagger.visible > *:nth-child(4) { opacity:1; transform:translateY(0); transition-delay: 0.35s; }
+.reveal-stagger.visible > *:nth-child(5) { opacity:1; transform:translateY(0); transition-delay: 0.45s; }
+.reveal-stagger.visible > *:nth-child(6) { opacity:1; transform:translateY(0); transition-delay: 0.55s; }
+
+/* ── Typed subtitle ── */
+#typed-subtitle {
+    color: #aaa;
+    font-size: 22px;
+    font-style: italic;
+    min-height: 30px;
+    display: block;
+    margin-top: 4px;
+}
+
+/* ── Experience Timeline ── */
+.timeline {
+    position: relative;
+    padding: 10px 0;
+    margin-top: 10px;
+}
+
+/* Vertical line */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #FFD700, rgba(255,215,0,0.1));
+}
+
+.tl-item {
+    position: relative;
+    padding: 0 0 28px 44px;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.tl-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Dot on the line */
+.tl-item::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #FFD700;
+    border: 3px solid #111;
+    box-shadow: 0 0 8px rgba(255,215,0,0.7);
+    z-index: 1;
+}
+
+.tl-date {
+    font-size: 12px;
+    color: #FFD700;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 3px;
+}
+
+.tl-role {
+    font-size: 14.5px;
+    color: #fff;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.tl-company {
+    font-size: 12.5px;
+    color: #888;
+    margin-top: 2px;
 }
 
 
