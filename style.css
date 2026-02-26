@@ -525,36 +525,178 @@ nav ul li a:hover::after{
     margin-top: 50px;
 } */
 
-
-/* resume */
-.resume{
-    display:flex;
-    justify-content: center; 
-    align-items: center; 
+#resume {
+    padding: 80px 10%;
+    text-align: center;
 }
-.btn {
-    background-color: black; 
-    border:2px solid #e1e113;             
-    color: #e1e113;         
-    padding: 10px 40px;       
-    text-align: center;        
-    text-decoration: none;     
-    display: inline-block;     
-    font-size: 24px;       
-    width: fit-content;
-    height: 50px;    
-    margin:50px auto;
+
+.resume-section-title {
+    margin-bottom: 48px;
+}
+
+.resume-section-title h2 {
+    font-size: 50px;
+    color: #f2f1ec;
+    text-shadow: 2px 2px 5px #00FFFF;
+    margin: 0 0 10px 0;
+}
+
+.resume-section-title p {
+    font-size: 17px;
+    color: #888;
+    font-style: italic;
+    margin: 0;
+}
+
+/* Cards row */
+.resume-cards {
+    display: flex;
     justify-content: center;
-    cursor: pointer;           
-    border-radius: 2px;       
-    transition: background-color 0.3s; 
-}
-.btn:hover {
-    background-color: #baba14; ; 
-    color: black;   
+    gap: 32px;
+    flex-wrap: wrap;
 }
 
+/* Individual card */
+.resume-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    border-radius: 20px;
+    padding: 40px 35px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
 
+/* Subtle glow behind card on hover */
+.resume-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: radial-gradient(circle at 50% 0%, rgba(255,215,0,0.08) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.resume-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(255, 215, 0, 0.2), 0 0 0 1px rgba(255,215,0,0.4);
+    border-color: rgba(255, 215, 0, 0.6);
+}
+
+.resume-card:hover::before {
+    opacity: 1;
+}
+
+/* Emoji icon */
+.resume-card-icon {
+    font-size: 44px;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 0 8px rgba(255,215,0,0.4));
+}
+
+/* Card title */
+.resume-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #FFD700;
+    margin: 0 0 12px 0;
+}
+
+/* Description */
+.resume-card > p {
+    font-size: 14px;
+    color: #aaa;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+}
+
+/* Highlight pills */
+.resume-highlights {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.resume-highlights li {
+    background: rgba(255, 215, 0, 0.07);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 13px;
+    color: #ddd;
+    transition: background 0.2s ease;
+}
+
+.resume-card:hover .resume-highlights li {
+    background: rgba(255, 215, 0, 0.12);
+}
+
+/* Download button */
+.resume-dl-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+    padding: 12px 24px;
+    background: transparent;
+    color: #FFD700;
+    border: 2px solid #FFD700;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: all 0.25s ease;
+    width: 100%;
+    justify-content: center;
+}
+
+.resume-dl-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid #FFD700;
+    border-radius: 50%;
+    font-size: 14px;
+    transition: transform 0.25s ease;
+}
+
+.resume-dl-btn:hover {
+    background: #FFD700;
+    color: #000;
+    box-shadow: 0 0 20px rgba(255,215,0,0.5);
+}
+
+.resume-dl-btn:hover .resume-dl-icon {
+    transform: translateY(2px);
+    border-color: #000;
+}
+
+/* Responsive */
+@media (max-width: 680px) {
+    .resume-card {
+        width: 100%;
+        max-width: 340px;
+    }
+    #resume {
+        padding: 60px 6%;
+    }
+}
 /* contact */
 
 .contact-right{
