@@ -437,19 +437,30 @@
                         </div>
                     </div>
 
-                    <!-- Education tab (unchanged) -->
+                    <!-- Education tab -->
                     <div class="tab-contents" id="education">
-                        <ul>
-                            <li>
-                                <span>Sep 2023 - Present</span><br>
-                                Bachelors - Computer Science &amp; Data Science · University of British Columbia<br>
-                                <i><font size="3">International Student Scholarship Winner - 2024, 2025</font></i>
-                            </li>
-                            <li>
-                                <span>Sep 2021 - May 2023</span><br>
-                                IB Diploma · GEMS Modern Academy
-                            </li>
-                        </ul>
+                    <div class="edu-timeline">
+
+                        <div class="edu-card">
+                        <div class="edu-icon">🎓</div>
+                        <div class="edu-body">
+                            <div class="edu-date">Sep 2023 — Present</div>
+                            <div class="edu-degree">Bachelors &nbsp;·&nbsp;Computer Science & Data Science</div>
+                            <div class="edu-school">University of British Columbia</div>
+                            <div class="edu-badge">🏆 International Student Scholarship — 2024, 2025</div>
+                        </div>
+                        </div>
+
+                        <div class="edu-card">
+                        <div class="edu-icon">📘</div>
+                        <div class="edu-body">
+                            <div class="edu-date">Sep 2021 — May 2023</div>
+                            <div class="edu-degree">IB Diploma</div>
+                            <div class="edu-school">GEMS Modern Academy</div>
+                        </div>
+                        </div>
+
+                    </div>
                     </div>
 
                 </div>
@@ -1240,38 +1251,96 @@ setTimeout(tryAnimate, 200);
   });
 })();
 </script>
-
-<script id="tilt-script">
-document.addEventListener('DOMContentLoaded', function() {
-  /* Resume cards — subtle tilt */
-  VanillaTilt.init(document.querySelectorAll('.resume-card'), {
-    max: 8,
-    speed: 400,
-    glare: true,
-    'max-glare': 0.08,
-    scale: 1.03
-  });
+<script>
+(function () {
+  function applyTilt(selector, options) {
+    var els = document.querySelectorAll(selector);
+    var max    = options.max    || 8;
+    var scale  = options.scale  || 1.03;
+    var speed  = options.speed  || 400;
+    var glare  = options.glare  || false;
+    var maxGlare = options.maxGlare || 0.1;
  
-  /* Contact cards */
-  VanillaTilt.init(document.querySelectorAll('.contact-info-card, .contact-form-card, .contact-socials'), {
-    max: 5,
-    speed: 500,
-    glare: true,
-    'max-glare': 0.05,
-    scale: 1.01
-  });
+    els.forEach(function (el) {
+      /* Make sure position is set so glare child positions correctly */
+      var pos = window.getComputedStyle(el).position;
+      if (pos === 'static') el.style.position = 'relative';
+      el.style.transformStyle = 'preserve-3d';
+      el.style.transition = 'transform ' + speed + 'ms ease, box-shadow ' + speed + 'ms ease';
+      el.style.willChange = 'transform';
  
-  /* About glass panel */
-  VanillaTilt.init(document.querySelectorAll('.about-glass'), {
-    max: 3,
-    speed: 600,
-    glare: false,
-    scale: 1.005
-  });
+      /* Optional glare overlay */
+      var glareEl = null;
+      if (glare) {
+        glareEl = document.createElement('div');
+        glareEl.style.cssText = [
+          'position:absolute', 'inset:0', 'border-radius:inherit',
+          'pointer-events:none', 'overflow:hidden', 'z-index:99',
+          'opacity:0', 'transition:opacity ' + speed + 'ms ease'
+        ].join(';');
+        var glareInner = document.createElement('div');
+        glareInner.style.cssText = [
+          'position:absolute', 'top:-50%', 'left:-50%',
+          'width:200%', 'height:200%',
+          'background:radial-gradient(circle at 50% 50%, rgba(255,255,255,0.18) 0%, transparent 60%)',
+          'transform:translate(0,0)', 'pointer-events:none'
+        ].join(';');
+        glareEl.appendChild(glareInner);
+        el.appendChild(glareEl);
+      }
  
-  /* Note: pc-cards use CSS flip on hover — tilt is disabled for them
-     to avoid conflict with the flip animation. */
-});
+      function onMove(e) {
+        var rect   = el.getBoundingClientRect();
+        var cx     = rect.left + rect.width  / 2;
+        var cy     = rect.top  + rect.height / 2;
+        var mouseX = e.clientX || (e.touches && e.touches[0].clientX) || cx;
+        var mouseY = e.clientY || (e.touches && e.touches[0].clientY) || cy;
+ 
+        var dx = (mouseX - cx) / (rect.width  / 2);   /* -1 to 1 */
+        var dy = (mouseY - cy) / (rect.height / 2);   /* -1 to 1 */
+ 
+        var rotateY =  dx * max;
+        var rotateX = -dy * max;
+ 
+        el.style.transform = 'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale3d(' + scale + ',' + scale + ',' + scale + ')';
+ 
+        if (glareEl) {
+          var glareX = ((mouseX - rect.left) / rect.width)  * 100;
+          var glareY = ((mouseY - rect.top)  / rect.height) * 100;
+          glareEl.style.opacity = maxGlare;
+          glareEl.querySelector('div').style.transform = 'translate(' + (glareX - 50) + '%,' + (glareY - 50) + '%)';
+        }
+      }
+ 
+      function onLeave() {
+        el.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
+        if (glareEl) glareEl.style.opacity = 0;
+      }
+ 
+      el.addEventListener('mousemove',  onMove);
+      el.addEventListener('mouseleave', onLeave);
+    });
+  }
+ 
+  function init() {
+    applyTilt('.resume-card', {
+      max: 8, scale: 1.03, speed: 400, glare: true, maxGlare: 0.08
+    });
+    applyTilt('.contact-info-card, .contact-form-card, .contact-socials', {
+      max: 5, scale: 1.01, speed: 500, glare: true, maxGlare: 0.05
+    });
+    applyTilt('.about-glass', {
+      max: 3, scale: 1.005, speed: 600, glare: false
+    });
+  }
+ 
+  /* Run after DOM is ready */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
 </script>
 </body>
 </html>
