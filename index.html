@@ -14,7 +14,175 @@
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
 </head>
+
+<script>
+(function () {
+  /* Elements */
+  var loader  = document.getElementById('loader');
+  var nameEl  = document.getElementById('ldrName');
+  var slash   = document.getElementById('ldrSlash');
+  var close   = document.getElementById('ldrClose');
+  var cursor  = document.getElementById('ldrCursor');
+  var fill    = document.getElementById('ldrFill');
+  var subEl   = document.getElementById('ldrSub');
+ 
+  /* Guard — if any element is missing, bail silently */
+  if (!loader || !nameEl) return;
+ 
+  var name     = 'Zaid';
+  var sub      = 'portfolio.loading';
+  var nameIdx  = 0;
+  var subIdx   = 0;
+  var progress = 0;
+  var done     = false;
+ 
+  /* Prevent scrolling while loader is up */
+  document.body.style.overflow = 'hidden';
+ 
+  /* ── Phase 1: type the name ── */
+  function typeName() {
+    if (nameIdx < name.length) {
+      nameEl.textContent += name[nameIdx++];
+      setTimeout(typeName, 100);
+    } else {
+      /* Show />, pause, then start bar */
+      setTimeout(function () {
+        slash.style.display = 'inline';
+        close.style.display = 'inline';
+        cursor.style.display = 'none';
+        setTimeout(typeSubtitle, 150);
+      }, 180);
+    }
+  }
+ 
+  /* ── Phase 2: type subtitle ── */
+  function typeSubtitle() {
+    if (subIdx < sub.length) {
+      subEl.textContent += sub[subIdx++];
+      setTimeout(typeSubtitle, 36);
+    } else {
+      setTimeout(runBar, 100);
+    }
+  }
+ 
+  /* ── Phase 3: progress bar ── */
+  function runBar() {
+    var iv = setInterval(function () {
+      progress += 1.6;
+      fill.style.width = Math.min(progress, 100) + '%';
+      if (progress >= 100 && !done) {
+        done = true;
+        clearInterval(iv);
+        hideLoader();
+      }
+    }, 16);
+  }
+ 
+  /* ── Hide loader ── */
+  function hideLoader() {
+    setTimeout(function () {
+      loader.classList.add('fade-out');
+      document.body.style.overflow = '';
+      /* Remove from DOM after transition */
+      setTimeout(function () {
+        if (loader.parentNode) loader.parentNode.removeChild(loader);
+      }, 900);
+    }, 200);
+  }
+ 
+  /* ── Start as soon as possible ── */
+  /* Use DOMContentLoaded so we don't wait for images/particles */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      setTimeout(typeName, 300);
+    });
+  } else {
+    /* DOM already ready (script is deferred or at bottom) */
+    setTimeout(typeName, 300);
+  }
+ 
+  /* ── Safety net: force-hide after 5s no matter what ── */
+  setTimeout(function () {
+    if (!done) {
+      done = true;
+      hideLoader();
+    }
+  }, 5000);
+})();
+</script>
+
 <body>
+    <div id="loader">
+    <div class="ldr-wrap">
+        <div class="ldr-logo">
+        <span class="c-cyan">&lt;</span><span id="ldrText"></span><span class="c-gray" id="ldrEnd" style="visibility:hidden">/</span><span class="c-cyan" id="ldrClose" style="visibility:hidden">&gt;</span>
+        </div>
+        <div class="ldr-track"><div class="ldr-bar" id="ldrBar"></div></div>
+        <div class="ldr-sub" id="ldrSub">&#8203;</div>
+    </div>
+    </div>
+
+
+    <script>
+    !function(){
+    var el   = document.getElementById('loader');
+    var txt  = document.getElementById('ldrText');
+    var end  = document.getElementById('ldrEnd');
+    var cls  = document.getElementById('ldrClose');
+    var bar  = document.getElementById('ldrBar');
+    var sub  = document.getElementById('ldrSub');
+    
+    if(!el || !txt) return;
+    
+    document.body.style.overflow = 'hidden';
+    
+    var name = 'Zaid';
+    var i    = 0;
+    
+    /* Type the name one char at a time */
+    function typeName() {
+        if(i < name.length) {
+        txt.textContent += name[i++];
+        setTimeout(typeName, 110);
+        } else {
+        /* Show /> */
+        end.style.visibility = 'visible';
+        cls.style.visibility = 'visible';
+        sub.textContent = 'loading portfolio...';
+        setTimeout(startBar, 250);
+        }
+    }
+    
+    /* Animate the progress bar */
+    function startBar() {
+        var pct = 0;
+        var iv  = setInterval(function(){
+        pct += 2;
+        bar.style.width = Math.min(pct, 100) + '%';
+        if(pct >= 100){
+            clearInterval(iv);
+            setTimeout(dismiss, 200);
+        }
+        }, 18);
+    }
+    
+    /* Fade and remove */
+    function dismiss() {
+        el.classList.add('fade-out');
+        document.body.style.overflow = '';
+        setTimeout(function(){ el.remove(); }, 900);
+    }
+    
+    /* Kick off — no waiting for load events, starts immediately */
+    setTimeout(typeName, 200);
+    
+    /* Hard kill after 4s in case anything stalls */
+    setTimeout(function(){
+        if(document.getElementById('loader')) dismiss();
+    }, 4000);
+    }();
+    </script>
+
     <div id="header">
         <div class="container">
             <div id="particles-js"></div>
@@ -316,7 +484,7 @@
                         <div class="contact-info-icon">📞</div>
                         <div>
                             <div class="contact-info-label">Phone</div>
-                            <div class="contact-info-value">+1 236 971 7782</div>
+                            <div class="contact-info-value">+1 236 971 7782 </div>
                         </div>
                     </div>
 
