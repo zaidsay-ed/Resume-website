@@ -254,14 +254,144 @@
                         <p class="tab-links" onclick="opentab('education')">Education</p>
                     </div>
 
-                    <!-- Skills tab (unchanged) -->
-                    <div class="tab-contents active-tab" id="skills">
+                    <!-- Skills tab -->
+                    <!-- <div class="tab-contents active-tab" id="skills">
                         <ul>
                             <li><span>AI Development</span><br>Prompt engineering · Dataset training · LLM optimization</li>
                             <li><span>Web App Development</span><br>Frontend: HTML, JavaScript, CSS &nbsp;|&nbsp; Backend: SQL, Java, Python</li>
                             <li><span>Data Science</span><br>Data wrangling &amp; processing (R, SQL, Python) · Visualizations (Python, Power BI) · ML (Regression Models, Classification Models, Ensembles, etc) · Version control (GitHub)</li>
                             <li><span>Graphic Design</span><br>Adobe Photoshop</li>
                         </ul>
+                    </div> -->
+                    <style id="skills-styles">
+                    .skill-bar-list {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                    }
+                    .skill-bar-item {
+                    margin-bottom: 18px;
+                    }
+                    .skill-bar-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: baseline;
+                    margin-bottom: 6px;
+                    }
+                    .skill-bar-label {
+                    font-size: 14px;
+                    color: #fff;
+                    font-weight: 500;
+                    }
+                    .skill-bar-label span {
+                    font-size: 12px;
+                    color: #888;
+                    font-weight: 400;
+                    margin-left: 6px;
+                    }
+                    .skill-bar-pct {
+                    font-size: 12px;
+                    color: #FFD700;
+                    font-weight: 600;
+                    }
+                    .skill-bar-track {
+                    height: 6px;
+                    background: rgba(255,255,255,0.08);
+                    border-radius: 6px;
+                    overflow: hidden;
+                    }
+                    .skill-bar-fill {
+                    height: 100%;
+                    border-radius: 6px;
+                    width: 0%;
+                    background: linear-gradient(90deg, #FFD700, #00FFFF);
+                    box-shadow: 0 0 8px rgba(255,215,0,0.4);
+                    transition: width 1.1s cubic-bezier(0.4, 0, 0.2, 1);
+                    }
+                    .skill-section-title {
+                    font-size: 11px;
+                    color: #FFD700;
+                    letter-spacing: 1.2px;
+                    text-transform: uppercase;
+                    margin: 18px 0 10px;
+                    font-weight: 600;
+                    }
+                    </style>
+                    <div class="tab-contents active-tab" id="skills">
+                    <p class="skill-section-title">AI & Data Science</p>
+                    <ul class="skill-bar-list">
+                        <li class="skill-bar-item">
+                        <div class="skill-bar-header">
+                            <div class="skill-bar-label">Prompt Engineering & LLMs <span>AI Development</span></div>
+                            <div class="skill-bar-pct">80%</div>
+                        </div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
+                        </li>
+                        <li class="skill-bar-item">
+                        <div class="skill-bar-header">
+                            <div class="skill-bar-label">Machine Learning <span>Regression · Classification · Ensembles</span></div>
+                            <div class="skill-bar-pct">80%</div>
+                        </div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
+                        </li>
+                        <li class="skill-bar-item">
+                        <div class="skill-bar-header">
+                            <div class="skill-bar-label">Data Wrangling & Visualization <span>PySpark · Pandas</span></div>
+                            <div class="skill-bar-pct">80%</div>
+                        </div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
+                        </li>
+                        <li class="skill-bar-item">
+                        <div class="skill-bar-header">
+                            <div class="skill-bar-label">Tableau / Power BI <span>Data Visualization</span></div>
+                            <div class="skill-bar-pct">75%</div>
+                        </div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div>
+                        </li>
+                    </ul>
+
+                    <p class="skill-section-title">Web Development</p>
+                    <ul class="skill-bar-list">
+                        <li class="skill-bar-item">
+                        <div class="skill-bar-header">
+                            <div class="skill-bar-label">Frontend <span>HTML · CSS · JavaScript</span></div>
+                            <div class="skill-bar-pct">80%</div>
+                        </div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
+                        </li>
+                        <li class="skill-bar-item">
+                        <div class="skill-bar-header">
+                            <div class="skill-bar-label">Backend & Databases <span>Python · Java · SQL</span></div>
+                            <div class="skill-bar-pct">75%</div>
+                        </div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div>
+                        </li>
+                    </ul>
+
+                    <p class="skill-section-title">Tools & Systems</p>
+                    <ul class="skill-bar-list">
+                        <li class="skill-bar-item">
+                        <div class="skill-bar-header">
+                            <div class="skill-bar-label">C / C++ <span>Systems Programming</span></div>
+                            <div class="skill-bar-pct">80%</div>
+                        </div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
+                        </li>
+                        <li class="skill-bar-item">
+                        <div class="skill-bar-header">
+                            <div class="skill-bar-label">Docker <span>Containerization</span></div>
+                            <div class="skill-bar-pct">75%</div>
+                        </div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div>
+                        </li>
+                        <li class="skill-bar-item">
+                        <div class="skill-bar-header">
+                            <div class="skill-bar-label">Version Control <span>Git · GitHub</span></div>
+                            <div class="skill-bar-pct">85%</div>
+                        </div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
+                        </li>
+                    </ul>
                     </div>
 
                     <!-- ── Experience tab — TIMELINE ── -->
@@ -339,52 +469,159 @@
       <div class="pc-track" id="pcTrack">
 
         <div class="pc-card">
+        <div class="pc-card-inner">
+            <div class="pc-card-front">
             <h3>Speedrun Analytics Database</h3>
-            <p>
-                Designed and implemented a relational database for a game speedrunning platform using Oracle SQL. Built advanced queries including aggregation, nested queries, and division to analyze verified runs and moderator coverage.
-            </p>
-            <!-- <a href="YOUR_GITHUB_LINK" class="pc-link" target="_blank"><i class="fab fa-github"></i> View on GitHub </a> -->
+            <p>Designed and implemented a relational database for a game speedrunning platform using Oracle SQL with advanced queries including aggregation and division.</p>
+            <span class="pc-flip-hint">hover to flip</span>
+            </div>
+            <div class="pc-card-back">
+            <h4>Tech Stack</h4>
+            <div class="tech-tags">
+                <span class="tech-tag">Oracle SQL</span>
+                <span class="tech-tag">Relational DB</span>
+                <span class="tech-tag">Aggregation</span>
+            </div>
+            </div>
+        </div>
         </div>
 
         <div class="pc-card">
-          <h3>Job Market ETL Pipeline</h3>
-          <p>Built an end-to-end ETL pipeline using Python and Pandas to extract, clean, and load job market data into a structured SQLite database. Performed data validation, normalization (salary, location), and designed SQL queries to analyze hiring trends and in-demand skills.</p>
-          <a href="https://github.com/zaidsay-ed/Job-market-etl-pipeline" class="pc-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+        <div class="pc-card-inner">
+            <div class="pc-card-front">
+            <h3>Job Market ETL Pipeline</h3>
+            <p>Built an end-to-end ETL pipeline using Python and Pandas to extract, clean, and load job market data into a structured SQLite database.</p>
+            <span class="pc-flip-hint">hover to flip</span>
+            </div>
+            <div class="pc-card-back">
+            <h4>Tech Stack</h4>
+            <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Pandas</span>
+                <span class="tech-tag">SQLite</span>
+                <span class="tech-tag">ETL</span>
+            </div>
+            <a href="https://github.com/zaidsay-ed/Job-market-etl-pipeline" class="pc-link" target="_blank">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
+            </div>
+        </div>
         </div>
 
         <div class="pc-card">
-          <h3>Maternal Health Risk Classifier</h3>
-          <p>Developed a classifier using R and the KNN algorithm in Jupyter Notebook to assess maternal health risks. Evaluated with a confusion matrix using test data from a recognized ML repository.</p>
-          <a href="https://github.com/zaidsay-ed/Maternal-Health-Risk-Classifier-Model" class="pc-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+        <div class="pc-card-inner">
+            <div class="pc-card-front">
+            <h3>Credit Card Default Prediction</h3>
+            <p>End-to-end ML pipeline in Python to predict credit card default risk — preprocessing, feature engineering, model training and explainability.</p>
+            <span class="pc-flip-hint">hover to flip</span>
+            </div>
+            <div class="pc-card-back">
+            <h4>Tech Stack</h4>
+            <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Scikit-learn</span>
+                <span class="tech-tag">Feature Eng.</span>
+            </div>
+            </div>
+        </div>
         </div>
 
         <div class="pc-card">
-          <h3>Credit Card Default Prediction</h3>
-          <p>Built an end-to-end ML pipeline in Python to predict credit card default risk. Includes data preprocessing, feature engineering, model training, evaluation, and explainability.</p>
-          <!-- <a href="https://github.com/zaidsay-ed/credit-card-default-prediction" class="pc-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a> -->
+        <div class="pc-card-inner">
+            <div class="pc-card-front">
+            <h3>Maternal Health Risk Classifier</h3>
+            <p>Developed a classifier using R and the KNN algorithm to assess maternal health risks, evaluated with a confusion matrix.</p>
+            <span class="pc-flip-hint">hover to flip</span>
+            </div>
+            <div class="pc-card-back">
+            <h4>Tech Stack</h4>
+            <div class="tech-tags">
+                <span class="tech-tag">R</span>
+                <span class="tech-tag">KNN</span>
+                <span class="tech-tag">Jupyter</span>
+                <span class="tech-tag">ML</span>
+            </div>
+            <a href="https://github.com/zaidsay-ed/Maternal-Health-Risk-Classifier-Model" class="pc-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+        </div>
+        </div>
+        
+        <div class="pc-card">
+        <div class="pc-card-inner">
+            <div class="pc-card-front">
+            <h3>Finance Budget Tracker</h3>
+            <p>A Java application built with JSwing to track earnings, expenditures, and cash flow. Uses JSON for data persistence and JUnit for testing.</p>
+            <span class="pc-flip-hint">hover to flip</span>
+            </div>
+            <div class="pc-card-back">
+            <h4>Tech Stack</h4>
+            <div class="tech-tags">
+                <span class="tech-tag">Java</span>
+                <span class="tech-tag">JSwing</span>
+                <span class="tech-tag">JSON</span>
+                <span class="tech-tag">JUnit</span>
+            </div>
+            <a href="https://github.com/zaidsay-ed/Budget-Tracker/tree/main" class="pc-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+        </div>
         </div>
 
         <div class="pc-card">
-          <h3>Finance Budget Tracker</h3>
-          <p>A Java application built with JSwing to track earnings, expenditures, and cash flow. Uses JSON for data persistence and JUnit for unit testing.</p>
-          <a href="https://github.com/zaidsay-ed/Budget-Tracker/tree/main" class="pc-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+        <div class="pc-card-inner">
+            <div class="pc-card-front">
+            <h3>Sudoku Solver</h3>
+            <p>A Python solver using backtracking, recursion, and depth-first search with constraint propagation to efficiently solve any Sudoku puzzle.</p>
+            <span class="pc-flip-hint">hover to flip</span>
+            </div>
+            <div class="pc-card-back">
+            <h4>Tech Stack</h4>
+            <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Backtracking</span>
+                <span class="tech-tag">DFS</span>
+            </div>
+            <a href="https://github.com/zaidsay-ed/sudoku-solver/tree/main" class="pc-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+        </div>
         </div>
 
         <div class="pc-card">
-          <h3>Sudoku Solver</h3>
-          <p>A Python solver using backtracking, recursion, and depth-first search with constraint propagation to efficiently solve any Sudoku puzzle.</p>
-          <a href="https://github.com/zaidsay-ed/sudoku-solver/tree/main" class="pc-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+        <div class="pc-card-inner">
+            <div class="pc-card-front">
+            <h3>Resume Parser</h3>
+            <p>Automated resume parser in Python using spaCy/NLTK and regular expressions to extract key candidate information with 95%+ accuracy.</p>
+            <span class="pc-flip-hint">hover to flip</span>
+            </div>
+            <div class="pc-card-back">
+            <h4>Tech Stack</h4>
+            <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">spaCy</span>
+                <span class="tech-tag">NLTK</span>
+                <span class="tech-tag">Regex</span>
+            </div>
+            </div>
+        </div>
         </div>
 
         <div class="pc-card">
-          <h3>Resume Parser</h3>
-          <p>An automated resume parser in Python using spaCy/NLTK and regular expressions to extract key candidate information with over 95% accuracy.</p>
+        <div class="pc-card-inner">
+            <div class="pc-card-front">
+            <h3>AI Email Assistant</h3>
+            <p>A React + TypeScript + Ionic web app integrating Gmail API (OAuth) and OpenAI API with prompt engineering to auto-generate email replies.</p>
+            <span class="pc-flip-hint">hover to flip</span>
+            </div>
+            <div class="pc-card-back">
+            <h4>Tech Stack</h4>
+            <div class="tech-tags">
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">OpenAI API</span>
+                <span class="tech-tag">Gmail API</span>
+            </div>
+            <a href="https://github.com/zaidsay-ed/email-responder" class="pc-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            </div>
         </div>
-
-        <div class="pc-card">
-          <h3>AI Email Assistant</h3>
-          <p>A React + TypeScript + Ionic web app integrating Gmail API (OAuth) and OpenAI API with prompt engineering to auto-generate email replies.</p>
-          <a href="https://github.com/zaidsay-ed/email-responder" class="pc-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
         </div>
 
       </div>
@@ -572,7 +809,7 @@
 
     <!-- Footer -->
     <div class="contact-footer">
-        <p>© Zaid Sayed, 2024 &nbsp;·&nbsp; Built with ❤️ in Vancouver</p>
+        <p>© Zaid Sayed, 2024 &nbsp;·&nbsp; Always Improving</p>
         <div class="footer-socials">
             <a href="https://github.com/zaidsay-ed" target="_blank"><i class="fab fa-github"></i></a>
             <a href="https://www.linkedin.com/in/zaid-sayed-a10804230/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
@@ -910,5 +1147,131 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
+<script id="skills-script">
+function animateSkillBars() {
+  document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+    bar.style.width = '0%';
+    setTimeout(() => {
+      bar.style.width = bar.dataset.width + '%';
+    }, 80);
+  });
+}
+ 
+/* Trigger on tab click — patch the existing opentab function */
+const _origOpentab = window.opentab;
+window.opentab = function(tabname) {
+  _origOpentab ? _origOpentab(tabname) : null;
+  if (tabname === 'skills') setTimeout(animateSkillBars, 60);
+};
+ 
+/* Also animate on first load if skills tab is active */
+function tryAnimate() {
+  var bars = document.querySelectorAll('.skill-bar-fill');
+  if (bars.length > 0) {
+    animateSkillBars();
+  } else {
+    setTimeout(tryAnimate, 100);
+  }
+}
+setTimeout(tryAnimate, 200);
+</script>
+
+<style id="cursor-styles">
+#cursorGlow {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99998;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,215,0,0.35) 0%, rgba(0,255,255,0.12) 50%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s linear, opacity 0.3s ease;
+  mix-blend-mode: screen;
+}
+#cursorDot {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #FFD700;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 6px rgba(255,215,0,0.8);
+  transition: transform 0.04s linear;
+}
+</style>
+ 
+<div id="cursorGlow"></div>
+<div id="cursorDot"></div>
+ 
+<script id="cursor-script">
+(function() {
+  const glow = document.getElementById('cursorGlow');
+  const dot  = document.getElementById('cursorDot');
+  let mx = -100, my = -100, gx = -100, gy = -100;
+ 
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
+  });
+ 
+  /* Smooth lag on the glow */
+  (function animGlow() {
+    gx += (mx - gx) * 0.12;
+    gy += (my - gy) * 0.12;
+    glow.style.left = gx + 'px';
+    glow.style.top  = gy + 'px';
+    requestAnimationFrame(animGlow);
+  })();
+ 
+  /* Scale up on clickable elements */
+  document.querySelectorAll('a, button, .tab-links, .pc-arrow, .resume-dl-btn').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      glow.style.width  = '52px';
+      glow.style.height = '52px';
+    });
+    el.addEventListener('mouseleave', () => {
+      glow.style.width  = '24px';
+      glow.style.height = '24px';
+    });
+  });
+})();
+</script>
+
+<script id="tilt-script">
+document.addEventListener('DOMContentLoaded', function() {
+  /* Resume cards — subtle tilt */
+  VanillaTilt.init(document.querySelectorAll('.resume-card'), {
+    max: 8,
+    speed: 400,
+    glare: true,
+    'max-glare': 0.08,
+    scale: 1.03
+  });
+ 
+  /* Contact cards */
+  VanillaTilt.init(document.querySelectorAll('.contact-info-card, .contact-form-card, .contact-socials'), {
+    max: 5,
+    speed: 500,
+    glare: true,
+    'max-glare': 0.05,
+    scale: 1.01
+  });
+ 
+  /* About glass panel */
+  VanillaTilt.init(document.querySelectorAll('.about-glass'), {
+    max: 3,
+    speed: 600,
+    glare: false,
+    scale: 1.005
+  });
+ 
+  /* Note: pc-cards use CSS flip on hover — tilt is disabled for them
+     to avoid conflict with the flip animation. */
+});
+</script>
 </body>
 </html>
