@@ -18,20 +18,43 @@
     <div id="header">
         <div class="container">
             <div id="particles-js"></div>
-            <nav>
-                <img src="images/logo.png" class="logo">
-                <ul id = "sidemenu">
-                    <li><a href="#header">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <!-- <li><a href="#">Services</a></li> -->
-                    <!-- <li><a href="#">Portfolio</a></li> -->
-                    <li><a href="#resume">Resume</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
+            
+            <div id="scrollProgress"></div>
+
+            <nav id="navbar">
+                <!-- Logo: styled text instead of image -->
+                <a href="#header" class="nav-logo">
+                    <span class="logo-bracket">&lt;</span>Zaid<span class="logo-dot">/</span><span class="logo-bracket">&gt;</span>
+                </a>
+
+                <!-- Desktop links -->
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#header"   class="nav-link" data-section="header">Home</a></li>
+                    <li><a href="#about"    class="nav-link" data-section="about">About</a></li>
+                    <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+                    <li><a href="#resume"   class="nav-link" data-section="resume">Resume</a></li>
+                    <li><a href="#contact"  class="nav-link" data-section="contact">Contact</a></li>
                 </ul>
-                <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+
+                <!-- Animated hamburger (mobile) -->
+                <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </nav>
+
+            <!-- Mobile drawer -->
+            <div class="mobile-drawer" id="mobileDrawer">
+                <ul>
+                    <li><a href="#header"   class="mobile-link" data-section="header">Home</a></li>
+                    <li><a href="#about"    class="mobile-link" data-section="about">About</a></li>
+                    <li><a href="#projects" class="mobile-link" data-section="projects">Projects</a></li>
+                    <li><a href="#resume"   class="mobile-link" data-section="resume">Resume</a></li>
+                    <li><a href="#contact"  class="mobile-link" data-section="contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="drawer-overlay" id="drawerOverlay"></div>
             <div class="header-text">
                 <!-- <p>Software Engineer/Data Scientist</p>
                 <h1>Hey, I'm <span>Zaid</span> <br> Sophomore at the <br>University of British Columbia</h1>
@@ -148,6 +171,20 @@
       <div class="pc-track" id="pcTrack">
 
         <div class="pc-card">
+            <h3>Speedrun Analytics Database</h3>
+            <p>
+                Designed and implemented a relational database for a game speedrunning platform using Oracle SQL. Built advanced queries including aggregation, nested queries, and division to analyze verified runs and moderator coverage.
+            </p>
+            <!-- <a href="YOUR_GITHUB_LINK" class="pc-link" target="_blank"><i class="fab fa-github"></i> View on GitHub </a> -->
+        </div>
+
+        <div class="pc-card">
+          <h3>Job Market ETL Pipeline</h3>
+          <p>Built an end-to-end ETL pipeline using Python and Pandas to extract, clean, and load job market data into a structured SQLite database. Performed data validation, normalization (salary, location), and designed SQL queries to analyze hiring trends and in-demand skills.</p>
+          <a href="https://github.com/zaidsay-ed/Job-market-etl-pipeline" class="pc-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+        </div>
+
+        <div class="pc-card">
           <h3>Maternal Health Risk Classifier</h3>
           <p>Developed a classifier using R and the KNN algorithm in Jupyter Notebook to assess maternal health risks. Evaluated with a confusion matrix using test data from a recognized ML repository.</p>
           <a href="https://github.com/zaidsay-ed/Maternal-Health-Risk-Classifier-Model" class="pc-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
@@ -156,7 +193,7 @@
         <div class="pc-card">
           <h3>Credit Card Default Prediction</h3>
           <p>Built an end-to-end ML pipeline in Python to predict credit card default risk. Includes data preprocessing, feature engineering, model training, evaluation, and explainability.</p>
-          <a href="https://github.com/zaidsay-ed/credit-card-default-prediction" class="pc-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
+          <!-- <a href="https://github.com/zaidsay-ed/credit-card-default-prediction" class="pc-link" target="_blank"><i class="fab fa-github"></i> View on GitHub</a> -->
         </div>
 
         <div class="pc-card">
@@ -262,30 +299,119 @@
 
     <!-- Contact -->
     <div id="contact">
-        <div class="container">
-            <div class="contact-right">
-                <h1 class = "sub-title">Contact Me</h1>
-                <form name = "submit-to-google-sheet">
-                    <input type="text" name ="Name" placeholder="Your Name" required>
-                    <input type="email" name ="Email" placeholder="Your Email" required>
-                    <textarea name="Message" rows="6" placeholder ="Your Message"></textarea>
-                    <button type="submit" class="btn-2">Submit</button>
-                </form>
-                <span id="msg"></span>
+    <div class="container">
+
+        <h2 class="contact-title reveal">Let's Connect</h2>
+        <p class="contact-subtitle reveal">Have an opportunity, idea, or just want to chat? I'd love to hear from you.</p>
+
+        <div class="contact-grid">
+
+            <!-- ── Left Panel ── -->
+            <div class="contact-left reveal-left">
+
+                <div class="contact-info-card">
+                    <h3>Contact Info</h3>
+
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">📞</div>
+                        <div>
+                            <div class="contact-info-label">Phone</div>
+                            <div class="contact-info-value">+1 236 971 7782</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">✉️</div>
+                        <div>
+                            <div class="contact-info-label">Email</div>
+                            <div class="contact-info-value">zaidsayedbusiness@gmail.com</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">📍</div>
+                        <div>
+                            <div class="contact-info-label">Location</div>
+                            <div class="contact-info-value">Vancouver, BC, Canada</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="contact-socials">
+                    <h3>Find me on</h3>
+                    <div class="social-links">
+
+                        <a href="https://github.com/zaidsay-ed" target="_blank" rel="noopener noreferrer" class="social-btn github">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+
+                        <a href="https://www.linkedin.com/in/zaid-sayed-a10804230/" target="_blank" rel="noopener noreferrer" class="social-btn linkedin">
+                            <i class="fab fa-linkedin-in"></i>
+                            <span>LinkedIn</span>
+                        </a>
+
+                        <a href="mailto:zaidsayedbusiness@gmail.com" class="social-btn email">
+                            <i class="fas fa-envelope"></i>
+                            <span>Email</span>
+                        </a>
+
+                    </div>
+                </div>
+
             </div>
-        </div>
-        <div class="copyright">
-            <div class="section left">
-                <p><i class="fa-solid fa-phone"></i> +1 236 9717782</p>
+
+            <!-- ── Right Panel: Form ── -->
+            <div class="contact-right reveal-right">
+                <div class="contact-form-card">
+                    <h3>Send a Message</h3>
+                    <form name="submit-to-google-sheet" id="contactForm">
+
+                        <div class="form-group">
+                            <label for="contactName">Your Name</label>
+                            <input type="text" id="contactName" name="Name" placeholder="Zaid Sayed" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactEmail">Your Email</label>
+                            <input type="email" id="contactEmail" name="Email" placeholder="hello@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactMessage">Message</label>
+                            <textarea id="contactMessage" name="Message" rows="5" placeholder="I'd love to chat about..."></textarea>
+                        </div>
+
+                        <button type="submit" class="contact-submit-btn" id="submitBtn">
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+
+                    </form>
+
+                    <!-- Success message -->
+                    <div class="contact-success" id="contactSuccess">
+                        <div class="success-icon">✓</div>
+                        <h4>Message Sent!</h4>
+                        <p>Thanks for reaching out — I'll get back to you soon.</p>
+                    </div>
+                </div>
             </div>
-            <div class="section center">
-                <p> <i class="fa-solid fa-envelope"></i> zaidsayedbusiness@gmail.com</p>
-            </div>
-            <div class="section right">
-                <p>Copyright © Zaid, 2024</p>
-            </div>
+
         </div>
     </div>
+
+    <!-- Footer -->
+    <div class="contact-footer">
+        <p>© Zaid Sayed, 2024 &nbsp;·&nbsp; Built with ❤️ in Vancouver</p>
+        <div class="footer-socials">
+            <a href="https://github.com/zaidsay-ed" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/zaid-sayed-a10804230/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:zaidsayedbusiness@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+</div>
 
 
 
@@ -306,14 +432,84 @@
     </script>
 
     <script>
-        var sidem = document.getElementById("sidemenu");
+        
+(function () {
 
-        function openmenu(){
-            sidem.style.right = "0";
-        }
-        function closemenu(){
-            sidem.style.right = "-140px";
-        }
+    // ── Scroll Progress Bar ──────────────────────────────
+    const progressBar = document.getElementById('scrollProgress');
+    function updateProgress() {
+        const scrollTop  = window.scrollY;
+        const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+        const pct        = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        progressBar.style.width = pct + '%';
+    }
+
+    // ── Navbar scroll opacity ────────────────────────────
+    const navbar = document.getElementById('navbar');
+    function updateNavbar() {
+        navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }
+
+    // ── Active section highlight ─────────────────────────
+    const sections  = ['header', 'about', 'projects', 'resume', 'contact'];
+    const navLinks  = document.querySelectorAll('.nav-link');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    function updateActive() {
+        let current = 'header';
+        sections.forEach(id => {
+            const el = document.getElementById(id);
+            if (el && window.scrollY >= el.offsetTop - 120) current = id;
+        });
+        [...navLinks, ...mobileLinks].forEach(link => {
+            link.classList.toggle('active', link.dataset.section === current);
+        });
+    }
+
+    window.addEventListener('scroll', () => {
+        updateProgress();
+        updateNavbar();
+        updateActive();
+    }, { passive: true });
+
+    // Run once on load
+    updateProgress();
+    updateNavbar();
+    updateActive();
+
+    // ── Hamburger / Mobile Drawer ────────────────────────
+    const hamburger     = document.getElementById('hamburger');
+    const drawer        = document.getElementById('mobileDrawer');
+    const overlay       = document.getElementById('drawerOverlay');
+
+    function openDrawer() {
+        hamburger.classList.add('open');
+        drawer.classList.add('open');
+        overlay.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+        hamburger.classList.remove('open');
+        drawer.classList.remove('open');
+        overlay.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', () => {
+        drawer.classList.contains('open') ? closeDrawer() : openDrawer();
+    });
+
+    overlay.addEventListener('click', closeDrawer);
+
+    // Close drawer when a mobile link is clicked
+    mobileLinks.forEach(link => link.addEventListener('click', closeDrawer));
+
+    // ── Remove old FontAwesome hamburger icons if present ──
+    // (your old nav used fa-bars / fa-xmark — safe to remove those elements)
+    document.querySelectorAll('nav .fa-solid').forEach(el => el.remove());
+
+})();
     </script>
 
     <script>
@@ -385,7 +581,7 @@
 </style>
 
 
-<!-- ====== REPLACE YOUR OLD CAROUSEL SCRIPT WITH THIS ====== -->
+<!-- ============ -->
 <script>
 (function () {
     const track  = document.getElementById('pcTrack');
