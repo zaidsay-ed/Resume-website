@@ -246,8 +246,7 @@
                 </div>
                 <div class="about-2 reveal-right">
                     <h1 class="sub-title">About Me</h1>
-                    <p>I'm a Computer Science and Data Science student at UBC, currently TAing for Models of Computing while working on projects and widening my skillset. My interests span AI, product development, data analysis, and business operations, and I'm actively seeking opportunities to bridge them all.</p>
-
+                    <p>I'm a Computer Science and Data Science student at UBC, currently working as a Data Engineer Co-op at Atreides. My interests span AI, data engineering, product development, and business operations. </p>
                     <div class="tab-titles">
                         <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
                         <p class="tab-links" onclick="opentab('experience')">Experience</p>
@@ -1346,6 +1345,367 @@ setTimeout(tryAnimate, 200);
   } else {
     init();
   }
+})();
+</script>
+
+<!-- Hint pill -->
+<div id="term-hint">press ~ to open terminal</div>
+
+<!-- Terminal overlay -->
+<div id="terminal-overlay">
+  <div id="terminal-box">
+    <div class="term-bar">
+      <div class="term-dot red"></div>
+      <div class="term-dot yellow"></div>
+      <div class="term-dot green"></div>
+      <span class="term-title">zaid@portfolio ~ bash</span>
+      <button class="term-close-btn" id="termCloseBtn">✕</button>
+    </div>
+    <div id="term-output"></div>
+    <div class="term-input-row">
+      <span class="term-prompt-symbol">visitor@zaid:~$</span>
+      <input id="term-input" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="type a command...">
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+ 
+  /* ── Commands ── */
+  var COMMANDS = {
+ 
+    help: function() {
+      return [
+        { cls: 'gold',    text: '╔══════════════════════════════════╗' },
+        { cls: 'gold',    text: '║     Available Commands           ║' },
+        { cls: 'gold',    text: '╚══════════════════════════════════╝' },
+        { cls: 'success', text: '  whoami      → who is Zaid?' },
+        { cls: 'success', text: '  skills      → technical skills' },
+        { cls: 'success', text: '  projects    → featured projects' },
+        { cls: 'success', text: '  experience  → work history' },
+        { cls: 'success', text: '  education   → academic background' },
+        { cls: 'success', text: '  contact     → get in touch' },
+        { cls: 'success', text: '  social      → links & profiles' },
+        { cls: 'success', text: '  clear        → clear terminal' },
+        { cls: 'success', text: '  exit         → close terminal' },
+        { cls: 'dim',     text: '' },
+        { cls: 'dim',     text: '  tip: press ~ anytime to toggle' },
+      ];
+    },
+ 
+    whoami: function() {
+      return [
+        { cls: 'gold',     text: '> Zaid Sayed' },
+        { cls: 'response', text: '  CS & Data Science @ UBC, Vancouver' },
+        { cls: 'response', text: '  AI enthusiast · Software Engineer · Data Scientist' },
+        { cls: 'dim',      text: '' },
+        { cls: 'response', text: '  Currently: Data Engineer Co-op · Atreides' },
+        { cls: 'response', text: '             Resident Advisor @ UBC' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  International Student Scholarship Winner — 2024, 2025 🏆' },
+        { cls: 'dim',      text: '' },
+        { cls: 'dim',      text: '  "Building AI that matters."' },
+      ];
+    },
+ 
+    skills: function() {
+      return [
+        { cls: 'gold',     text: '> Technical Skills' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  AI & Data Science' },
+        { cls: 'response', text: '  ├── Prompt Engineering & LLMs       ████████░░ 90%' },
+        { cls: 'response', text: '  ├── Machine Learning                 ████████░░ 80%' },
+        { cls: 'response', text: '  ├── PySpark / Pandas                 ████████░░ 80%' },
+        { cls: 'response', text: '  └── Tableau / Power BI               ███████░░░ 75%' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  Web Development' },
+        { cls: 'response', text: '  ├── Frontend  (HTML/CSS/JS)          ████████░░ 80%' },
+        { cls: 'response', text: '  └── Backend   (Python/Java/SQL)      ███████░░░ 75%' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  Tools & Systems' },
+        { cls: 'response', text: '  ├── C / C++                          ████████░░ 80%' },
+        { cls: 'response', text: '  ├── Docker                           ███████░░░ 75%' },
+        { cls: 'response', text: '  └── Git / GitHub                     ████████░░ 85%' },
+      ];
+    },
+ 
+    projects: function() {
+      return [
+        { cls: 'gold',     text: '> Featured Projects' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  [1] Job Market ETL Pipeline' },
+        { cls: 'response', text: '      Python · Pandas · SQLite' },
+        { cls: 'response', text: '      github.com/zaidsay-ed/Job-market-etl-pipeline' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  [2] Maternal Health Risk Classifier' },
+        { cls: 'response', text: '      R · KNN · Jupyter Notebook' },
+        { cls: 'response', text: '      github.com/zaidsay-ed/Maternal-Health-Risk-Classifier-Model' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  [3] AI Email Assistant' },
+        { cls: 'response', text: '      React · TypeScript · OpenAI API · Gmail API' },
+        { cls: 'response', text: '      github.com/zaidsay-ed/email-responder' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  [4] Finance Budget Tracker' },
+        { cls: 'response', text: '      Java · JSwing · JSON · JUnit' },
+        { cls: 'response', text: '      github.com/zaidsay-ed/Budget-Tracker' },
+        { cls: 'dim',      text: '' },
+        { cls: 'dim',      text: '  → scroll the Projects section to see all 8' },
+      ];
+    },
+ 
+    experience: function() {
+      return [
+        { cls: 'gold',     text: '> Work Experience' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  May 2026 – Present' },
+        { cls: 'response', text: '  Data Engineer Co-op · Atreides' },
+        { cls: 'dim',      text: '' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  Aug 2025 – Present' },
+        { cls: 'response', text: '  Resident Advisor · University of British Columbia' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  Sep 2024 – Present' },
+        { cls: 'response', text: '  Undergraduate Teaching Assistant · UBC' },
+        { cls: 'response', text: '  Models of Computing · Software Construction (Java)' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  May 2025 – Jun 2025' },
+        { cls: 'response', text: '  IT Intern · Grant Thornton' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  Jan 2023 – Aug 2024' },
+        { cls: 'response', text: '  AI Program Manager · Venu AI' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  Aug 2022 – Jan 2023' },
+        { cls: 'response', text: '  AI Software Engineer · Venu AI' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  Jun 2023 – Sep 2023' },
+        { cls: 'response', text: '  STEM Research Intern · Edsolab' },
+      ];
+    },
+ 
+    education: function() {
+      return [
+        { cls: 'gold',     text: '> Education' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  Sep 2023 – Present' },
+        { cls: 'response', text: '  BSc Computer Science & Data Science' },
+        { cls: 'response', text: '  University of British Columbia, Vancouver' },
+        { cls: 'gold',     text: '  🏆 International Student Scholarship — 2024, 2025' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  Sep 2021 – May 2023' },
+        { cls: 'response', text: '  IB Diploma · GEMS Modern Academy' },
+      ];
+    },
+ 
+    contact: function() {
+      return [
+        { cls: 'gold',     text: '> Contact Info' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  📞 Phone' },
+        { cls: 'response', text: '     +1 236 971 7782' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  ✉  Email' },
+        { cls: 'response', text: '     zaidsayedbusiness@gmail.com' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  📍 Location' },
+        { cls: 'response', text: '     Vancouver, BC, Canada' },
+        { cls: 'dim',      text: '' },
+        { cls: 'dim',      text: '  → or scroll to the Contact section to send a message' },
+      ];
+    },
+ 
+    social: function() {
+      return [
+        { cls: 'gold',     text: '> Social & Links' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  GitHub' },
+        { cls: 'response', text: '  github.com/zaidsay-ed' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  LinkedIn' },
+        { cls: 'response', text: '  linkedin.com/in/zaid-sayed-a10804230' },
+        { cls: 'dim',      text: '' },
+        { cls: 'success',  text: '  Email' },
+        { cls: 'response', text: '  zaidsayedbusiness@gmail.com' },
+      ];
+    },
+ 
+  };
+ 
+  /* ── Easter egg responses for fun inputs ── */
+  var FUN = {
+    'sudo':        [{ cls: 'error', text: 'Permission denied. Nice try 😄' }],
+    'sudo rm -rf /': [{ cls: 'error', text: '❌ Absolutely not.' }],
+    'ls':          [{ cls: 'response', text: 'about/  projects/  resume/  contact/  secrets/' }],
+    'cd secrets':  [{ cls: 'error',    text: 'Access denied. 🔒' }],
+    'pwd':         [{ cls: 'response', text: '/home/zaid/portfolio' }],
+    'uname':       [{ cls: 'response', text: 'ZaidOS 2.0 — powered by caffeine & curiosity' }],
+    'date':        [{ cls: 'response', text: new Date().toString() }],
+    'hello':       [{ cls: 'gold',     text: 'Hello! Type help to see what I can do.' }],
+    'hi':          [{ cls: 'gold',     text: 'Hey there! Type help to get started.' }],
+    'vim':         [{ cls: 'error',    text: 'Opening vim... just kidding. Type :q to quit (you know the drill).' }],
+    'emacs':       [{ cls: 'error',    text: 'An operating system, not a text editor. No.' }],
+    'git status':  [{ cls: 'success',  text: 'On branch main. Nothing to commit — portfolio looking clean ✨' }],
+    'ping':        [{ cls: 'response', text: 'pong 🏓' }],
+    'matrix':      [{ cls: 'success',  text: 'Wake up, Neo... (you found an easter egg 👀)' }],
+  };
+ 
+  /* ── DOM refs ── */
+  var overlay  = document.getElementById('terminal-overlay');
+  var output   = document.getElementById('term-output');
+  var input    = document.getElementById('term-input');
+  var hint     = document.getElementById('term-hint');
+  var closeBtn = document.getElementById('termCloseBtn');
+ 
+  if (!overlay || !output || !input) return;
+ 
+  var history  = [];
+  var histIdx  = -1;
+  var isOpen   = false;
+ 
+  /* ── Print lines ── */
+  function print(lines) {
+    lines.forEach(function(l) {
+      var p = document.createElement('p');
+      p.className = 'term-line ' + (l.cls || 'response');
+      p.textContent = l.text;
+      output.appendChild(p);
+    });
+    output.scrollTop = output.scrollHeight;
+  }
+ 
+  function printPrompt(cmd) {
+    var p = document.createElement('p');
+    p.className = 'term-line prompt';
+    p.textContent = 'visitor@zaid:~$ ' + cmd;
+    output.appendChild(p);
+  }
+ 
+  /* ── Welcome message ── */
+  function printWelcome() {
+    print([
+      { cls: 'gold',     text: '  ______     _     _ ' },
+      { cls: 'gold',     text: ' |___  /    (_)   | |' },
+      { cls: 'gold',     text: '    / / __ _ _  __| |' },
+      { cls: 'gold',     text: '   / / / _` | |/ _` |' },
+      { cls: 'gold',     text: '  / /_| (_| | | (_| |' },
+      { cls: 'gold',     text: ' /_____\\__,_|_|\\__,_|' },
+      { cls: 'dim',      text: '' },
+      { cls: 'success',  text: '  Welcome to Zaid\'s Portfolio Terminal v1.0' },
+      { cls: 'dim',      text: '  Type  help  to see available commands.' },
+      { cls: 'dim',      text: '  Press  ~  or  Esc  to close.' },
+      { cls: 'dim',      text: '────────────────────────────────────────' },
+    ]);
+  }
+ 
+  /* ── Run a command ── */
+  function runCommand(raw) {
+    var cmd = raw.trim().toLowerCase();
+    if (!cmd) return;
+ 
+    history.unshift(raw);
+    histIdx = -1;
+ 
+    printPrompt(raw);
+ 
+    if (cmd === 'clear') {
+      output.innerHTML = '';
+      return;
+    }
+ 
+    if (cmd === 'exit') {
+      closeTerminal();
+      return;
+    }
+ 
+    if (COMMANDS[cmd]) {
+      print(COMMANDS[cmd]());
+      return;
+    }
+ 
+    if (FUN[cmd]) {
+      print(FUN[cmd]);
+      return;
+    }
+ 
+    print([
+      { cls: 'error',    text: 'command not found: ' + cmd },
+      { cls: 'dim',      text: 'Type  help  for available commands.' },
+    ]);
+  }
+ 
+  /* ── Open / close ── */
+  function openTerminal() {
+    isOpen = true;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if (output.children.length === 0) printWelcome();
+    setTimeout(function() { input.focus(); }, 50);
+  }
+ 
+  function closeTerminal() {
+    isOpen = false;
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    input.blur();
+  }
+ 
+  /* ── Show hint once after 3s ── */
+  var hintShown = false;
+  setTimeout(function() {
+    if (!hintShown && !isOpen) {
+      hintShown = true;
+      hint.classList.add('show');
+      setTimeout(function() { hint.classList.remove('show'); }, 3500);
+    }
+  }, 3000);
+ 
+  /* ── Key listeners ── */
+  document.addEventListener('keydown', function(e) {
+    /* ~ key (backtick on most keyboards = key 192) */
+    if (e.key === '`' || e.key === '~') {
+      /* Don't fire if user is typing in a form field */
+      var tag = document.activeElement.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+      e.preventDefault();
+      isOpen ? closeTerminal() : openTerminal();
+      return;
+    }
+    if (!isOpen) return;
+    if (e.key === 'Escape') { closeTerminal(); return; }
+  });
+ 
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      runCommand(input.value);
+      input.value = '';
+    }
+    /* Command history with arrow keys */
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (histIdx < history.length - 1) {
+        histIdx++;
+        input.value = history[histIdx];
+      }
+    }
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (histIdx > 0) {
+        histIdx--;
+        input.value = history[histIdx];
+      } else {
+        histIdx = -1;
+        input.value = '';
+      }
+    }
+  });
+ 
+  /* Close on overlay background click */
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeTerminal();
+  });
+ 
+  closeBtn.addEventListener('click', closeTerminal);
+ 
 })();
 </script>
 </body>
