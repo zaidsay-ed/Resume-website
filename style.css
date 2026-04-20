@@ -1654,6 +1654,54 @@ body{
 #term-hint.show { opacity: 1; }
 </style>
 
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 7px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  font-size: 13px;
+  color: #ccc;
+  font-family: 'Poppins', sans-serif;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00e676;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.6);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%   { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.6); }
+  70%  { box-shadow: 0 0 0 7px rgba(0, 230, 118, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
+}
+
+.status-badge .status-divider {
+  color: #444;
+  margin: 0 2px;
+}
+
+.status-badge .status-highlight {
+  color: #FFD700;
+  font-weight: 500;
+}
+.typed-cursor {
+    display: none;
+}
+
+/* Only show cursor on the subtitle */
+#typed-subtitle + .typed-cursor {
+    display: inline;
+    color: #aaa;
+}
 
 /* Responsive */
 @media (max-width: 760px) {

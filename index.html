@@ -231,6 +231,15 @@
                 <h2>AI & Data Science Enthusiast</h2>
                 <p>Software Engineer | Data Scientist</p>
                 <span id="typed-subtitle"></span>
+                <div style="margin-top: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                <div style="display:inline-flex; align-items:center; gap:7px; padding:5px 14px; background:rgba(0,230,118,0.08); border:1px solid rgba(0,230,118,0.25); border-radius:20px; font-size:12px; color:#00e676; font-family:'Poppins',sans-serif;">
+                    <span style="width:7px; height:7px; border-radius:50%; background:#00e676; display:inline-block; animation:pulse-dot 2s ease-in-out infinite; flex-shrink:0;"></span>
+                    Open to work
+                </div>
+                <div style="display:inline-flex; align-items:center; gap:7px; padding:5px 14px; background:rgba(255,215,0,0.07); border:1px solid rgba(255,215,0,0.25); border-radius:20px; font-size:12px; color:#FFD700; font-family:'Poppins',sans-serif;">
+                    Data Eng @ Atreides
+                </div>
+                </div>
             </div>
         </div>
     </div>
@@ -993,8 +1002,24 @@
             strings: ["Zaid Sayed"],
             typeSpeed: 80,   // Adjust the typing speed (in milliseconds)
             backSpeed: 50,    // If you want to simulate deleting text, adjust the backspace speed
-            loop: false       // Set to true if you want it to loop repeatedly
+            loop: false,       // Set to true if you want it to loop repeatedly
+            showCursor: false 
         });
+        // new Typed("#typed-subtitle", {
+        // strings: [
+        //     "Building AI that matters.",
+        //     "Turning data into decisions.",
+        //     "Junior @ UBC · CS & Data Science.",
+        //     "Exploring AI, Building the Future."
+        // ],
+        // typeSpeed: 55,
+        // backSpeed: 30,
+        // backDelay: 2000,
+        // loop: true,
+        // smartBackspace: true,
+        // // showCursor: true,   // ← keep true for subtitle (cycling text looks better with cursor)
+        // // cursorChar: '|'
+        // });
         });
     </script>
   
@@ -1077,8 +1102,8 @@ document.addEventListener("DOMContentLoaded", function () {
             strings: [
                 "Building AI that matters.",
                 "Turning data into decisions.",
-                "Junior @ UBC · CS &amp; Data Science.",
-                "Exploring AI, Building the Future."
+                "Exploring AI, Building the Future.",
+                "CS & Data Science @ UBC."
             ],
             typeSpeed: 55,
             backSpeed: 30,
