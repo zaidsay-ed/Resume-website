@@ -1,1737 +1,369 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Portfolio Website</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://kit.fontawesome.com/926a3d59c8.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zaid Sayed, data and software engineer</title>
+  <meta name="description" content="Zaid Sayed: UBC Computer Science + Data Science. Data pipelines, ML models and the software around them. Open to Summer 2027 internships in data or software engineering.">
+  <meta property="og:title" content="Zaid Sayed, data and software engineer">
+  <meta property="og:description" content="Data pipelines, ML models and the software around them. Open to Summer 2027 internships.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://personal-website-blush-tau.vercel.app/images/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#070B0A">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23070B0A'/%3E%3Ccircle cx='9' cy='10' r='2.6' fill='%23FFC24B'/%3E%3Ccircle cx='9' cy='22' r='2.6' fill='%23E9EFEA'/%3E%3Ccircle cx='23' cy='16' r='3.4' fill='%23FFC24B'/%3E%3Cpath d='M11.5 10 C17 10 17 16 19.5 16 M11.5 22 C17 22 17 16 19.5 16' stroke='%23E9EFEA' stroke-width='1.4' fill='none'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js" } }
+  </script>
 </head>
-
-<script>
-(function () {
-  /* Elements */
-  var loader  = document.getElementById('loader');
-  var nameEl  = document.getElementById('ldrName');
-  var slash   = document.getElementById('ldrSlash');
-  var close   = document.getElementById('ldrClose');
-  var cursor  = document.getElementById('ldrCursor');
-  var fill    = document.getElementById('ldrFill');
-  var subEl   = document.getElementById('ldrSub');
- 
-  /* Guard — if any element is missing, bail silently */
-  if (!loader || !nameEl) return;
- 
-  var name     = 'Zaid';
-  var sub      = 'portfolio.loading';
-  var nameIdx  = 0;
-  var subIdx   = 0;
-  var progress = 0;
-  var done     = false;
- 
-  /* Prevent scrolling while loader is up */
-  document.body.style.overflow = 'hidden';
- 
-  /* ── Phase 1: type the name ── */
-  function typeName() {
-    if (nameIdx < name.length) {
-      nameEl.textContent += name[nameIdx++];
-      setTimeout(typeName, 100);
-    } else {
-      /* Show />, pause, then start bar */
-      setTimeout(function () {
-        slash.style.display = 'inline';
-        close.style.display = 'inline';
-        cursor.style.display = 'none';
-        setTimeout(typeSubtitle, 150);
-      }, 180);
-    }
-  }
- 
-  /* ── Phase 2: type subtitle ── */
-  function typeSubtitle() {
-    if (subIdx < sub.length) {
-      subEl.textContent += sub[subIdx++];
-      setTimeout(typeSubtitle, 36);
-    } else {
-      setTimeout(runBar, 100);
-    }
-  }
- 
-  /* ── Phase 3: progress bar ── */
-  function runBar() {
-    var iv = setInterval(function () {
-      progress += 1.6;
-      fill.style.width = Math.min(progress, 100) + '%';
-      if (progress >= 100 && !done) {
-        done = true;
-        clearInterval(iv);
-        hideLoader();
-      }
-    }, 16);
-  }
- 
-  /* ── Hide loader ── */
-  function hideLoader() {
-    setTimeout(function () {
-      loader.classList.add('fade-out');
-      document.body.style.overflow = '';
-      /* Remove from DOM after transition */
-      setTimeout(function () {
-        if (loader.parentNode) loader.parentNode.removeChild(loader);
-      }, 900);
-    }, 200);
-  }
- 
-  /* ── Start as soon as possible ── */
-  /* Use DOMContentLoaded so we don't wait for images/particles */
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () {
-      setTimeout(typeName, 300);
-    });
-  } else {
-    /* DOM already ready (script is deferred or at bottom) */
-    setTimeout(typeName, 300);
-  }
- 
-  /* ── Safety net: force-hide after 5s no matter what ── */
-  setTimeout(function () {
-    if (!done) {
-      done = true;
-      hideLoader();
-    }
-  }, 5000);
-})();
-</script>
-
 <body>
-    <div id="loader">
-    <div class="ldr-wrap">
-        <div class="ldr-logo">
-        <span class="c-cyan">&lt;</span><span id="ldrText"></span><span class="c-gray" id="ldrEnd" style="visibility:hidden">/</span><span class="c-cyan" id="ldrClose" style="visibility:hidden">&gt;</span>
-        </div>
-        <div class="ldr-track"><div class="ldr-bar" id="ldrBar"></div></div>
-        <div class="ldr-sub" id="ldrSub">&#8203;</div>
-    </div>
-    </div>
+<a class="skip" href="#main">Skip to content</a>
 
+<!-- 3D particle field behind everything -->
+<canvas id="field" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
 
-    <script>
-    !function(){
-    var el   = document.getElementById('loader');
-    var txt  = document.getElementById('ldrText');
-    var end  = document.getElementById('ldrEnd');
-    var cls  = document.getElementById('ldrClose');
-    var bar  = document.getElementById('ldrBar');
-    var sub  = document.getElementById('ldrSub');
-    
-    if(!el || !txt) return;
-    
-    document.body.style.overflow = 'hidden';
-    
-    var name = 'Zaid';
-    var i    = 0;
-    
-    /* Type the name one char at a time */
-    function typeName() {
-        if(i < name.length) {
-        txt.textContent += name[i++];
-        setTimeout(typeName, 110);
-        } else {
-        /* Show /> */
-        end.style.visibility = 'visible';
-        cls.style.visibility = 'visible';
-        sub.textContent = 'loading portfolio...';
-        setTimeout(startBar, 250);
-        }
-    }
-    
-    /* Animate the progress bar */
-    function startBar() {
-        var pct = 0;
-        var iv  = setInterval(function(){
-        pct += 2;
-        bar.style.width = Math.min(pct, 100) + '%';
-        if(pct >= 100){
-            clearInterval(iv);
-            setTimeout(dismiss, 200);
-        }
-        }, 18);
-    }
-    
-    /* Fade and remove */
-    function dismiss() {
-        el.classList.add('fade-out');
-        document.body.style.overflow = '';
-        setTimeout(function(){ el.remove(); }, 900);
-    }
-    
-    /* Kick off — no waiting for load events, starts immediately */
-    setTimeout(typeName, 200);
-    
-    /* Hard kill after 4s in case anything stalls */
-    setTimeout(function(){
-        if(document.getElementById('loader')) dismiss();
-    }, 4000);
-    }();
-    </script>
+<header class="nav">
+  <a class="nav-name" href="#top">Zaid Sayed</a>
+  <p class="nav-stage" aria-hidden="true"><span class="pulse"></span><span id="stageLabel">raw input</span></p>
+  <nav aria-label="Sections">
+    <a href="#pipeline">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#work">Projects</a>
+    <a href="#demo">Demo</a>
+    <a href="#query">Query</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a class="btn btn-sm magnetic" href="images/Zaid_Resume_DS.pdf" target="_blank" rel="noopener">Resume</a>
+</header>
 
-    <div id="header">
-        <div class="container">
-            <div id="particles-js"></div>
-            
-            <div id="scrollProgress"></div>
+<main id="main">
 
-            <nav id="navbar">
-                <!-- Logo: styled text instead of image -->
-                <a href="#header" class="nav-logo">
-                    <span class="logo-bracket">&lt;</span>Zaid<span class="logo-dot">/</span><span class="logo-bracket">&gt;</span>
-                </a>
-
-                <!-- Desktop links -->
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="#header"   class="nav-link" data-section="header">Home</a></li>
-                    <li><a href="#about"    class="nav-link" data-section="about">About</a></li>
-                    <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
-                    <li><a href="#resume"   class="nav-link" data-section="resume">Resume</a></li>
-                    <li><a href="#contact"  class="nav-link" data-section="contact">Contact</a></li>
-                </ul>
-
-                <!-- Animated hamburger (mobile) -->
-                <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </nav>
-
-            <!-- Mobile drawer -->
-            <div class="mobile-drawer" id="mobileDrawer">
-                <ul>
-                    <li><a href="#header"   class="mobile-link" data-section="header">Home</a></li>
-                    <li><a href="#about"    class="mobile-link" data-section="about">About</a></li>
-                    <li><a href="#projects" class="mobile-link" data-section="projects">Projects</a></li>
-                    <li><a href="#resume"   class="mobile-link" data-section="resume">Resume</a></li>
-                    <li><a href="#contact"  class="mobile-link" data-section="contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="drawer-overlay" id="drawerOverlay"></div>
-            <div class="header-text">
-                <!-- <p>Software Engineer/Data Scientist</p>
-                <h1>Hey, I'm <span>Zaid</span> <br> Sophomore at the <br>University of British Columbia</h1>
-             -->
-                <h1><span id="typed"></span></h1>
-                <h2>AI & Data Science Enthusiast</h2>
-                <p>Software Engineer | Data Scientist</p>
-                <span id="typed-subtitle"></span>
-                <div style="margin-top: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
-                <div style="display:inline-flex; align-items:center; gap:7px; padding:5px 14px; background:rgba(0,230,118,0.08); border:1px solid rgba(0,230,118,0.25); border-radius:20px; font-size:12px; color:#00e676; font-family:'Poppins',sans-serif;">
-                    <span style="width:7px; height:7px; border-radius:50%; background:#00e676; display:inline-block; animation:pulse-dot 2s ease-in-out infinite; flex-shrink:0;"></span>
-                    Open to work
-                </div>
-                <div style="display:inline-flex; align-items:center; gap:7px; padding:5px 14px; background:rgba(255,215,0,0.07); border:1px solid rgba(255,215,0,0.25); border-radius:20px; font-size:12px; color:#FFD700; font-family:'Poppins',sans-serif;">
-                    Data Eng @ Atreides
-                </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- about -->
-    
-<div id="about">
-    <div class="container">
-        <div class="about-glass reveal">
-            <div class="row">
-                <div class="about-1 reveal-left">
-                    <img src="images/dp.jpg" alt="Zaid Sayed">
-                </div>
-                <div class="about-2 reveal-right">
-                    <h1 class="sub-title">About Me</h1>
-                    <p>I'm a Computer Science and Data Science student at UBC, currently working as a Data Engineer Co-op at Atreides. My interests span AI, data engineering, product development, and business operations. </p>
-                    <div class="tab-titles">
-                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
-                        <p class="tab-links" onclick="opentab('experience')">Experience</p>
-                        <p class="tab-links" onclick="opentab('education')">Education</p>
-                    </div>
-
-                    <!-- Skills tab -->
-                    <!-- <div class="tab-contents active-tab" id="skills">
-                        <ul>
-                            <li><span>AI Development</span><br>Prompt engineering · Dataset training · LLM optimization</li>
-                            <li><span>Web App Development</span><br>Frontend: HTML, JavaScript, CSS &nbsp;|&nbsp; Backend: SQL, Java, Python</li>
-                            <li><span>Data Science</span><br>Data wrangling &amp; processing (R, SQL, Python) · Visualizations (Python, Power BI) · ML (Regression Models, Classification Models, Ensembles, etc) · Version control (GitHub)</li>
-                            <li><span>Graphic Design</span><br>Adobe Photoshop</li>
-                        </ul>
-                    </div> -->
-                    <style id="skills-styles">
-                    .skill-bar-list {
-                    list-style: none;
-                    padding: 0;
-                    margin: 0;
-                    }
-                    .skill-bar-item {
-                    margin-bottom: 18px;
-                    }
-                    .skill-bar-header {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: baseline;
-                    margin-bottom: 6px;
-                    }
-                    .skill-bar-label {
-                    font-size: 14px;
-                    color: #fff;
-                    font-weight: 500;
-                    }
-                    .skill-bar-label span {
-                    font-size: 12px;
-                    color: #888;
-                    font-weight: 400;
-                    margin-left: 6px;
-                    }
-                    .skill-bar-pct {
-                    font-size: 12px;
-                    color: #FFD700;
-                    font-weight: 600;
-                    }
-                    .skill-bar-track {
-                    height: 6px;
-                    background: rgba(255,255,255,0.08);
-                    border-radius: 6px;
-                    overflow: hidden;
-                    }
-                    .skill-bar-fill {
-                    height: 100%;
-                    border-radius: 6px;
-                    width: 0%;
-                    background: linear-gradient(90deg, #FFD700, #00FFFF);
-                    box-shadow: 0 0 8px rgba(255,215,0,0.4);
-                    transition: width 1.1s cubic-bezier(0.4, 0, 0.2, 1);
-                    }
-                    .skill-section-title {
-                    font-size: 11px;
-                    color: #FFD700;
-                    letter-spacing: 1.2px;
-                    text-transform: uppercase;
-                    margin: 18px 0 10px;
-                    font-weight: 600;
-                    }
-                    </style>
-                    <div class="tab-contents active-tab" id="skills">
-                    <p class="skill-section-title">AI & Data Science</p>
-                    <ul class="skill-bar-list">
-                        <li class="skill-bar-item">
-                        <div class="skill-bar-header">
-                            <div class="skill-bar-label">Prompt Engineering & LLMs <span>AI Development</span></div>
-                            <div class="skill-bar-pct">80%</div>
-                        </div>
-                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
-                        </li>
-                        <li class="skill-bar-item">
-                        <div class="skill-bar-header">
-                            <div class="skill-bar-label">Machine Learning <span>Regression · Classification · Ensembles</span></div>
-                            <div class="skill-bar-pct">80%</div>
-                        </div>
-                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
-                        </li>
-                        <li class="skill-bar-item">
-                        <div class="skill-bar-header">
-                            <div class="skill-bar-label">Data Wrangling & Visualization <span>PySpark · Pandas</span></div>
-                            <div class="skill-bar-pct">80%</div>
-                        </div>
-                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
-                        </li>
-                        <li class="skill-bar-item">
-                        <div class="skill-bar-header">
-                            <div class="skill-bar-label">Tableau / Power BI <span>Data Visualization</span></div>
-                            <div class="skill-bar-pct">75%</div>
-                        </div>
-                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div>
-                        </li>
-                    </ul>
-
-                    <p class="skill-section-title">Web Development</p>
-                    <ul class="skill-bar-list">
-                        <li class="skill-bar-item">
-                        <div class="skill-bar-header">
-                            <div class="skill-bar-label">Frontend <span>HTML · CSS · JavaScript</span></div>
-                            <div class="skill-bar-pct">80%</div>
-                        </div>
-                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
-                        </li>
-                        <li class="skill-bar-item">
-                        <div class="skill-bar-header">
-                            <div class="skill-bar-label">Backend & Databases <span>Python · Java · SQL</span></div>
-                            <div class="skill-bar-pct">75%</div>
-                        </div>
-                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div>
-                        </li>
-                    </ul>
-
-                    <p class="skill-section-title">Tools & Systems</p>
-                    <ul class="skill-bar-list">
-                        <li class="skill-bar-item">
-                        <div class="skill-bar-header">
-                            <div class="skill-bar-label">C / C++ <span>Systems Programming</span></div>
-                            <div class="skill-bar-pct">80%</div>
-                        </div>
-                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
-                        </li>
-                        <li class="skill-bar-item">
-                        <div class="skill-bar-header">
-                            <div class="skill-bar-label">Docker <span>Containerization</span></div>
-                            <div class="skill-bar-pct">75%</div>
-                        </div>
-                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div>
-                        </li>
-                        <li class="skill-bar-item">
-                        <div class="skill-bar-header">
-                            <div class="skill-bar-label">Version Control <span>Git · GitHub</span></div>
-                            <div class="skill-bar-pct">85%</div>
-                        </div>
-                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
-                        </li>
-                    </ul>
-                    </div>
-
-                    <!-- ── Experience tab — TIMELINE ── -->
-                    <div class="tab-contents" id="experience">
-                        <div class="timeline" id="experienceTimeline">
-                            
-                            <div class="tl-item">
-                                <div class="tl-date">May 2026 - Present</div>
-                                <div class="tl-role">Data Engineer Co-op</div>
-                                <div class="tl-company">Atreides</div>
-                            </div>
-
-                            <div class="tl-item">
-                                <div class="tl-date">Aug 2025 - Present</div>
-                                <div class="tl-role">Resident Advisor</div>
-                                <div class="tl-company">University of British Columbia</div>
-                            </div>
-
-                            <div class="tl-item">
-                                <div class="tl-date">Sep 2024 - Present</div>
-                                <div class="tl-role">Undergraduate Teaching Assistant</div>
-                                <div class="tl-company">University of British Columbia · Models of Computing · Software Construction (Java)</div>
-                            </div>
-
-                            <div class="tl-item">
-                                <div class="tl-date">May 2025 — Jun 2025</div>
-                                <div class="tl-role">IT Intern</div>
-                                <div class="tl-company">Grant Thornton</div>
-                            </div>
-
-                            <div class="tl-item">
-                                <div class="tl-date">Jan 2023 - Aug 2024</div>
-                                <div class="tl-role">AI Program Manager</div>
-                                <div class="tl-company">Venu AI</div>
-                            </div>
-
-                            <div class="tl-item">
-                                <div class="tl-date">Aug 2022 - Jan 2023</div>
-                                <div class="tl-role">AI Software Engineer</div>
-                                <div class="tl-company">Venu AI</div>
-                            </div>
-
-                            <div class="tl-item">
-                                <div class="tl-date">Jun 2023 - Sep 2023</div>
-                                <div class="tl-role">STEM Research Intern</div>
-                                <div class="tl-company">Edsolab</div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- Education tab -->
-                    <div class="tab-contents" id="education">
-                    <div class="edu-timeline">
-
-                        <div class="edu-card">
-                        <div class="edu-icon">🎓</div>
-                        <div class="edu-body">
-                            <div class="edu-date">Sep 2023 — Present</div>
-                            <div class="edu-degree">Bachelors &nbsp;·&nbsp;Computer Science & Data Science</div>
-                            <div class="edu-school">University of British Columbia</div>
-                            <div class="edu-badge">🏆 International Student Scholarship — 2024, 2025</div>
-                        </div>
-                        </div>
-
-                        <div class="edu-card">
-                        <div class="edu-icon">📘</div>
-                        <div class="edu-body">
-                            <div class="edu-date">Sep 2021 — May 2023</div>
-                            <div class="edu-degree">IB Diploma</div>
-                            <div class="edu-school">GEMS Modern Academy</div>
-                        </div>
-                        </div>
-
-                    </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-
-<div id="projects">
-  <h2 class="projects-title">My Projects</h2>
-
-  <div class="pc-outer">
-    <button class="pc-arrow pc-prev" id="pcPrev">&#8249;</button>
-    <div class="pc-window" id="pcWindow">
-      <div class="pc-track" id="pcTrack">
-
-        <div class="pc-card">
-        <div class="pc-card-inner">
-            <div class="pc-card-front">
-            <h3>Speedrun Analytics Database</h3>
-            <p>Designed and implemented a relational database for a game speedrunning platform using Oracle SQL with advanced queries including aggregation and division.</p>
-            <span class="pc-flip-hint">hover to flip</span>
-            </div>
-            <div class="pc-card-back">
-            <h4>Tech Stack</h4>
-            <div class="tech-tags">
-                <span class="tech-tag">Oracle SQL</span>
-                <span class="tech-tag">Relational DB</span>
-                <span class="tech-tag">Aggregation</span>
-            </div>
-            </div>
-        </div>
-        </div>
-
-        <div class="pc-card">
-        <div class="pc-card-inner">
-            <div class="pc-card-front">
-            <h3>Job Market ETL Pipeline</h3>
-            <p>Built an end-to-end ETL pipeline using Python and Pandas to extract, clean, and load job market data into a structured SQLite database.</p>
-            <span class="pc-flip-hint">hover to flip</span>
-            </div>
-            <div class="pc-card-back">
-            <h4>Tech Stack</h4>
-            <div class="tech-tags">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">Pandas</span>
-                <span class="tech-tag">SQLite</span>
-                <span class="tech-tag">ETL</span>
-            </div>
-            <a href="https://github.com/zaidsay-ed/Job-market-etl-pipeline" class="pc-link" target="_blank">
-                <i class="fab fa-github"></i> View on GitHub
-            </a>
-            </div>
-        </div>
-        </div>
-
-        <div class="pc-card">
-        <div class="pc-card-inner">
-            <div class="pc-card-front">
-            <h3>Credit Card Default Prediction</h3>
-            <p>End-to-end ML pipeline in Python to predict credit card default risk — preprocessing, feature engineering, model training and explainability.</p>
-            <span class="pc-flip-hint">hover to flip</span>
-            </div>
-            <div class="pc-card-back">
-            <h4>Tech Stack</h4>
-            <div class="tech-tags">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">Scikit-learn</span>
-                <span class="tech-tag">Feature Eng.</span>
-            </div>
-            </div>
-        </div>
-        </div>
-
-        <div class="pc-card">
-        <div class="pc-card-inner">
-            <div class="pc-card-front">
-            <h3>Maternal Health Risk Classifier</h3>
-            <p>Developed a classifier using R and the KNN algorithm to assess maternal health risks, evaluated with a confusion matrix.</p>
-            <span class="pc-flip-hint">hover to flip</span>
-            </div>
-            <div class="pc-card-back">
-            <h4>Tech Stack</h4>
-            <div class="tech-tags">
-                <span class="tech-tag">R</span>
-                <span class="tech-tag">KNN</span>
-                <span class="tech-tag">Jupyter</span>
-                <span class="tech-tag">ML</span>
-            </div>
-            <a href="https://github.com/zaidsay-ed/Maternal-Health-Risk-Classifier-Model" class="pc-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-        </div>
-        </div>
-        
-        <div class="pc-card">
-        <div class="pc-card-inner">
-            <div class="pc-card-front">
-            <h3>Finance Budget Tracker</h3>
-            <p>A Java application built with JSwing to track earnings, expenditures, and cash flow. Uses JSON for data persistence and JUnit for testing.</p>
-            <span class="pc-flip-hint">hover to flip</span>
-            </div>
-            <div class="pc-card-back">
-            <h4>Tech Stack</h4>
-            <div class="tech-tags">
-                <span class="tech-tag">Java</span>
-                <span class="tech-tag">JSwing</span>
-                <span class="tech-tag">JSON</span>
-                <span class="tech-tag">JUnit</span>
-            </div>
-            <a href="https://github.com/zaidsay-ed/Budget-Tracker/tree/main" class="pc-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-        </div>
-        </div>
-
-        <div class="pc-card">
-        <div class="pc-card-inner">
-            <div class="pc-card-front">
-            <h3>Sudoku Solver</h3>
-            <p>A Python solver using backtracking, recursion, and depth-first search with constraint propagation to efficiently solve any Sudoku puzzle.</p>
-            <span class="pc-flip-hint">hover to flip</span>
-            </div>
-            <div class="pc-card-back">
-            <h4>Tech Stack</h4>
-            <div class="tech-tags">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">Backtracking</span>
-                <span class="tech-tag">DFS</span>
-            </div>
-            <a href="https://github.com/zaidsay-ed/sudoku-solver/tree/main" class="pc-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-        </div>
-        </div>
-
-        <div class="pc-card">
-        <div class="pc-card-inner">
-            <div class="pc-card-front">
-            <h3>Resume Parser</h3>
-            <p>Automated resume parser in Python using spaCy/NLTK and regular expressions to extract key candidate information with 95%+ accuracy.</p>
-            <span class="pc-flip-hint">hover to flip</span>
-            </div>
-            <div class="pc-card-back">
-            <h4>Tech Stack</h4>
-            <div class="tech-tags">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">spaCy</span>
-                <span class="tech-tag">NLTK</span>
-                <span class="tech-tag">Regex</span>
-            </div>
-            </div>
-        </div>
-        </div>
-
-        <div class="pc-card">
-        <div class="pc-card-inner">
-            <div class="pc-card-front">
-            <h3>AI Email Assistant</h3>
-            <p>A React + TypeScript + Ionic web app integrating Gmail API (OAuth) and OpenAI API with prompt engineering to auto-generate email replies.</p>
-            <span class="pc-flip-hint">hover to flip</span>
-            </div>
-            <div class="pc-card-back">
-            <h4>Tech Stack</h4>
-            <div class="tech-tags">
-                <span class="tech-tag">React</span>
-                <span class="tech-tag">TypeScript</span>
-                <span class="tech-tag">OpenAI API</span>
-                <span class="tech-tag">Gmail API</span>
-            </div>
-            <a href="https://github.com/zaidsay-ed/email-responder" class="pc-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-        </div>
-        </div>
-
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <p class="hero-status reveal-up"><span class="dot"></span>Open to Summer 2027 internships in data and software engineering</p>
+    <h1 class="hero-name" aria-label="Zaid Sayed">
+      <span class="line"><span class="word">Zaid</span></span>
+      <span class="line"><span class="word">Sayed</span></span>
+    </h1>
+    <div class="hero-foot">
+      <p class="hero-lede reveal-up">I turn messy data into systems people can use: ingestion pipelines, ML models and the software around them. Most recently a data engineering co-op at Atreides. Computer Science at UBC, two-time International Student Scholarship recipient.</p>
+      <div class="hero-actions reveal-up">
+        <a class="btn magnetic" href="images/Zaid_Resume_DS.pdf" target="_blank" rel="noopener">Resume: data &amp; ML</a>
+        <a class="btn btn-line magnetic" href="images/Zaid_Resume.pdf" target="_blank" rel="noopener">Resume: software</a>
       </div>
     </div>
-    <button class="pc-arrow pc-next" id="pcNext">&#8250;</button>
-  </div>
+    <p class="scroll-cue reveal-up" aria-hidden="true">Scroll to run the pipeline</p>
+  </section>
 
-  <div class="pc-dots" id="pcDots"></div>
-</div>
-    <!-- services
-    <div id="services">
-        <div class="container">
-            <h1 class ="sub-title">My Services</h1>
-            <div class="services-list">
-                <div>
-                    <h2>Web Design</h2>
-                    <p>Lorer ea ectus amet</p>
-                    <a href="#"> learn more</a>
-                </div>
-                <div>
-                    <h2>App Design</h2>
-                    <p>Lorer ea ectus amet</p>
-                    <a href="#"> learn more</a>
-                </div>
+  <!-- PIPELINE STORY: particles change shape per stage, each stage is a job -->
+  <section class="pipeline" id="pipeline" aria-labelledby="h-pipe">
+    <h2 id="h-pipe" class="sr-only">Experience</h2>
+    <div class="pipe-pin">
+      <ol class="pipe-rail" aria-hidden="true">
+        <li data-i="0">Ingest</li>
+        <li data-i="1">Transform</li>
+        <li data-i="2">Serve</li>
+      </ol>
+
+      <article class="stage" data-stage="0">
+        <p class="stage-kicker"><span class="mono">01</span> Ingest</p>
+        <h3>Data Engineer Co-op</h3>
+        <p class="stage-org">Atreides, Vancouver <span class="mono">May – Aug 2026</span></p>
+        <p class="stage-big"><span class="big-num">24 h → 10 min</span><span>roughly how long raw vendor data took to reach analysts, before and after the new ingestion system</span></p>
+        <ul>
+          <li>Owned the backfill module across the full SDLC: design, build, testing and deployment.</li>
+          <li>Backfills fan out across ~1,000 parallel AWS Lambda invocations, each handling up to ~10 GB.</li>
+          <li>Part of a new ingestion system whose proof of concept was designed for petabyte-scale vendor data.</li>
+        </ul>
+      </article>
+
+      <article class="stage" data-stage="1">
+        <p class="stage-kicker"><span class="mono">02</span> Transform</p>
+        <h3>Data Science Intern</h3>
+        <p class="stage-org">Grant Thornton, Dubai <span class="mono">May – Jul 2025</span></p>
+        <p class="stage-big"><span class="count" data-from="0" data-to="30" data-suffix="%">30%</span><span>less manual processing time on audit data reviews</span></p>
+        <ul>
+          <li>Ingested, cleaned and validated multi-source financial datasets in Python and Excel.</li>
+          <li>Flagged anomalies through exploratory analysis to improve audit accuracy.</li>
+        </ul>
+      </article>
+
+      <article class="stage" data-stage="2">
+        <p class="stage-kicker"><span class="mono">03</span> Serve</p>
+        <h3>AI Software Engineer, then Program Manager</h3>
+        <p class="stage-org">Venu AI, San Jose <span class="mono">Aug 2023 – Aug 2024</span></p>
+        <p class="stage-big"><span class="count" data-from="25" data-to="40" data-suffix="%">40%</span><span>outreach response rate for clients, up from 25%, by A/B testing LLM prompt templates</span></p>
+        <ul>
+          <li>Shipped reusable email-generation automation used across 3+ client use cases.</li>
+          <li>Redesigned the prompt-engineering layer, cutting debugging time by 40%.</li>
+          <li>Promoted from intern to Program Manager in 7 months.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- Full experience list -->
+  <section class="section" id="experience" aria-labelledby="h-exp">
+    <header class="section-head">
+      <h2 id="h-exp">Every role</h2>
+      <p>Most recent first.</p>
+    </header>
+    <ol class="roles">
+      <li><span class="r-when mono">2026</span><span class="r-role">Data Engineer Co-op, ingestion and backfill</span><span class="r-org">Atreides</span><span class="r-dur mono">May – Aug 2026</span></li>
+      <li><span class="r-when mono">now</span><span class="r-role">Undergraduate Teaching Assistant, CPSC 210 and 121</span><span class="r-org">UBC</span><span class="r-dur mono">Sep 2024 – now</span></li>
+      <li><span class="r-when mono">now</span><span class="r-role">Resident Advisor</span><span class="r-org">UBC</span><span class="r-dur mono">Aug 2025 – now</span></li>
+      <li><span class="r-when mono">2025</span><span class="r-role">Data Science Intern</span><span class="r-org">Grant Thornton</span><span class="r-dur mono">May – Jul 2025</span></li>
+      <li><span class="r-when mono">2024</span><span class="r-role">AI Software Engineer, then Program Manager</span><span class="r-org">Venu AI</span><span class="r-dur mono">Aug 2023 – Aug 2024</span></li>
+      <li><span class="r-when mono">2023</span><span class="r-role">STEM Research Intern</span><span class="r-org">Edsolab</span><span class="r-dur mono">Jun – Sep 2023</span></li>
+    </ol>
+  </section>
+
+  <!-- Education -->
+  <section class="section" id="education" aria-labelledby="h-edu">
+    <header class="section-head">
+      <h2 id="h-edu">Education</h2>
+    </header>
+    <div class="edu-grid">
+      <article class="edu-main">
+        <div class="card-top"><span class="chip-track">University of British Columbia</span><span class="mono">Sep 2023 – Nov 2027 (expected)</span></div>
+        <h3>B.A. Computer Science, minor in Data Science</h3>
+        <ul class="edu-list">
+          <li><span>Teaching Assistant</span> CPSC 210 Software Construction (Java) and CPSC 121 Models of Computation</li>
+          <li><span>Resident Advisor</span> Since Aug 2025</li>
+        </ul>
+      </article>
+      <article class="edu-stat">
+        <p class="edu-num"><span class="count" data-from="0" data-to="2" data-suffix="×">2×</span></p>
+        <h3>International Student Scholarship</h3>
+        <p>Awarded by UBC in 2024 and again in 2025.</p>
+      </article>
+      <article class="edu-stat">
+        <p class="edu-num"><span class="count" data-from="0" data-to="3.7" data-dec="1">3.7</span><span class="edu-of">/ 4.0</span></p>
+        <h3>GPA</h3>
+        <p>While working, TAing and serving as a Resident Advisor.</p>
+      </article>
+      <article class="edu-small">
+        <h3>GEMS Modern Academy</h3>
+        <p>IB Diploma <span class="mono">2021 – 2023</span></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="section" id="work" aria-labelledby="h-work">
+    <header class="section-head">
+      <h2 id="h-work">Selected work</h2>
+      <div class="tabs" role="group" aria-label="Filter projects">
+        <button type="button" class="tab" data-track="all" aria-pressed="true">All</button>
+        <button type="button" class="tab" data-track="data" aria-pressed="false">Data</button>
+        <button type="button" class="tab" data-track="ml" aria-pressed="false">ML</button>
+        <button type="button" class="tab" data-track="software" aria-pressed="false">Software</button>
+      </div>
+    </header>
+
+    <div class="bento" id="bento">
+      <article class="card card-xl" data-track="data">
+        <div class="card-top"><span class="chip-track">Data</span><span class="mono">2026</span></div>
+        <h3>Job market ETL pipeline</h3>
+        <p>Extracts raw job postings, normalises salaries and locations, pulls skills out of free text and loads it all into a relational SQLite schema. Validation drops duplicates and handles missing values; SQL on top shows hiring trends and the most-requested skills.</p>
+        <div class="flow" aria-hidden="true">
+          <span>raw postings</span><i></i><span>clean + validate</span><i></i><span>SQLite</span><i></i><span>trends</span>
+        </div>
+        <p class="stack mono">Python, Pandas, SQL, SQLite</p>
+        <a class="card-link" href="https://github.com/zaidsay-ed/Job-market-etl-pipeline" target="_blank" rel="noopener">Code on GitHub</a>
+      </article>
+
+      <article class="card card-tall" data-track="ml">
+        <div class="card-top"><span class="chip-track">ML</span><span class="mono">2025</span></div>
+        <h3>Credit card default prediction</h3>
+        <p class="metric"><span class="count" data-from="0.5" data-to="0.785" data-dec="3">0.785</span><span>test ROC-AUC on 30,000+ records</span></p>
+        <p>Compared classifiers with stratified cross-validation; gradient boosting generalised best (CV 0.773 ± 0.007).</p>
+        <p class="stack mono">Python, scikit-learn, Pandas</p>
+      </article>
+
+      <article class="card" data-track="software ml">
+        <div class="card-top"><span class="chip-track">Software</span><span class="mono">2025</span></div>
+        <h3>AI email assistant</h3>
+        <p>Drafts Gmail replies from the whole thread and sender context, with guardrails on tone, length and low-confidence replies.</p>
+        <p class="stack mono">React, TypeScript, Gmail API, OpenAI</p>
+        <a class="card-link" href="https://github.com/zaidsay-ed/email-responder" target="_blank" rel="noopener">Code on GitHub</a>
+      </article>
+
+      <article class="card" data-track="data">
+        <div class="card-top"><span class="chip-track">Data</span><span class="mono">2025</span></div>
+        <h3>Customer spending dashboard</h3>
+        <p>Power BI dashboard on transaction-level data with SQL aggregations for monthly spend and category trends.</p>
+        <p class="stack mono">Power BI, SQL, Python</p>
+      </article>
+
+      <article class="card" data-track="ml">
+        <div class="card-top"><span class="chip-track">ML</span><span class="mono live">in progress</span></div>
+        <h3>Adaptive game difficulty engine</h3>
+        <p>A reinforcement learning agent that adapts enemy behaviour to how well the player is doing.</p>
+        <p class="stack mono">Python, RL</p>
+      </article>
+
+      <article class="card" data-track="software">
+        <div class="card-top"><span class="chip-track">Software</span><span class="mono">2024</span></div>
+        <h3>Finance budget tracker</h3>
+        <p>Desktop app with an MVC structure, JSON persistence and full JUnit coverage.</p>
+        <p class="stack mono">Java, Swing, JUnit</p>
+        <a class="card-link" href="https://github.com/zaidsay-ed/Budget-Tracker" target="_blank" rel="noopener">Code on GitHub</a>
+      </article>
+
+      <article class="card" data-track="data">
+        <div class="card-top"><span class="chip-track">Data</span></div>
+        <h3>Speedrun analytics database</h3>
+        <p>Relational schema for a speedrunning platform, with aggregation and division queries in Oracle SQL.</p>
+        <p class="stack mono">Oracle SQL</p>
+      </article>
+
+      <article class="card" data-track="ml">
+        <div class="card-top"><span class="chip-track">ML</span><span class="mono">2023</span></div>
+        <h3>Maternal health risk classifier</h3>
+        <p>KNN classifier tuned for recall on high-risk patients, benchmarked on imbalanced data.</p>
+        <p class="stack mono">R, Jupyter</p>
+        <a class="card-link" href="https://github.com/zaidsay-ed/Maternal-Health-Risk-Classifier-Model" target="_blank" rel="noopener">Code on GitHub</a>
+      </article>
+
+      <article class="card" data-track="software">
+        <div class="card-top"><span class="chip-track">Software</span><span class="mono">2024</span></div>
+        <h3>Sudoku solver</h3>
+        <p>Backtracking search with constraint propagation to cut branching.</p>
+        <p class="stack mono">Python</p>
+        <a class="card-link" href="https://github.com/zaidsay-ed/sudoku-solver" target="_blank" rel="noopener">Code on GitHub</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- Live ETL demo -->
+  <section class="section" id="demo" aria-labelledby="h-demo">
+    <header class="section-head">
+      <h2 id="h-demo">Run my pipeline</h2>
+      <p>A browser version of my job market ETL pipeline, using the same cleaning rules on a small set of sample postings made up for this demo.</p>
+    </header>
+
+    <div class="etl" id="etl">
+      <div class="etl-top">
+        <ol class="etl-steps">
+          <li class="etl-step"><span class="k">Extract</span><span class="n mono">–</span></li>
+          <li class="etl-step"><span class="k">Validate</span><span class="n mono">–</span></li>
+          <li class="etl-step"><span class="k">Transform</span><span class="n mono">–</span></li>
+          <li class="etl-step"><span class="k">Load</span><span class="n mono">–</span></li>
+        </ol>
+        <button type="button" class="btn magnetic" id="etlRun">Run pipeline</button>
+      </div>
+
+      <div class="etl-body">
+        <div class="etl-panel">
+          <div class="etl-panel-head">
+            <span>Data</span>
+            <div class="etl-toggle" role="group" aria-label="Table view">
+              <button type="button" class="etl-view" data-view="raw" aria-pressed="true">Raw</button>
+              <button type="button" class="etl-view" data-view="clean" aria-pressed="false" disabled>Clean</button>
             </div>
+          </div>
+          <div class="etl-scroll"><table class="etl-table mono" id="etlTable"></table></div>
         </div>
-    </div> 
-    
-    Portfolio
-    <div id="portfolio">
-        <div class="container">
-            <h1 class ="sub-title">My Work</h1>
+        <div class="etl-panel">
+          <div class="etl-panel-head"><span>Run log</span></div>
+          <div class="etl-log mono" id="etlLog" aria-live="polite"></div>
         </div>
-    </div> -->
+      </div>
 
+      <div class="etl-charts">
+        <figure><figcaption>Most requested skills</figcaption><div class="bars" id="etlSkills"></div></figure>
+        <figure><figcaption>Median salary by city, CAD per year</figcaption><div class="bars" id="etlPay"></div></figure>
+      </div>
+    </div>
+    <p class="etl-note">The real project runs on scraped postings in Python and Pandas and loads into SQLite. <a href="https://github.com/zaidsay-ed/Job-market-etl-pipeline" target="_blank" rel="noopener">See the code</a>.</p>
+  </section>
 
-     <!-- CV/Resume -->
-    <div id="resume">
-    <div class="resume-section-title reveal">
-        <h2>Resume</h2>
-        <p>Tailored for the role you're hiring for</p>
+  <!-- SQL console -->
+  <section class="section" id="query" aria-labelledby="h-query">
+    <header class="section-head">
+      <h2 id="h-query">Query my work</h2>
+      <p>A small SQL engine I wrote for this page. Tables: <code>projects</code>, <code>experience</code>, <code>awards</code>, <code>skills</code>. Press <kbd>/</kbd> to start typing.</p>
+    </header>
+
+    <div class="console">
+      <div class="console-bar">
+        <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="mono">zaid.db</span>
+      </div>
+      <div class="presets" role="group" aria-label="Example queries">
+        <button type="button" class="preset" data-q="select name, year from projects where track = 'data' order by year desc">Data projects</button>
+        <button type="button" class="preset" data-q="select name, stack from projects where track = 'software'">Software projects</button>
+        <button type="button" class="preset" data-q="select company, role, months from experience order by months desc">Longest roles</button>
+        <button type="button" class="preset" data-q="select name from projects where stack like '%python%'">Everything in Python</button>
+        <button type="button" class="preset" data-q="select area, count(*) from skills group by area order by count desc">Skills by area</button>
+        <button type="button" class="preset" data-q="select award, year from awards order by year">Awards</button>
+      </div>
+      <form class="console-input" id="qForm">
+        <label for="qInput" class="prompt mono">sql&gt;</label>
+        <input id="qInput" class="mono" type="text" spellcheck="false" autocomplete="off" autocapitalize="off" value="select name, track, year from projects order by year desc limit 5">
+        <button class="btn btn-sm" type="submit">Run</button>
+      </form>
+      <div class="console-out" id="qOut" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- Skills marquee -->
+  <section class="marquee" aria-label="Tools I use">
+    <div class="marquee-track">
+      <span>Python</span><span>SQL</span><span>PySpark</span><span>Pandas</span><span>scikit-learn</span><span>TensorFlow</span><span>Java</span><span>TypeScript</span><span>React</span><span>Docker</span><span>Power BI</span><span>Git</span><span>R</span><span>C++</span>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section contact" id="contact" aria-labelledby="h-contact">
+    <div class="contact-main">
+      <h2 id="h-contact">Hiring for summer&nbsp;2027?</h2>
+      <p class="contact-lede">I'm looking for a data engineering, data science or software engineering internship. Email is the fastest way to reach me.</p>
+      <p class="contact-email">
+        <a href="mailto:zaidsayedbusiness@gmail.com">zaidsayedbusiness@gmail.com</a>
+        <button type="button" class="copy" id="copyEmail">Copy</button>
+      </p>
+      <p class="contact-links">
+        <a href="https://www.linkedin.com/in/zaid-sayed-a10804230/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/zaidsay-ed" target="_blank" rel="noopener">GitHub</a>
+        <span>Vancouver, BC <span class="mono" id="clock"></span></span>
+      </p>
+      <p class="offclock">Off the clock I'm usually on a football pitch or watching a match.</p>
     </div>
 
-    <div class="resume-cards reveal-stagger">
-
-        <!-- SWE Card -->
-        <div class="resume-card">
-            <div class="resume-card-icon">💻</div>
-            <h3>Software Engineer</h3>
-            <p>Full-stack development, systems design, Java &amp; Python projects, and software engineering fundamentals.</p>
-            <ul class="resume-highlights">
-                <li>Web App Development</li>
-                <li>Backend &amp; APIs</li>
-                <li>Data Structures &amp; Algorithms</li>
-            </ul>
-            <a href="images/Zaid_Resume.pdf" download class="resume-dl-btn">
-                <span class="resume-dl-icon">↓</span>
-                Download SWE Resume
-            </a>
-        </div>
-
-        <!-- DS/ML Card -->
-        <div class="resume-card">
-            <div class="resume-card-icon">📊</div>
-            <h3>Data Science / ML</h3>
-            <p>Machine learning pipelines, data analysis, AI projects, and statistical modeling experience.</p>
-            <ul class="resume-highlights">
-                <li>ML &amp; Model Building</li>
-                <li>Data Wrangling &amp; Visualization</li>
-                <li>AI &amp; Prompt Engineering</li>
-            </ul>
-            <a href="images/Zaid_Resume_DS.pdf" download class="resume-dl-btn">
-                <span class="resume-dl-icon">↓</span>
-                Download DS/ML Resume
-            </a>
-        </div>
-
-    </div>
-</div>
-
-    <!-- Contact -->
-    <div id="contact">
-    <div class="container">
-
-        <h2 class="contact-title reveal">Let's Connect</h2>
-        <p class="contact-subtitle reveal">Have an opportunity, idea, or just want to chat? I'd love to hear from you.</p>
-
-        <div class="contact-grid">
-
-            <!-- ── Left Panel ── -->
-            <div class="contact-left reveal-left">
-
-                <div class="contact-info-card">
-                    <h3>Contact Info</h3>
-
-                    <div class="contact-info-item">
-                        <div class="contact-info-icon">📞</div>
-                        <div>
-                            <div class="contact-info-label">Phone</div>
-                            <div class="contact-info-value">+1 236 971 7782 </div>
-                        </div>
-                    </div>
-
-                    <div class="contact-info-item">
-                        <div class="contact-info-icon">✉️</div>
-                        <div>
-                            <div class="contact-info-label">Email</div>
-                            <div class="contact-info-value">zaidsayedbusiness@gmail.com</div>
-                        </div>
-                    </div>
-
-                    <div class="contact-info-item">
-                        <div class="contact-info-icon">📍</div>
-                        <div>
-                            <div class="contact-info-label">Location</div>
-                            <div class="contact-info-value">Vancouver, BC, Canada</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Social Links -->
-                <div class="contact-socials">
-                    <h3>Find me on</h3>
-                    <div class="social-links">
-
-                        <a href="https://github.com/zaidsay-ed" target="_blank" rel="noopener noreferrer" class="social-btn github">
-                            <i class="fab fa-github"></i>
-                            <span>GitHub</span>
-                        </a>
-
-                        <a href="https://www.linkedin.com/in/zaid-sayed-a10804230/" target="_blank" rel="noopener noreferrer" class="social-btn linkedin">
-                            <i class="fab fa-linkedin-in"></i>
-                            <span>LinkedIn</span>
-                        </a>
-
-                        <a href="mailto:zaidsayedbusiness@gmail.com" class="social-btn email">
-                            <i class="fas fa-envelope"></i>
-                            <span>Email</span>
-                        </a>
-
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- ── Right Panel: Form ── -->
-            <div class="contact-right reveal-right">
-                <div class="contact-form-card">
-                    <h3>Send a Message</h3>
-                    <form name="submit-to-google-sheet" id="contactForm">
-
-                        <div class="form-group">
-                            <label for="contactName">Your Name</label>
-                            <input type="text" id="contactName" name="Name" placeholder="Zaid Sayed" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="contactEmail">Your Email</label>
-                            <input type="email" id="contactEmail" name="Email" placeholder="hello@example.com" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="contactMessage">Message</label>
-                            <textarea id="contactMessage" name="Message" rows="5" placeholder="I'd love to chat about..."></textarea>
-                        </div>
-
-                        <button type="submit" class="contact-submit-btn" id="submitBtn">
-                            <span class="btn-text">Send Message</span>
-                            <span class="btn-icon">→</span>
-                        </button>
-
-                    </form>
-
-                    <!-- Success message -->
-                    <div class="contact-success" id="contactSuccess">
-                        <div class="success-icon">✓</div>
-                        <h4>Message Sent!</h4>
-                        <p>Thanks for reaching out — I'll get back to you soon.</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="contact-footer">
-        <p>© Zaid Sayed, 2024 &nbsp;·&nbsp; Always Improving</p>
-        <div class="footer-socials">
-            <a href="https://github.com/zaidsay-ed" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/zaid-sayed-a10804230/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="mailto:zaidsayedbusiness@gmail.com"><i class="fas fa-envelope"></i></a>
-        </div>
-    </div>
-</div>
-
-
-
-    <script>
-        var tablinks = document.getElementsByClassName("tab-links");
-        var tabcontents = document.getElementsByClassName("tab-contents");
-
-        function opentab(tabname) {
-            for(tablink of tablinks){
-                tablink.classList.remove("active-link");
-            }
-            for(tabcontent of tabcontents){
-                tabcontent.classList.remove("active-tab");
-            }
-            event.currentTarget.classList.add("active-link");
-            document.getElementById(tabname).classList.add("active-tab");
-        }
-    </script>
-
-    <script>
-        
-(function () {
-
-    // ── Scroll Progress Bar ──────────────────────────────
-    const progressBar = document.getElementById('scrollProgress');
-    function updateProgress() {
-        const scrollTop  = window.scrollY;
-        const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
-        const pct        = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-        progressBar.style.width = pct + '%';
-    }
-
-    // ── Navbar scroll opacity ────────────────────────────
-    const navbar = document.getElementById('navbar');
-    function updateNavbar() {
-        navbar.classList.toggle('scrolled', window.scrollY > 40);
-    }
-
-    // ── Active section highlight ─────────────────────────
-    const sections  = ['header', 'about', 'projects', 'resume', 'contact'];
-    const navLinks  = document.querySelectorAll('.nav-link');
-    const mobileLinks = document.querySelectorAll('.mobile-link');
-
-    function updateActive() {
-        let current = 'header';
-        sections.forEach(id => {
-            const el = document.getElementById(id);
-            if (el && window.scrollY >= el.offsetTop - 120) current = id;
-        });
-        [...navLinks, ...mobileLinks].forEach(link => {
-            link.classList.toggle('active', link.dataset.section === current);
-        });
-    }
-
-    window.addEventListener('scroll', () => {
-        updateProgress();
-        updateNavbar();
-        updateActive();
-    }, { passive: true });
-
-    // Run once on load
-    updateProgress();
-    updateNavbar();
-    updateActive();
-
-    // ── Hamburger / Mobile Drawer ────────────────────────
-    const hamburger     = document.getElementById('hamburger');
-    const drawer        = document.getElementById('mobileDrawer');
-    const overlay       = document.getElementById('drawerOverlay');
-
-    function openDrawer() {
-        hamburger.classList.add('open');
-        drawer.classList.add('open');
-        overlay.classList.add('show');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeDrawer() {
-        hamburger.classList.remove('open');
-        drawer.classList.remove('open');
-        overlay.classList.remove('show');
-        document.body.style.overflow = '';
-    }
-
-    hamburger.addEventListener('click', () => {
-        drawer.classList.contains('open') ? closeDrawer() : openDrawer();
-    });
-
-    overlay.addEventListener('click', closeDrawer);
-
-    // Close drawer when a mobile link is clicked
-    mobileLinks.forEach(link => link.addEventListener('click', closeDrawer));
-
-    // ── Remove old FontAwesome hamburger icons if present ──
-    // (your old nav used fa-bars / fa-xmark — safe to remove those elements)
-    document.querySelectorAll('nav .fa-solid').forEach(el => el.remove());
-
-})();
-    </script>
-
-    <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycby1vZzv79Xex50FJk1kjpzVY0cJQUWyrU-S9ob54KoWCaC6bCLnGLgPk7_cpzTbeAsKeQ/exec'
-        const form = document.forms['submit-to-google-sheet']
-        const msg = document.getElementById("msg")
-    
-        form.addEventListener('submit', e => {
-        e.preventDefault()
-        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(response => {
-                msg.innerHTML= "Message sent successfully."
-                setTimeout(function(){
-                    msg.innerHTML = ""
-                }, 5000)
-                form.reset()
-            })
-            .catch(error => console.error('Error!', error.message))
-        })
-    </script>
-
-    <script>
-        particlesJS("particles-js", {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: "#FFD700" },  /* Yellow particles */
-                shape: { type: "circle" },
-                opacity: { value: 0.7 },
-                size: { value: 3 },
-                move: { enable: true, speed: 2 },
-                line_linked: { enable: true, distance: 150, color: "#FFD700", opacity: 0.4 }
-            }
-        });
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-        // Animate header text
-        gsap.from(".header-text", { 
-            duration: 1.5, 
-            opacity: 0, 
-            y: -50, 
-            ease: "power2.out" 
-        });
-
-        // Animate project cards (if any)
-        gsap.from(".project-card", { 
-            duration: 1, 
-            opacity: 0, 
-            y: 30, 
-            ease: "power2.out", 
-            stagger: 0.2 
-        });
-        });
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-        var typed = new Typed("#typed", {
-            strings: ["Zaid Sayed"],
-            typeSpeed: 80,   // Adjust the typing speed (in milliseconds)
-            backSpeed: 50,    // If you want to simulate deleting text, adjust the backspace speed
-            loop: false,       // Set to true if you want it to loop repeatedly
-            showCursor: false 
-        });
-        // new Typed("#typed-subtitle", {
-        // strings: [
-        //     "Building AI that matters.",
-        //     "Turning data into decisions.",
-        //     "Junior @ UBC · CS & Data Science.",
-        //     "Exploring AI, Building the Future."
-        // ],
-        // typeSpeed: 55,
-        // backSpeed: 30,
-        // backDelay: 2000,
-        // loop: true,
-        // smartBackspace: true,
-        // // showCursor: true,   // ← keep true for subtitle (cycling text looks better with cursor)
-        // // cursorChar: '|'
-        // });
-        });
-    </script>
-  
-
-</style>
-
-
-<!-- ============ -->
-<script>
-(function () {
-    const track  = document.getElementById('pcTrack');
-    const window_ = document.getElementById('pcWindow');
-    const prev   = document.getElementById('pcPrev');
-    const next   = document.getElementById('pcNext');
-    const dotsEl = document.getElementById('pcDots');
-    const cards  = Array.from(track.querySelectorAll('.pc-card'));
-    let idx = 0;
-
-    function visibleCount() {
-        const w = window.innerWidth;
-        if (w <= 560) return 1;
-        if (w <= 860) return 2;
-        return 3;
-    }
-
-    function pageCount() {
-        return Math.ceil(cards.length / visibleCount());
-    }
-
-    function buildDots() {
-        dotsEl.innerHTML = '';
-        for (let i = 0; i < pageCount(); i++) {
-            const d = document.createElement('button');
-            d.className = 'pc-dot' + (i === idx ? ' active' : '');
-            d.onclick = () => go(i);
-            dotsEl.appendChild(d);
-        }
-    }
-
-    function go(newIdx) {
-        idx = Math.max(0, Math.min(newIdx, pageCount() - 1));
-
-        // Card width is computed from the actual rendered card
-        const cardW = cards[0].getBoundingClientRect().width;
-        const gap   = 20;
-        const vis   = visibleCount();
-        const offset = idx * vis * (cardW + gap);
-
-        track.style.transform = `translateX(-${offset}px)`;
-
-        prev.disabled = idx === 0;
-        next.disabled = idx >= pageCount() - 1;
-
-        dotsEl.querySelectorAll('.pc-dot').forEach((d, i) => {
-            d.classList.toggle('active', i === idx);
-        });
-    }
-
-    prev.addEventListener('click', () => go(idx - 1));
-    next.addEventListener('click', () => go(idx + 1));
-
-    function init() {
-        idx = 0;
-        buildDots();
-        go(0);
-    }
-
-    window.addEventListener('resize', init);
-    // Small delay so browser has painted and card widths are real
-    setTimeout(init, 50);
-})();
-</script>
-    
-
-<script>
-// ── Typed.js subtitle cycling ──────────────────────────────────────────
-document.addEventListener("DOMContentLoaded", function () {
-    if (document.getElementById("typed-subtitle")) {
-        new Typed("#typed-subtitle", {
-            strings: [
-                "Building AI that matters.",
-                "Turning data into decisions.",
-                "Exploring AI, Building the Future.",
-                "CS & Data Science @ UBC."
-            ],
-            typeSpeed: 55,
-            backSpeed: 30,
-            backDelay: 2000,
-            loop: true,
-            smartBackspace: true
-        });
-    }
-});
-
-// ── Scroll Reveal ──────────────────────────────────────────────────────
-(function () {
-    const selectors = '.reveal, .reveal-left, .reveal-right, .reveal-stagger';
-
-    function checkVisibility() {
-        document.querySelectorAll(selectors).forEach(el => {
-            const rect = el.getBoundingClientRect();
-            const inView = rect.top < window.innerHeight * 0.88;
-            if (inView) el.classList.add('visible');
-        });
-    }
-
-    window.addEventListener('scroll', checkVisibility, { passive: true });
-    window.addEventListener('resize', checkVisibility);
-    // Run once on load
-    setTimeout(checkVisibility, 100);
-})();
-
-// ── Timeline reveal (staggered, triggered when tab opens) ──────────────
-function animateTimeline() {
-    const items = document.querySelectorAll('.tl-item');
-    items.forEach((item, i) => {
-        setTimeout(() => item.classList.add('visible'), i * 120);
-    });
-}
-
-// Hook into your existing opentab function
-const _origOpenTab = window.opentab;
-// Patch: re-declare opentab to also trigger timeline animation
-var tablinks    = document.getElementsByClassName("tab-links");
-var tabcontents = document.getElementsByClassName("tab-contents");
-
-function opentab(tabname) {
-    for (let tablink of tablinks) tablink.classList.remove("active-link");
-    for (let tabcontent of tabcontents) tabcontent.classList.remove("active-tab");
-    event.currentTarget.classList.add("active-link");
-    document.getElementById(tabname).classList.add("active-tab");
-    if (tabname === 'experience') {
-        // reset then animate
-        document.querySelectorAll('.tl-item').forEach(el => el.classList.remove('visible'));
-        setTimeout(animateTimeline, 50);
-    }
-}
-
-// ── Project cards scroll stagger ───────────────────────────────────────
-// Add reveal class to carousel cards dynamically
-document.addEventListener("DOMContentLoaded", function() {
-    const projectSection = document.getElementById('projects');
-    if (projectSection) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    document.querySelectorAll('.pc-card, .project-card').forEach((card, i) => {
-                        setTimeout(() => {
-                            card.style.opacity = '1';
-                            card.style.transform = 'translateY(0)';
-                        }, i * 100);
-                    });
-                    observer.disconnect();
-                }
-            });
-        }, { threshold: 0.1 });
-        observer.observe(projectSection);
-
-        // Set initial state
-        document.querySelectorAll('.pc-card, .project-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        });
-    }
-});
-</script>
-
-<script id="skills-script">
-function animateSkillBars() {
-  document.querySelectorAll('.skill-bar-fill').forEach(bar => {
-    bar.style.width = '0%';
-    setTimeout(() => {
-      bar.style.width = bar.dataset.width + '%';
-    }, 80);
-  });
-}
- 
-/* Trigger on tab click — patch the existing opentab function */
-const _origOpentab = window.opentab;
-window.opentab = function(tabname) {
-  _origOpentab ? _origOpentab(tabname) : null;
-  if (tabname === 'skills') setTimeout(animateSkillBars, 60);
-};
- 
-/* Also animate on first load if skills tab is active */
-function tryAnimate() {
-  var bars = document.querySelectorAll('.skill-bar-fill');
-  if (bars.length > 0) {
-    animateSkillBars();
-  } else {
-    setTimeout(tryAnimate, 100);
-  }
-}
-setTimeout(tryAnimate, 200);
-</script>
-
-<style id="cursor-styles">
-#cursorGlow {
-  position: fixed;
-  pointer-events: none;
-  z-index: 99998;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,215,0,0.35) 0%, rgba(0,255,255,0.12) 50%, transparent 70%);
-  transform: translate(-50%, -50%);
-  transition: transform 0.08s linear, opacity 0.3s ease;
-  mix-blend-mode: screen;
-}
-#cursorDot {
-  position: fixed;
-  pointer-events: none;
-  z-index: 99999;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #FFD700;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 6px rgba(255,215,0,0.8);
-  transition: transform 0.04s linear;
-}
-</style>
- 
-<div id="cursorGlow"></div>
-<div id="cursorDot"></div>
- 
-<script id="cursor-script">
-(function() {
-  const glow = document.getElementById('cursorGlow');
-  const dot  = document.getElementById('cursorDot');
-  let mx = -100, my = -100, gx = -100, gy = -100;
- 
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    dot.style.left = mx + 'px';
-    dot.style.top  = my + 'px';
-  });
- 
-  /* Smooth lag on the glow */
-  (function animGlow() {
-    gx += (mx - gx) * 0.12;
-    gy += (my - gy) * 0.12;
-    glow.style.left = gx + 'px';
-    glow.style.top  = gy + 'px';
-    requestAnimationFrame(animGlow);
-  })();
- 
-  /* Scale up on clickable elements */
-  document.querySelectorAll('a, button, .tab-links, .pc-arrow, .resume-dl-btn').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      glow.style.width  = '52px';
-      glow.style.height = '52px';
-    });
-    el.addEventListener('mouseleave', () => {
-      glow.style.width  = '24px';
-      glow.style.height = '24px';
-    });
-  });
-})();
-</script>
-<script>
-(function () {
-  function applyTilt(selector, options) {
-    var els = document.querySelectorAll(selector);
-    var max    = options.max    || 8;
-    var scale  = options.scale  || 1.03;
-    var speed  = options.speed  || 400;
-    var glare  = options.glare  || false;
-    var maxGlare = options.maxGlare || 0.1;
- 
-    els.forEach(function (el) {
-      /* Make sure position is set so glare child positions correctly */
-      var pos = window.getComputedStyle(el).position;
-      if (pos === 'static') el.style.position = 'relative';
-      el.style.transformStyle = 'preserve-3d';
-      el.style.transition = 'transform ' + speed + 'ms ease, box-shadow ' + speed + 'ms ease';
-      el.style.willChange = 'transform';
- 
-      /* Optional glare overlay */
-      var glareEl = null;
-      if (glare) {
-        glareEl = document.createElement('div');
-        glareEl.style.cssText = [
-          'position:absolute', 'inset:0', 'border-radius:inherit',
-          'pointer-events:none', 'overflow:hidden', 'z-index:99',
-          'opacity:0', 'transition:opacity ' + speed + 'ms ease'
-        ].join(';');
-        var glareInner = document.createElement('div');
-        glareInner.style.cssText = [
-          'position:absolute', 'top:-50%', 'left:-50%',
-          'width:200%', 'height:200%',
-          'background:radial-gradient(circle at 50% 50%, rgba(255,255,255,0.18) 0%, transparent 60%)',
-          'transform:translate(0,0)', 'pointer-events:none'
-        ].join(';');
-        glareEl.appendChild(glareInner);
-        el.appendChild(glareEl);
-      }
- 
-      function onMove(e) {
-        var rect   = el.getBoundingClientRect();
-        var cx     = rect.left + rect.width  / 2;
-        var cy     = rect.top  + rect.height / 2;
-        var mouseX = e.clientX || (e.touches && e.touches[0].clientX) || cx;
-        var mouseY = e.clientY || (e.touches && e.touches[0].clientY) || cy;
- 
-        var dx = (mouseX - cx) / (rect.width  / 2);   /* -1 to 1 */
-        var dy = (mouseY - cy) / (rect.height / 2);   /* -1 to 1 */
- 
-        var rotateY =  dx * max;
-        var rotateX = -dy * max;
- 
-        el.style.transform = 'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale3d(' + scale + ',' + scale + ',' + scale + ')';
- 
-        if (glareEl) {
-          var glareX = ((mouseX - rect.left) / rect.width)  * 100;
-          var glareY = ((mouseY - rect.top)  / rect.height) * 100;
-          glareEl.style.opacity = maxGlare;
-          glareEl.querySelector('div').style.transform = 'translate(' + (glareX - 50) + '%,' + (glareY - 50) + '%)';
-        }
-      }
- 
-      function onLeave() {
-        el.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
-        if (glareEl) glareEl.style.opacity = 0;
-      }
- 
-      el.addEventListener('mousemove',  onMove);
-      el.addEventListener('mouseleave', onLeave);
-    });
-  }
- 
-  function init() {
-    applyTilt('.resume-card', {
-      max: 8, scale: 1.03, speed: 400, glare: true, maxGlare: 0.08
-    });
-    applyTilt('.contact-info-card, .contact-form-card, .contact-socials', {
-      max: 5, scale: 1.01, speed: 500, glare: true, maxGlare: 0.05
-    });
-    applyTilt('.about-glass', {
-      max: 3, scale: 1.005, speed: 600, glare: false
-    });
-  }
- 
-  /* Run after DOM is ready */
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
-</script>
-
-<!-- Hint pill -->
-<div id="term-hint">press ~ to open terminal</div>
-
-<!-- Terminal overlay -->
-<div id="terminal-overlay">
-  <div id="terminal-box">
-    <div class="term-bar">
-      <div class="term-dot red"></div>
-      <div class="term-dot yellow"></div>
-      <div class="term-dot green"></div>
-      <span class="term-title">zaid@portfolio ~ bash</span>
-      <button class="term-close-btn" id="termCloseBtn">✕</button>
-    </div>
-    <div id="term-output"></div>
-    <div class="term-input-row">
-      <span class="term-prompt-symbol">visitor@zaid:~$</span>
-      <input id="term-input" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="type a command...">
-    </div>
-  </div>
-</div>
-
-<script>
-(function () {
- 
-  /* ── Commands ── */
-  var COMMANDS = {
- 
-    help: function() {
-      return [
-        { cls: 'gold',    text: '╔══════════════════════════════════╗' },
-        { cls: 'gold',    text: '║     Available Commands           ║' },
-        { cls: 'gold',    text: '╚══════════════════════════════════╝' },
-        { cls: 'success', text: '  whoami      → who is Zaid?' },
-        { cls: 'success', text: '  skills      → technical skills' },
-        { cls: 'success', text: '  projects    → featured projects' },
-        { cls: 'success', text: '  experience  → work history' },
-        { cls: 'success', text: '  education   → academic background' },
-        { cls: 'success', text: '  contact     → get in touch' },
-        { cls: 'success', text: '  social      → links & profiles' },
-        { cls: 'success', text: '  clear        → clear terminal' },
-        { cls: 'success', text: '  exit         → close terminal' },
-        { cls: 'dim',     text: '' },
-        { cls: 'dim',     text: '  tip: press ~ anytime to toggle' },
-      ];
-    },
- 
-    whoami: function() {
-      return [
-        { cls: 'gold',     text: '> Zaid Sayed' },
-        { cls: 'response', text: '  CS & Data Science @ UBC, Vancouver' },
-        { cls: 'response', text: '  AI enthusiast · Software Engineer · Data Scientist' },
-        { cls: 'dim',      text: '' },
-        { cls: 'response', text: '  Currently: Data Engineer Co-op · Atreides' },
-        { cls: 'response', text: '             Resident Advisor @ UBC' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  International Student Scholarship Winner — 2024, 2025 🏆' },
-        { cls: 'dim',      text: '' },
-        { cls: 'dim',      text: '  "Building AI that matters."' },
-      ];
-    },
- 
-    skills: function() {
-      return [
-        { cls: 'gold',     text: '> Technical Skills' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  AI & Data Science' },
-        { cls: 'response', text: '  ├── Prompt Engineering & LLMs       ████████░░ 90%' },
-        { cls: 'response', text: '  ├── Machine Learning                 ████████░░ 80%' },
-        { cls: 'response', text: '  ├── PySpark / Pandas                 ████████░░ 80%' },
-        { cls: 'response', text: '  └── Tableau / Power BI               ███████░░░ 75%' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  Web Development' },
-        { cls: 'response', text: '  ├── Frontend  (HTML/CSS/JS)          ████████░░ 80%' },
-        { cls: 'response', text: '  └── Backend   (Python/Java/SQL)      ███████░░░ 75%' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  Tools & Systems' },
-        { cls: 'response', text: '  ├── C / C++                          ████████░░ 80%' },
-        { cls: 'response', text: '  ├── Docker                           ███████░░░ 75%' },
-        { cls: 'response', text: '  └── Git / GitHub                     ████████░░ 85%' },
-      ];
-    },
- 
-    projects: function() {
-      return [
-        { cls: 'gold',     text: '> Featured Projects' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  [1] Job Market ETL Pipeline' },
-        { cls: 'response', text: '      Python · Pandas · SQLite' },
-        { cls: 'response', text: '      github.com/zaidsay-ed/Job-market-etl-pipeline' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  [2] Maternal Health Risk Classifier' },
-        { cls: 'response', text: '      R · KNN · Jupyter Notebook' },
-        { cls: 'response', text: '      github.com/zaidsay-ed/Maternal-Health-Risk-Classifier-Model' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  [3] AI Email Assistant' },
-        { cls: 'response', text: '      React · TypeScript · OpenAI API · Gmail API' },
-        { cls: 'response', text: '      github.com/zaidsay-ed/email-responder' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  [4] Finance Budget Tracker' },
-        { cls: 'response', text: '      Java · JSwing · JSON · JUnit' },
-        { cls: 'response', text: '      github.com/zaidsay-ed/Budget-Tracker' },
-        { cls: 'dim',      text: '' },
-        { cls: 'dim',      text: '  → scroll the Projects section to see all 8' },
-      ];
-    },
- 
-    experience: function() {
-      return [
-        { cls: 'gold',     text: '> Work Experience' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  May 2026 – Present' },
-        { cls: 'response', text: '  Data Engineer Co-op · Atreides' },
-        { cls: 'dim',      text: '' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  Aug 2025 – Present' },
-        { cls: 'response', text: '  Resident Advisor · University of British Columbia' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  Sep 2024 – Present' },
-        { cls: 'response', text: '  Undergraduate Teaching Assistant · UBC' },
-        { cls: 'response', text: '  Models of Computing · Software Construction (Java)' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  May 2025 – Jun 2025' },
-        { cls: 'response', text: '  IT Intern · Grant Thornton' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  Jan 2023 – Aug 2024' },
-        { cls: 'response', text: '  AI Program Manager · Venu AI' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  Aug 2022 – Jan 2023' },
-        { cls: 'response', text: '  AI Software Engineer · Venu AI' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  Jun 2023 – Sep 2023' },
-        { cls: 'response', text: '  STEM Research Intern · Edsolab' },
-      ];
-    },
- 
-    education: function() {
-      return [
-        { cls: 'gold',     text: '> Education' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  Sep 2023 – Present' },
-        { cls: 'response', text: '  BSc Computer Science & Data Science' },
-        { cls: 'response', text: '  University of British Columbia, Vancouver' },
-        { cls: 'gold',     text: '  🏆 International Student Scholarship — 2024, 2025' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  Sep 2021 – May 2023' },
-        { cls: 'response', text: '  IB Diploma · GEMS Modern Academy' },
-      ];
-    },
- 
-    contact: function() {
-      return [
-        { cls: 'gold',     text: '> Contact Info' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  📞 Phone' },
-        { cls: 'response', text: '     +1 236 971 7782' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  ✉  Email' },
-        { cls: 'response', text: '     zaidsayedbusiness@gmail.com' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  📍 Location' },
-        { cls: 'response', text: '     Vancouver, BC, Canada' },
-        { cls: 'dim',      text: '' },
-        { cls: 'dim',      text: '  → or scroll to the Contact section to send a message' },
-      ];
-    },
- 
-    social: function() {
-      return [
-        { cls: 'gold',     text: '> Social & Links' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  GitHub' },
-        { cls: 'response', text: '  github.com/zaidsay-ed' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  LinkedIn' },
-        { cls: 'response', text: '  linkedin.com/in/zaid-sayed-a10804230' },
-        { cls: 'dim',      text: '' },
-        { cls: 'success',  text: '  Email' },
-        { cls: 'response', text: '  zaidsayedbusiness@gmail.com' },
-      ];
-    },
- 
-  };
- 
-  /* ── Easter egg responses for fun inputs ── */
-  var FUN = {
-    'sudo':        [{ cls: 'error', text: 'Permission denied. Nice try 😄' }],
-    'sudo rm -rf /': [{ cls: 'error', text: '❌ Absolutely not.' }],
-    'ls':          [{ cls: 'response', text: 'about/  projects/  resume/  contact/  secrets/' }],
-    'cd secrets':  [{ cls: 'error',    text: 'Access denied. 🔒' }],
-    'pwd':         [{ cls: 'response', text: '/home/zaid/portfolio' }],
-    'uname':       [{ cls: 'response', text: 'ZaidOS 2.0 — powered by caffeine & curiosity' }],
-    'date':        [{ cls: 'response', text: new Date().toString() }],
-    'hello':       [{ cls: 'gold',     text: 'Hello! Type help to see what I can do.' }],
-    'hi':          [{ cls: 'gold',     text: 'Hey there! Type help to get started.' }],
-    'vim':         [{ cls: 'error',    text: 'Opening vim... just kidding. Type :q to quit (you know the drill).' }],
-    'emacs':       [{ cls: 'error',    text: 'An operating system, not a text editor. No.' }],
-    'git status':  [{ cls: 'success',  text: 'On branch main. Nothing to commit — portfolio looking clean ✨' }],
-    'ping':        [{ cls: 'response', text: 'pong 🏓' }],
-    'matrix':      [{ cls: 'success',  text: 'Wake up, Neo... (you found an easter egg 👀)' }],
-  };
- 
-  /* ── DOM refs ── */
-  var overlay  = document.getElementById('terminal-overlay');
-  var output   = document.getElementById('term-output');
-  var input    = document.getElementById('term-input');
-  var hint     = document.getElementById('term-hint');
-  var closeBtn = document.getElementById('termCloseBtn');
- 
-  if (!overlay || !output || !input) return;
- 
-  var history  = [];
-  var histIdx  = -1;
-  var isOpen   = false;
- 
-  /* ── Print lines ── */
-  function print(lines) {
-    lines.forEach(function(l) {
-      var p = document.createElement('p');
-      p.className = 'term-line ' + (l.cls || 'response');
-      p.textContent = l.text;
-      output.appendChild(p);
-    });
-    output.scrollTop = output.scrollHeight;
-  }
- 
-  function printPrompt(cmd) {
-    var p = document.createElement('p');
-    p.className = 'term-line prompt';
-    p.textContent = 'visitor@zaid:~$ ' + cmd;
-    output.appendChild(p);
-  }
- 
-  /* ── Welcome message ── */
-  function printWelcome() {
-    print([
-      { cls: 'gold',     text: '  ______     _     _ ' },
-      { cls: 'gold',     text: ' |___  /    (_)   | |' },
-      { cls: 'gold',     text: '    / / __ _ _  __| |' },
-      { cls: 'gold',     text: '   / / / _` | |/ _` |' },
-      { cls: 'gold',     text: '  / /_| (_| | | (_| |' },
-      { cls: 'gold',     text: ' /_____\\__,_|_|\\__,_|' },
-      { cls: 'dim',      text: '' },
-      { cls: 'success',  text: '  Welcome to Zaid\'s Portfolio Terminal v1.0' },
-      { cls: 'dim',      text: '  Type  help  to see available commands.' },
-      { cls: 'dim',      text: '  Press  ~  or  Esc  to close.' },
-      { cls: 'dim',      text: '────────────────────────────────────────' },
-    ]);
-  }
- 
-  /* ── Run a command ── */
-  function runCommand(raw) {
-    var cmd = raw.trim().toLowerCase();
-    if (!cmd) return;
- 
-    history.unshift(raw);
-    histIdx = -1;
- 
-    printPrompt(raw);
- 
-    if (cmd === 'clear') {
-      output.innerHTML = '';
-      return;
-    }
- 
-    if (cmd === 'exit') {
-      closeTerminal();
-      return;
-    }
- 
-    if (COMMANDS[cmd]) {
-      print(COMMANDS[cmd]());
-      return;
-    }
- 
-    if (FUN[cmd]) {
-      print(FUN[cmd]);
-      return;
-    }
- 
-    print([
-      { cls: 'error',    text: 'command not found: ' + cmd },
-      { cls: 'dim',      text: 'Type  help  for available commands.' },
-    ]);
-  }
- 
-  /* ── Open / close ── */
-  function openTerminal() {
-    isOpen = true;
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    if (output.children.length === 0) printWelcome();
-    setTimeout(function() { input.focus(); }, 50);
-  }
- 
-  function closeTerminal() {
-    isOpen = false;
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-    input.blur();
-  }
- 
-  /* ── Show hint once after 3s ── */
-  var hintShown = false;
-  setTimeout(function() {
-    if (!hintShown && !isOpen) {
-      hintShown = true;
-      hint.classList.add('show');
-      setTimeout(function() { hint.classList.remove('show'); }, 3500);
-    }
-  }, 3000);
- 
-  /* ── Key listeners ── */
-  document.addEventListener('keydown', function(e) {
-    /* ~ key (backtick on most keyboards = key 192) */
-    if (e.key === '`' || e.key === '~') {
-      /* Don't fire if user is typing in a form field */
-      var tag = document.activeElement.tagName;
-      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
-      e.preventDefault();
-      isOpen ? closeTerminal() : openTerminal();
-      return;
-    }
-    if (!isOpen) return;
-    if (e.key === 'Escape') { closeTerminal(); return; }
-  });
- 
-  input.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-      runCommand(input.value);
-      input.value = '';
-    }
-    /* Command history with arrow keys */
-    if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      if (histIdx < history.length - 1) {
-        histIdx++;
-        input.value = history[histIdx];
-      }
-    }
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      if (histIdx > 0) {
-        histIdx--;
-        input.value = history[histIdx];
-      } else {
-        histIdx = -1;
-        input.value = '';
-      }
-    }
-  });
- 
-  /* Close on overlay background click */
-  overlay.addEventListener('click', function(e) {
-    if (e.target === overlay) closeTerminal();
-  });
- 
-  closeBtn.addEventListener('click', closeTerminal);
- 
-})();
-</script>
+    <form class="form" name="submit-to-google-sheet" id="contactForm">
+      <label for="cName">Name</label>
+      <input id="cName" name="Name" type="text" autocomplete="name" required>
+      <label for="cEmail">Email</label>
+      <input id="cEmail" name="Email" type="email" autocomplete="email" required>
+      <label for="cMsg">Message</label>
+      <textarea id="cMsg" name="Message" rows="4" required></textarea>
+      <button class="btn" type="submit" id="cSend">Send message</button>
+      <p class="form-msg" id="cStatus" role="status"></p>
+    </form>
+  </section>
+</main>
+
+<footer class="foot">
+  <p>© <span id="year">2026</span> Zaid Sayed</p>
+  <p class="foot-tech">Built with Three.js, GSAP and Lenis</p>
+  <a href="#top">Back to top</a>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js"></script>
+<script src="query.js"></script>
+<script src="app.js"></script>
+<script src="etl.js"></script>
+<script type="module" src="field.js"></script>
 </body>
 </html>
