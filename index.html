@@ -14,10 +14,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js" } }
+  </script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
+<!-- 3D particle field behind everything -->
+<canvas id="field" aria-hidden="true"></canvas>
 <div class="vignette" aria-hidden="true"></div>
 
 <header class="nav">
@@ -49,7 +54,7 @@
         <a class="btn btn-line magnetic" href="images/Zaid_Resume.pdf" target="_blank" rel="noopener">Resume: software</a>
       </div>
     </div>
-    <p class="scroll-cue reveal-up" aria-hidden="true">Scroll for experience</p>
+    <p class="scroll-cue reveal-up" aria-hidden="true">Scroll to run the pipeline</p>
   </section>
 
   <!-- PIPELINE STORY: particles change shape per stage, each stage is a job -->
@@ -301,7 +306,7 @@
 
 <footer class="foot">
   <p>© <span id="year">2026</span> Zaid Sayed</p>
-  <p class="foot-tech">Built with GSAP and Lenis</p>
+  <p class="foot-tech">Built with Three.js, GSAP and Lenis</p>
   <a href="#top">Back to top</a>
 </footer>
 
@@ -310,5 +315,6 @@
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js"></script>
 <script src="query.js"></script>
 <script src="app.js"></script>
+<script type="module" src="field.js"></script>
 </body>
 </html>
