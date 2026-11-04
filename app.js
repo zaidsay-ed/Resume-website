@@ -10,6 +10,32 @@
 
   document.getElementById("year").textContent = new Date().getFullYear();
 
+  /* ---------- Data / Software mode ---------- */
+  var root = document.documentElement;
+  var modeBtns = $$("[data-set-mode]");
+  S.mode = root.dataset.mode === "swe" ? 1 : 0;
+  function syncModeButtons() {
+    modeBtns.forEach(function (b) { b.setAttribute("aria-checked", String(b.dataset.setMode === root.dataset.mode)); });
+  }
+  function setMode(m) {
+    if (m === root.dataset.mode) return;
+    root.dataset.mode = m;
+    S.mode = m === "swe" ? 1 : 0;
+    try { localStorage.setItem("mode", m); } catch (e) {}
+    try { var u = new URL(location.href); u.searchParams.set("mode", m); history.replaceState(null, "", u); } catch (e) {}
+    syncModeButtons();
+    document.dispatchEvent(new CustomEvent("modechange", { detail: m }));
+    if (window.gsap && !reduce) gsap.fromTo("main", { opacity: 0.35 }, { opacity: 1, duration: 0.5, ease: "power2.out" });
+    if (window.ScrollTrigger) requestAnimationFrame(function () { ScrollTrigger.refresh(); });
+  }
+  modeBtns.forEach(function (b) {
+    b.addEventListener("click", function () { setMode(b.dataset.setMode); });
+    b.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft" || e.key === "ArrowRight") { e.preventDefault(); var n = b.dataset.setMode === "data" ? "swe" : "data"; setMode(n); $('[data-set-mode="' + n + '"]').focus(); }
+    });
+  });
+  syncModeButtons();
+
   /* ---------- split hero name into letters ---------- */
   $$(".hero-name .word").forEach(function (w) {
     var txt = w.textContent; w.textContent = "";
@@ -18,10 +44,11 @@
 
   /* ---------- count-up numbers ---------- */
   function countUp(el, dur) {
-    var from = parseFloat(el.dataset.from || 0), to = parseFloat(el.dataset.to), dec = parseInt(el.dataset.dec || 0, 10), suf = el.dataset.suffix || "";
-    if (reduce || !hasGsap) { el.textContent = to.toFixed(dec) + suf; return; }
+    var from = parseFloat(el.dataset.from || 0), to = parseFloat(el.dataset.to), dec = parseInt(el.dataset.dec || 0, 10), suf = el.dataset.suffix || "", pre = el.dataset.prefix || "";
+    var fmt = function (v) { var s = v.toFixed(dec); if (el.dataset.sep) s = Number(s).toLocaleString("en-US", { minimumFractionDigits: dec, maximumFractionDigits: dec }); return pre + s + suf; };
+    if (reduce || !hasGsap) { el.textContent = fmt(to); return; }
     var o = { v: from };
-    gsap.to(o, { v: to, duration: dur || 1.4, ease: "power3.out", onUpdate: function () { el.textContent = o.v.toFixed(dec) + suf; } });
+    gsap.to(o, { v: to, duration: dur || 1.4, ease: "power3.out", onUpdate: function () { el.textContent = fmt(o.v); } });
   }
 
   /* ---------- static fallback ---------- */
@@ -69,13 +96,18 @@
 
   /* ---------- pinned pipeline ---------- */
   var stages = $$(".stage"), rail = $$(".pipe-rail li"), label = $("#stageLabel");
-  var names = ["ingest", "transform", "serve"];
+  var NAMES = { data: ["ingest", "transform", "serve"], swe: ["design", "build", "review"] };
+  var current = -1;
   var counted = {};
   function setStage(i) {
     rail.forEach(function (li, k) { li.classList.toggle("on", k === i); });
-    label.textContent = i < 0 ? "raw input" : i >= 3 ? "done" : names[i];
+    current = i;
+    var names = NAMES[root.dataset.mode] || NAMES.data;
+    label.textContent = i < 0 ? (root.dataset.mode === "swe" ? "idle" : "raw input") : i >= 3 ? "done" : names[i];
     if (i >= 0 && i < 3 && !counted[i]) { counted[i] = true; $$(".count", stages[i]).forEach(function (el) { countUp(el); }); }
   }
+
+  document.addEventListener("modechange", function () { setStage(current); $$(".count", stages[Math.max(0, Math.min(current, 2))]).forEach(function (el) { countUp(el, 1); }); });
 
   var mm = gsap.matchMedia();
   mm.add({ desk: "(min-width: 721px)", mob: "(max-width: 720px)" }, function (ctx) {

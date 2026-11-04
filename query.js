@@ -10,7 +10,6 @@
       { name: "Credit card default prediction", track: "ml", stack: "python, scikit-learn, pandas, numpy", year: 2025, status: "done" },
       { name: "Customer spending dashboard", track: "data", stack: "power bi, sql, python", year: 2025, status: "done" },
       { name: "AI email assistant", track: "software", stack: "react, typescript, ionic, gmail api, openai", year: 2025, status: "done" },
-      { name: "Adaptive game difficulty engine", track: "ml", stack: "python, reinforcement learning", year: 2025, status: "in progress" },
       { name: "Finance budget tracker", track: "software", stack: "java, swing, junit, json", year: 2024, status: "done" },
       { name: "Sudoku solver", track: "software", stack: "python", year: 2024, status: "done" },
       { name: "Maternal health risk classifier", track: "ml", stack: "r, jupyter, knn", year: 2023, status: "done" },
