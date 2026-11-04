@@ -28,6 +28,7 @@ const N = small ? 6500 : 15000;
 const A = new Float32Array(N * 3); // cloud
 const C = new Float32Array(N * 3); // table
 const D = new Float32Array(N * 3); // bars
+const E = new Float32Array(N * 3); // service graph (software mode)
 const lane = new Float32Array(N);  // stream lane start y
 const tpos = new Float32Array(N);  // position along stream
 const jit = new Float32Array(N * 3);
@@ -46,6 +47,10 @@ const barW = 0.95, barGap = 0.5;
 const chartW = BARS.length * barW + (BARS.length - 1) * barGap;
 const barTotal = BARS.reduce((a, b) => a + b, 0);
 const LANES = [-3.6, -2.2, -0.8, 0.9, 2.3, 3.7];
+// software mode: a small service architecture, client → API → services → stores
+const NODES = [[-7.2, 0], [-3.4, 1.6], [-3.4, -1.6], [0.6, 3.0], [0.6, 0], [0.6, -3.0], [4.8, 2.0], [4.8, -0.6], [4.8, -3.2]];
+const NODE_R = [0.75, 0.55, 0.55, 0.5, 0.5, 0.5, 0.6, 0.6, 0.6];
+const LINKS = [[0, 1], [0, 2], [1, 3], [1, 4], [2, 4], [2, 5], [3, 6], [4, 6], [4, 7], [5, 7], [5, 8]];
 
 for (let i = 0; i < N; i++) {
   const r = Math.random();
@@ -83,12 +88,28 @@ for (let i = 0; i < N; i++) {
   D[i * 3 + 1] = -3.4 + Math.random() * BARS[b];
   D[i * 3 + 2] = (Math.random() - 0.5) * 0.5;
   if (b === BARS.length - 1 && Math.random() < 0.7) hue[i] = 1;
+
+  // graph: 55% of particles sit on nodes, the rest along links
+  if (Math.random() < 0.55) {
+    const n = Math.floor(Math.random() * NODES.length), rad = NODE_R[n] * Math.cbrt(Math.random());
+    const t2 = Math.random() * Math.PI * 2, p2 = Math.acos(2 * Math.random() - 1);
+    E[i * 3] = NODES[n][0] + rad * Math.sin(p2) * Math.cos(t2);
+    E[i * 3 + 1] = NODES[n][1] + rad * Math.cos(p2);
+    E[i * 3 + 2] = rad * Math.sin(p2) * Math.sin(t2);
+  } else {
+    const l = LINKS[Math.floor(Math.random() * LINKS.length)], u = Math.random();
+    const a = NODES[l[0]], c = NODES[l[1]];
+    E[i * 3] = a[0] + (c[0] - a[0]) * u + gauss() * 0.04;
+    E[i * 3 + 1] = a[1] + (c[1] - a[1]) * u + gauss() * 0.04;
+    E[i * 3 + 2] = gauss() * 0.04;
+  }
 }
 
 const geo = new THREE.BufferGeometry();
 geo.setAttribute("position", new THREE.BufferAttribute(A, 3));
 geo.setAttribute("aC", new THREE.BufferAttribute(C, 3));
 geo.setAttribute("aD", new THREE.BufferAttribute(D, 3));
+geo.setAttribute("aE", new THREE.BufferAttribute(E, 3));
 geo.setAttribute("aLane", new THREE.BufferAttribute(lane, 1));
 geo.setAttribute("aT", new THREE.BufferAttribute(tpos, 1));
 geo.setAttribute("aJit", new THREE.BufferAttribute(jit, 3));
@@ -100,6 +121,7 @@ const uniforms = {
   uTime: { value: 0 },
   uP: { value: 0 },
   uIntro: { value: reduce ? 1 : 0 },
+  uMode: { value: S.mode || 0 },
   uAlpha: { value: 1 },
   uPR: { value: renderer.getPixelRatio() },
   uMouse: { value: new THREE.Vector2(0, 0) },
@@ -114,10 +136,10 @@ const mat = new THREE.ShaderMaterial({
   depthWrite: false,
   blending: THREE.AdditiveBlending,
   vertexShader: /* glsl */ `
-    uniform float uTime, uP, uIntro, uPR;
+    uniform float uTime, uP, uIntro, uPR, uMode;
     uniform vec2 uMouse;
     uniform float uMouseOn;
-    attribute vec3 aC, aD, aJit;
+    attribute vec3 aC, aD, aE, aJit;
     attribute float aLane, aT, aRnd, aHue, aSize;
     varying float vHue, vFade;
 
@@ -134,10 +156,12 @@ const mat = new THREE.ShaderMaterial({
       vec3 Acl = position;
       Acl += 0.25 * vec3(sin(uTime * 0.4 + aRnd * 40.0), cos(uTime * 0.35 + aRnd * 30.0), sin(uTime * 0.3 + aRnd * 20.0));
 
+      // software mode swaps the table for a service graph
+      vec3 mid = mix(aC, aE, uMode);
       vec3 pos;
       if (uP <= 1.0)      pos = mix(Acl, B, stage(uP));
-      else if (uP <= 2.0) pos = mix(B, aC, stage(uP - 1.0));
-      else                pos = mix(aC, aD, stage(uP - 2.0));
+      else if (uP <= 2.0) pos = mix(B, mid, stage(uP - 1.0));
+      else                pos = mix(mid, aD, stage(uP - 2.0));
 
       // shimmer on structured shapes
       pos.z += 0.04 * sin(uTime * 1.5 + aRnd * 60.0);
@@ -174,6 +198,7 @@ const mat = new THREE.ShaderMaterial({
   `
 });
 
+const AMBER = new THREE.Color("#FFC24B"), BLUE = new THREE.Color("#6CC4FF");
 const points = new THREE.Points(geo, mat);
 const group = new THREE.Group();
 group.add(points);
@@ -234,6 +259,9 @@ function frame(now) {
   uniforms.uP.value += (S.p - uniforms.uP.value) * Math.min(1, dt * 6);
   uniforms.uAlpha.value += (S.alpha - uniforms.uAlpha.value) * Math.min(1, dt * 4);
   uniforms.uIntro.value = reduce ? 1 : S.intro;
+  const tm = S.mode || 0;
+  uniforms.uMode.value += (tm - uniforms.uMode.value) * Math.min(1, dt * (reduce ? 60 : 3));
+  uniforms.uAmber.value.copy(AMBER).lerp(BLUE, uniforms.uMode.value);
 
   // mouse in view space at z=0 plane
   const halfH = Math.tan(THREE.MathUtils.degToRad(22.5)) * camera.position.z;

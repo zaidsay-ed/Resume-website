@@ -18,6 +18,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script>
+    (function () {
+      var m = new URLSearchParams(location.search).get("mode"), saved = null;
+      try { saved = localStorage.getItem("mode"); } catch (e) {}
+      if (m !== "swe" && m !== "data") m = saved === "swe" ? "swe" : "data";
+      document.documentElement.dataset.mode = m;
+    })();
+  </script>
   <script type="importmap">
     { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js" } }
   </script>
@@ -40,26 +48,33 @@
     <a href="#query">Query</a>
     <a href="#contact">Contact</a>
   </nav>
-  <a class="btn btn-sm magnetic" href="images/Zaid_Resume_DS.pdf" target="_blank" rel="noopener">Resume</a>
+  <div class="mode" role="radiogroup" aria-label="Show my portfolio for">
+    <span class="mode-thumb" aria-hidden="true"></span>
+    <button type="button" role="radio" data-set-mode="data">Data</button>
+    <button type="button" role="radio" data-set-mode="swe">Software</button>
+  </div>
+  <a class="btn btn-sm magnetic only-data" href="images/Zaid_Resume_DS.pdf" target="_blank" rel="noopener">Resume</a>
+  <a class="btn btn-sm magnetic only-swe" href="images/Zaid_Resume.pdf" target="_blank" rel="noopener">Resume</a>
 </header>
 
 <main id="main">
 
   <!-- HERO -->
   <section class="hero" id="top">
-    <p class="hero-status reveal-up"><span class="dot"></span>Open to Summer 2027 internships in data and software engineering</p>
+    <p class="hero-status reveal-up"><span class="dot"></span><span class="only-data">Open to Summer 2027 internships in data engineering, data science and software</span><span class="only-swe">Open to Summer 2027 internships in software engineering and data engineering</span></p>
     <h1 class="hero-name" aria-label="Zaid Sayed">
       <span class="line"><span class="word">Zaid</span></span>
       <span class="line"><span class="word">Sayed</span></span>
     </h1>
     <div class="hero-foot">
-      <p class="hero-lede reveal-up">I turn messy data into systems people can use: ingestion pipelines, ML models and the software around them. Most recently a data engineering co-op at Atreides. Computer Science at UBC, two-time International Student Scholarship recipient.</p>
+      <p class="hero-lede reveal-up only-data">I turn messy data into systems people can use: ingestion pipelines, ML models and the software around them. Most recently a data engineering co-op at Atreides. Computer Science at UBC, two-time International Student Scholarship recipient.</p>
+      <p class="hero-lede reveal-up only-swe">I design, build and ship software, from backend services on AWS to LLM-powered apps. Most recently I owned a module end to end at Atreides, from design to deployment. Computer Science at UBC, two-time International Student Scholarship recipient.</p>
       <div class="hero-actions reveal-up">
-        <a class="btn magnetic" href="images/Zaid_Resume_DS.pdf" target="_blank" rel="noopener">Resume: data &amp; ML</a>
-        <a class="btn btn-line magnetic" href="images/Zaid_Resume.pdf" target="_blank" rel="noopener">Resume: software</a>
+        <a class="btn magnetic r-data" href="images/Zaid_Resume_DS.pdf" target="_blank" rel="noopener">Resume: data &amp; ML</a>
+        <a class="btn btn-line magnetic r-swe" href="images/Zaid_Resume.pdf" target="_blank" rel="noopener">Resume: software</a>
       </div>
     </div>
-    <p class="scroll-cue reveal-up" aria-hidden="true">Scroll to run the pipeline</p>
+    <p class="scroll-cue reveal-up" aria-hidden="true"><span class="only-data">Scroll to run the pipeline</span><span class="only-swe">Scroll to see how I build</span></p>
   </section>
 
   <!-- PIPELINE STORY: particles change shape per stage, each stage is a job -->
@@ -67,44 +82,81 @@
     <h2 id="h-pipe" class="sr-only">Experience</h2>
     <div class="pipe-pin">
       <ol class="pipe-rail" aria-hidden="true">
-        <li data-i="0">Ingest</li>
-        <li data-i="1">Transform</li>
-        <li data-i="2">Serve</li>
+        <li data-i="0"><span class="only-data">Ingest</span><span class="only-swe">Design</span></li>
+        <li data-i="1"><span class="only-data">Transform</span><span class="only-swe">Build</span></li>
+        <li data-i="2"><span class="only-data">Serve</span><span class="only-swe">Review</span></li>
       </ol>
 
       <article class="stage" data-stage="0">
-        <p class="stage-kicker"><span class="mono">01</span> Ingest</p>
-        <h3>Data Engineer Co-op</h3>
-        <p class="stage-org">Atreides, Vancouver <span class="mono">May – Aug 2026</span></p>
-        <p class="stage-big"><span class="big-num">24 h → 10 min</span><span>roughly how long raw vendor data took to reach analysts, before and after the new ingestion system</span></p>
-        <ul>
-          <li>Owned the backfill module across the full SDLC: design, build, testing and deployment.</li>
-          <li>Backfills fan out across ~1,000 parallel AWS Lambda invocations, each handling up to ~10 GB.</li>
-          <li>Part of a new ingestion system whose proof of concept was designed for petabyte-scale vendor data.</li>
-        </ul>
+        <div class="only-data">
+          <p class="stage-kicker"><span class="mono">01</span> Ingest</p>
+          <h3>Data Engineer Co-op</h3>
+          <p class="stage-org">Atreides, Vancouver <span class="mono">May – Aug 2026</span></p>
+          <p class="stage-big"><span class="big-num">24 h → 10 min</span><span>roughly how long raw vendor data took to reach analysts, before and after the new ingestion system</span></p>
+          <ul>
+            <li>Owned the backfill module across the full SDLC: design, build, testing and deployment.</li>
+            <li>Backfills fan out across ~1,000 parallel AWS Lambda invocations, each handling up to ~10 GB.</li>
+            <li>Part of a new ingestion system whose proof of concept was designed for petabyte-scale vendor data.</li>
+          </ul>
+        </div>
+        <div class="only-swe">
+          <p class="stage-kicker"><span class="mono">01</span> Design</p>
+          <h3>Data Engineer Co-op</h3>
+          <p class="stage-org">Atreides, Vancouver <span class="mono">May – Aug 2026</span></p>
+          <p class="stage-big"><span class="count" data-from="0" data-to="1000" data-prefix="~" data-sep="1">~1,000</span><span>parallel AWS Lambda invocations per backfill, from a module I owned end to end</span></p>
+          <ul>
+            <li>Owned the backfill module across the full SDLC: design, implementation, testing and deployment.</li>
+            <li>Did code reviews on the team's ingestion code.</li>
+            <li>Part of an ingestion system that cut the time for raw vendor data to reach analysts from about 24 hours to about 10 minutes.</li>
+          </ul>
+        </div>
       </article>
 
       <article class="stage" data-stage="1">
-        <p class="stage-kicker"><span class="mono">02</span> Transform</p>
-        <h3>Data Science Intern</h3>
-        <p class="stage-org">Grant Thornton, Dubai <span class="mono">May – Jul 2025</span></p>
-        <p class="stage-big"><span class="count" data-from="0" data-to="30" data-suffix="%">30%</span><span>less manual processing time on audit data reviews</span></p>
-        <ul>
-          <li>Ingested, cleaned and validated multi-source financial datasets in Python and Excel.</li>
-          <li>Flagged anomalies through exploratory analysis to improve audit accuracy.</li>
-        </ul>
+        <div class="only-data">
+          <p class="stage-kicker"><span class="mono">02</span> Transform</p>
+          <h3>Data Science Intern</h3>
+          <p class="stage-org">Grant Thornton, Dubai <span class="mono">May – Jul 2025</span></p>
+          <p class="stage-big"><span class="count" data-from="0" data-to="30" data-suffix="%">30%</span><span>less manual processing time on audit data reviews</span></p>
+          <ul>
+            <li>Ingested, cleaned and validated multi-source financial datasets in Python and Excel.</li>
+            <li>Flagged anomalies through exploratory analysis to improve audit accuracy.</li>
+          </ul>
+        </div>
+        <div class="only-swe">
+          <p class="stage-kicker"><span class="mono">02</span> Build</p>
+          <h3>AI Software Engineer, then Program Manager</h3>
+          <p class="stage-org">Venu AI, San Jose <span class="mono">Aug 2023 – Aug 2024</span></p>
+          <p class="stage-big"><span class="count" data-from="0" data-to="40" data-suffix="%">40%</span><span>less debugging time after I redesigned the prompt-engineering layer</span></p>
+          <ul>
+            <li>Developed and trained an LLM for sales outreach in Python, built on the OpenAI (ChatGPT) API.</li>
+            <li>Raised client response rates from 25% to 40% by A/B testing prompts and model parameters.</li>
+            <li>Ran GitHub issues and sprint planning; promoted to Program Manager in 7 months.</li>
+          </ul>
+        </div>
       </article>
 
       <article class="stage" data-stage="2">
-        <p class="stage-kicker"><span class="mono">03</span> Serve</p>
-        <h3>AI Software Engineer, then Program Manager</h3>
-        <p class="stage-org">Venu AI, San Jose <span class="mono">Aug 2023 – Aug 2024</span></p>
-        <p class="stage-big"><span class="count" data-from="25" data-to="40" data-suffix="%">40%</span><span>outreach response rate for clients, up from 25%, by A/B testing LLM prompt templates</span></p>
-        <ul>
-          <li>Shipped reusable email-generation automation used across 3+ client use cases.</li>
-          <li>Redesigned the prompt-engineering layer, cutting debugging time by 40%.</li>
-          <li>Promoted from intern to Program Manager in 7 months.</li>
-        </ul>
+        <div class="only-data">
+          <p class="stage-kicker"><span class="mono">03</span> Serve</p>
+          <h3>AI Software Engineer, then Program Manager</h3>
+          <p class="stage-org">Venu AI, San Jose <span class="mono">Aug 2023 – Aug 2024</span></p>
+          <p class="stage-big"><span class="count" data-from="25" data-to="40" data-suffix="%">40%</span><span>outreach response rate for clients, up from 25%, by A/B testing LLM prompt templates</span></p>
+          <ul>
+            <li>Shipped reusable email-generation automation used across 3+ client use cases.</li>
+            <li>Redesigned the prompt-engineering layer, cutting debugging time by 40%.</li>
+            <li>Promoted from intern to Program Manager in 7 months.</li>
+          </ul>
+        </div>
+        <div class="only-swe">
+          <p class="stage-kicker"><span class="mono">03</span> Review</p>
+          <h3>Undergraduate Teaching Assistant</h3>
+          <p class="stage-org">UBC, Vancouver <span class="mono">Sep 2024 – now</span></p>
+          <p class="stage-big"><span class="big-num">CPSC 210</span><span>Software Construction in Java, plus CPSC 121 Models of Computation</span></p>
+          <ul>
+            <li>Help students design, test and debug object-oriented Java programs.</li>
+          </ul>
+        </div>
       </article>
     </div>
   </section>
@@ -169,7 +221,7 @@
     </header>
 
     <div class="bento" id="bento">
-      <article class="card card-xl" data-track="data">
+      <article data-key="etl" class="card card-xl" data-track="data">
         <div class="card-top"><span class="chip-track">Data</span><span class="mono">2026</span></div>
         <h3>Job market ETL pipeline</h3>
         <p>Extracts raw job postings, normalises salaries and locations, pulls skills out of free text and loads it all into a relational SQLite schema. Validation drops duplicates and handles missing values; SQL on top shows hiring trends and the most-requested skills.</p>
@@ -180,7 +232,7 @@
         <a class="card-link" href="https://github.com/zaidsay-ed/Job-market-etl-pipeline" target="_blank" rel="noopener">Code on GitHub</a>
       </article>
 
-      <article class="card card-tall" data-track="ml">
+      <article data-key="credit" class="card card-tall" data-track="ml">
         <div class="card-top"><span class="chip-track">ML</span><span class="mono">2025</span></div>
         <h3>Credit card default prediction</h3>
         <p class="metric"><span class="count" data-from="0.5" data-to="0.785" data-dec="3">0.785</span><span>test ROC-AUC on 30,000+ records</span></p>
@@ -188,29 +240,33 @@
         <p class="stack mono">Python, scikit-learn, Pandas</p>
       </article>
 
-      <article class="card" data-track="software ml">
+      <article data-key="email" class="card" data-track="software ml">
         <div class="card-top"><span class="chip-track">Software</span><span class="mono">2025</span></div>
         <h3>AI email assistant</h3>
         <p>Drafts Gmail replies from the whole thread and sender context, with guardrails on tone, length and low-confidence replies.</p>
+        <p class="only-swe">Under the hood: Gmail OAuth sign-in, thread fetching through the Gmail API, structured prompt templates with guardrails, and a React and Ionic front end in TypeScript.</p>
+        <div class="flow only-swe" aria-hidden="true">
+          <span>Gmail thread</span><i></i><span>context</span><i></i><span>guardrails</span><i></i><span>draft reply</span>
+        </div>
         <p class="stack mono">React, TypeScript, Gmail API, OpenAI</p>
         <a class="card-link" href="https://github.com/zaidsay-ed/email-responder" target="_blank" rel="noopener">Code on GitHub</a>
       </article>
 
-      <article class="card" data-track="data">
+      <article data-key="dash" class="card" data-track="data">
         <div class="card-top"><span class="chip-track">Data</span><span class="mono">2025</span></div>
         <h3>Customer spending dashboard</h3>
         <p>Power BI dashboard on transaction-level data with SQL aggregations for monthly spend and category trends.</p>
         <p class="stack mono">Power BI, SQL, Python</p>
       </article>
 
-      <article class="card" data-track="ml">
+      <article data-key="rl" class="card" data-track="ml">
         <div class="card-top"><span class="chip-track">ML</span><span class="mono live">in progress</span></div>
         <h3>Adaptive game difficulty engine</h3>
         <p>A reinforcement learning agent that adapts enemy behaviour to how well the player is doing.</p>
         <p class="stack mono">Python, RL</p>
       </article>
 
-      <article class="card" data-track="software">
+      <article data-key="budget" class="card" data-track="software">
         <div class="card-top"><span class="chip-track">Software</span><span class="mono">2024</span></div>
         <h3>Finance budget tracker</h3>
         <p>Desktop app with an MVC structure, JSON persistence and full JUnit coverage.</p>
@@ -218,14 +274,14 @@
         <a class="card-link" href="https://github.com/zaidsay-ed/Budget-Tracker" target="_blank" rel="noopener">Code on GitHub</a>
       </article>
 
-      <article class="card" data-track="data">
+      <article data-key="speedrun" class="card" data-track="data">
         <div class="card-top"><span class="chip-track">Data</span></div>
         <h3>Speedrun analytics database</h3>
         <p>Relational schema for a speedrunning platform, with aggregation and division queries in Oracle SQL.</p>
         <p class="stack mono">Oracle SQL</p>
       </article>
 
-      <article class="card" data-track="ml">
+      <article data-key="maternal" class="card" data-track="ml">
         <div class="card-top"><span class="chip-track">ML</span><span class="mono">2023</span></div>
         <h3>Maternal health risk classifier</h3>
         <p>KNN classifier tuned for recall on high-risk patients, benchmarked on imbalanced data.</p>
@@ -233,7 +289,7 @@
         <a class="card-link" href="https://github.com/zaidsay-ed/Maternal-Health-Risk-Classifier-Model" target="_blank" rel="noopener">Code on GitHub</a>
       </article>
 
-      <article class="card" data-track="software">
+      <article data-key="sudoku" class="card" data-track="software">
         <div class="card-top"><span class="chip-track">Software</span><span class="mono">2024</span></div>
         <h3>Sudoku solver</h3>
         <p>Backtracking search with constraint propagation to cut branching.</p>
@@ -326,7 +382,8 @@
   <section class="section contact" id="contact" aria-labelledby="h-contact">
     <div class="contact-main">
       <h2 id="h-contact">Hiring for summer&nbsp;2027?</h2>
-      <p class="contact-lede">I'm looking for a data engineering, data science or software engineering internship. Email is the fastest way to reach me.</p>
+      <p class="contact-lede only-data">I'm looking for a data engineering or data science internship, with software engineering a close second. Email is the fastest way to reach me.</p>
+      <p class="contact-lede only-swe">I'm looking for a software engineering internship, with data engineering a close second. Email is the fastest way to reach me.</p>
       <p class="contact-email">
         <a href="mailto:zaidsayedbusiness@gmail.com">zaidsayedbusiness@gmail.com</a>
         <button type="button" class="copy" id="copyEmail">Copy</button>
