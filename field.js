@@ -29,6 +29,9 @@ const A = new Float32Array(N * 3); // cloud
 const C = new Float32Array(N * 3); // table
 const D = new Float32Array(N * 3); // bars
 const E = new Float32Array(N * 3); // service graph (software mode)
+const F = new Float32Array(N * 3); // blueprint wireframe (software mode, design)
+const G = new Float32Array(N * 3); // code file with a diff (software mode, review)
+const hue2 = new Float32Array(N);  // accent particles in software mode
 const lane = new Float32Array(N);  // stream lane start y
 const tpos = new Float32Array(N);  // position along stream
 const jit = new Float32Array(N * 3);
@@ -51,6 +54,38 @@ const LANES = [-3.6, -2.2, -0.8, 0.9, 2.3, 3.7];
 const NODES = [[-7.2, 0], [-3.4, 1.6], [-3.4, -1.6], [0.6, 3.0], [0.6, 0], [0.6, -3.0], [4.8, 2.0], [4.8, -0.6], [4.8, -3.2]];
 const NODE_R = [0.75, 0.55, 0.55, 0.5, 0.5, 0.5, 0.6, 0.6, 0.6];
 const LINKS = [[0, 1], [0, 2], [1, 3], [1, 4], [2, 4], [2, 5], [3, 6], [4, 6], [4, 7], [5, 7], [5, 8]];
+
+// segments are [x0, y0, x1, y1, accent]; particles are spread along them by length
+function rectSegs(x0, y0, x1, y1, acc) { return [[x0, y0, x1, y0, acc], [x1, y0, x1, y1, acc], [x1, y1, x0, y1, acc], [x0, y1, x0, y0, acc]]; }
+const BLUEPRINT = [].concat(
+  rectSegs(-7, -3.8, 7, 3.8, 0),          // app frame
+  rectSegs(-7, 2.8, 7, 3.8, 1),           // header
+  rectSegs(-7, -3.8, -4.2, 2.8, 0),       // sidebar
+  rectSegs(-3.7, 0.4, -0.6, 2.3, 0), rectSegs(-0.2, 0.4, 2.9, 2.3, 0), rectSegs(3.3, 0.4, 6.4, 2.3, 0), // cards
+  rectSegs(-3.7, -3.3, 6.4, -0.2, 0),     // main panel
+  [[-6.5, 2.1, -4.8, 2.1, 1], [-6.5, 1.4, -5.2, 1.4, 0], [-6.5, 0.7, -5.0, 0.7, 0], [-6.5, 0.0, -5.4, 0.0, 0]], // nav items
+  [[-3.1, -1.0, 5.8, -1.0, 0], [-3.1, -1.7, 3.6, -1.7, 0], [-3.1, -2.4, 4.6, -2.4, 0]] // panel content
+);
+const INDENT = [0, 1, 2, 2, 1, 2, 3, 3, 2, 1, 0, 1, 2, 1, 0];
+const CODE = [];
+INDENT.forEach((ind, k) => {
+  const y = 3.6 - k * 0.52, diff = k >= 5 && k <= 7 ? 1 : 0;
+  const len = 2.2 + ((Math.sin(k * 91.7) * 43758.5453) % 1 + 1) % 1 * 6;
+  const x0 = -5.8 + ind * 0.8;
+  CODE.push([-7.3, y, -6.9, y, 0]);                 // line number
+  CODE.push([x0, y, Math.min(x0 + len, 7), y, diff]); // code
+  if (diff) CODE.push([-6.55, y + 0.22, -6.55, y - 0.22, 1]); // change marker in the gutter
+});
+function segPicker(segs) {
+  const lens = segs.map(s => Math.hypot(s[2] - s[0], s[3] - s[1]) + 0.05), total = lens.reduce((a, b) => a + b, 0);
+  return function () {
+    let r = Math.random() * total, k = 0;
+    while (r > lens[k]) { r -= lens[k]; k++; }
+    const s = segs[k], u = Math.random();
+    return [s[0] + (s[2] - s[0]) * u, s[1] + (s[3] - s[1]) * u, s[4]];
+  };
+}
+const pickBlueprint = segPicker(BLUEPRINT), pickCode = segPicker(CODE);
 
 for (let i = 0; i < N; i++) {
   const r = Math.random();
@@ -103,6 +138,15 @@ for (let i = 0; i < N; i++) {
     E[i * 3 + 1] = a[1] + (c[1] - a[1]) * u + gauss() * 0.04;
     E[i * 3 + 2] = gauss() * 0.04;
   }
+
+  hue2[i] = Math.random() < 0.08 ? 1 : 0;
+  const bp = pickBlueprint();
+  F[i * 3] = bp[0] + gauss() * 0.03; F[i * 3 + 1] = bp[1] + gauss() * 0.03; F[i * 3 + 2] = gauss() * 0.03;
+  const cd = pickCode();
+  G[i * 3] = cd[0]; G[i * 3 + 1] = cd[1] + gauss() * 0.045; G[i * 3 + 2] = gauss() * 0.04;
+  // a particle is accented only in the shape where it lands on an accent segment
+  if (bp[2] && Math.random() < 0.5) hue2[i] = 1;
+  if (cd[2]) hue2[i] = 1;
 }
 
 const geo = new THREE.BufferGeometry();
@@ -110,6 +154,9 @@ geo.setAttribute("position", new THREE.BufferAttribute(A, 3));
 geo.setAttribute("aC", new THREE.BufferAttribute(C, 3));
 geo.setAttribute("aD", new THREE.BufferAttribute(D, 3));
 geo.setAttribute("aE", new THREE.BufferAttribute(E, 3));
+geo.setAttribute("aF", new THREE.BufferAttribute(F, 3));
+geo.setAttribute("aG", new THREE.BufferAttribute(G, 3));
+geo.setAttribute("aHue2", new THREE.BufferAttribute(hue2, 1));
 geo.setAttribute("aLane", new THREE.BufferAttribute(lane, 1));
 geo.setAttribute("aT", new THREE.BufferAttribute(tpos, 1));
 geo.setAttribute("aJit", new THREE.BufferAttribute(jit, 3));
@@ -139,8 +186,8 @@ const mat = new THREE.ShaderMaterial({
     uniform float uTime, uP, uIntro, uPR, uMode;
     uniform vec2 uMouse;
     uniform float uMouseOn;
-    attribute vec3 aC, aD, aE, aJit;
-    attribute float aLane, aT, aRnd, aHue, aSize;
+    attribute vec3 aC, aD, aE, aF, aG, aJit;
+    attribute float aLane, aT, aRnd, aHue, aHue2, aSize;
     varying float vHue, vFade;
 
     float ease(float x) { x = clamp(x, 0.0, 1.0); return x * x * (3.0 - 2.0 * x); }
@@ -156,12 +203,14 @@ const mat = new THREE.ShaderMaterial({
       vec3 Acl = position;
       Acl += 0.25 * vec3(sin(uTime * 0.4 + aRnd * 40.0), cos(uTime * 0.35 + aRnd * 30.0), sin(uTime * 0.3 + aRnd * 20.0));
 
-      // software mode swaps the table for a service graph
-      vec3 mid = mix(aC, aE, uMode);
+      // software mode: blueprint → service graph → code diff
+      vec3 s1 = mix(B, aF, uMode);
+      vec3 s2 = mix(aC, aE, uMode);
+      vec3 s3 = mix(aD, aG, uMode);
       vec3 pos;
-      if (uP <= 1.0)      pos = mix(Acl, B, stage(uP));
-      else if (uP <= 2.0) pos = mix(B, mid, stage(uP - 1.0));
-      else                pos = mix(mid, aD, stage(uP - 2.0));
+      if (uP <= 1.0)      pos = mix(Acl, s1, stage(uP));
+      else if (uP <= 2.0) pos = mix(s1, s2, stage(uP - 1.0));
+      else                pos = mix(s2, s3, stage(uP - 2.0));
 
       // shimmer on structured shapes
       pos.z += 0.04 * sin(uTime * 1.5 + aRnd * 60.0);
@@ -178,8 +227,9 @@ const mat = new THREE.ShaderMaterial({
       mv.xy += normalize(toM + 0.0001) * smoothstep(2.8, 0.0, d) * 0.9 * uMouseOn;
 
       gl_Position = projectionMatrix * mv;
-      gl_PointSize = aSize * uPR * (40.0 / -mv.z) * (aHue > 0.5 ? 1.25 : 1.0);
-      vHue = aHue;
+      float h = mix(aHue, aHue2, uMode);
+      gl_PointSize = aSize * uPR * (40.0 / -mv.z) * (h > 0.5 ? 1.25 : 1.0);
+      vHue = h;
       vFade = k;
     }
   `,
