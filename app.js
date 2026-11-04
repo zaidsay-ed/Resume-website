@@ -261,8 +261,10 @@
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       send.disabled = true; send.textContent = "Sending…"; status.className = "form-msg"; status.textContent = "";
-      fetch(SHEET_URL, { method: "POST", body: new FormData(form) })
-        .then(function (r) { if (!r.ok) throw new Error(r.status); status.className = "form-msg ok"; status.textContent = "Message sent. I'll reply to the email you gave."; form.reset(); })
+      // Apps Script answers through a redirect without CORS headers, so the response can't be read.
+      // "no-cors" sends the form anyway; a network failure still lands in catch.
+      fetch(SHEET_URL, { method: "POST", body: new FormData(form), mode: "no-cors" })
+        .then(function () { status.className = "form-msg ok"; status.textContent = "Message sent. I'll reply to the email you gave."; form.reset(); })
         .catch(function () { status.className = "form-msg err"; status.textContent = "Message not sent. Check your connection, or email zaidsayedbusiness@gmail.com directly."; })
         .finally(function () { send.disabled = false; send.textContent = "Send message"; });
     });
