@@ -6,6 +6,7 @@
 
   var DB = {
     projects: [
+      { name: "LeadFlow", track: "software", stack: "python, fastapi, mongodb, redis, rq, docker", year: 2026, status: "done" },
       { name: "Job market ETL pipeline", track: "data", stack: "python, pandas, sql, sqlite", year: 2026, status: "done" },
       { name: "Credit card default prediction", track: "ml", stack: "python, scikit-learn, pandas, numpy", year: 2025, status: "done" },
       { name: "Customer spending dashboard", track: "data", stack: "power bi, sql, python", year: 2025, status: "done" },
@@ -38,7 +39,7 @@
       { name: "Java", area: "languages" }, { name: "TypeScript", area: "languages" }, { name: "JavaScript", area: "languages" }, { name: "C++", area: "languages" },
       { name: "PySpark", area: "data" }, { name: "Pandas", area: "data" }, { name: "SQLite", area: "data" }, { name: "Power BI", area: "data" }, { name: "ETL pipelines", area: "data" },
       { name: "scikit-learn", area: "ml" }, { name: "TensorFlow", area: "ml" }, { name: "NumPy", area: "ml" }, { name: "Prompt engineering", area: "ml" },
-      { name: "React", area: "software" }, { name: "Docker", area: "software" }, { name: "Git", area: "software" }, { name: "JUnit", area: "software" }
+      { name: "React", area: "software" }, { name: "FastAPI", area: "software" }, { name: "MongoDB", area: "software" }, { name: "Redis", area: "software" }, { name: "Docker", area: "software" }, { name: "Git", area: "software" }, { name: "JUnit", area: "software" }
     ]
   };
 

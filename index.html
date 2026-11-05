@@ -252,6 +252,23 @@
         <a class="card-link" href="https://github.com/zaidsay-ed/email-responder" target="_blank" rel="noopener">Code on GitHub</a>
       </article>
 
+      <article data-key="leadflow" class="card card-xl" data-track="software">
+        <div class="card-top"><span class="chip-track">Software</span><span class="mono">2026</span></div>
+        <h3>LeadFlow</h3>
+        <p>A backend for sales outreach: a REST API for contacts, background enrichment jobs, and multi-step email sequences that stop as soon as a contact replies.</p>
+        <ul class="card-points">
+          <li>Redis caching for search with version-based invalidation, and per-API-key rate limiting.</li>
+          <li>Enrichment runs on an RQ worker with retries and backoff; an atomic status check stops a contact being enriched twice.</li>
+          <li>A scheduler claims due sequence steps atomically, so several schedulers can run without double-sending.</li>
+          <li>Case-insensitive, index-backed search with a MongoDB collation; duplicate emails return 409.</li>
+        </ul>
+        <div class="flow" aria-hidden="true">
+          <span>FastAPI</span><i></i><span>Redis queue</span><i></i><span>RQ worker</span><i></i><span>MongoDB</span>
+        </div>
+        <p class="stack mono">Python, FastAPI, MongoDB, Redis, RQ, Docker Compose</p>
+        <a class="card-link" href="https://github.com/zaidsay-ed/leadflow" target="_blank" rel="noopener">Code on GitHub</a>
+      </article>
+
       <article data-key="dash" class="card" data-track="data">
         <div class="card-top"><span class="chip-track">Data</span><span class="mono">2025</span></div>
         <h3>Customer spending dashboard</h3>
@@ -368,7 +385,7 @@
   <!-- Skills marquee -->
   <section class="marquee" aria-label="Tools I use">
     <div class="marquee-track">
-      <span>Python</span><span>SQL</span><span>PySpark</span><span>Pandas</span><span>scikit-learn</span><span>TensorFlow</span><span>Java</span><span>TypeScript</span><span>React</span><span>Docker</span><span>Power BI</span><span>Git</span><span>R</span><span>C++</span>
+      <span>Python</span><span>SQL</span><span>PySpark</span><span>Pandas</span><span>scikit-learn</span><span>TensorFlow</span><span>Java</span><span>TypeScript</span><span>React</span><span>Docker</span><span>FastAPI</span><span>MongoDB</span><span>Redis</span><span>Power BI</span><span>Git</span><span>R</span><span>C++</span>
     </div>
   </section>
 
