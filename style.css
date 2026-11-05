@@ -427,3 +427,10 @@ html[data-mode="swe"] .card[data-key="speedrun"] { order: 4; }
 @media (max-width: 380px) { .nav-name { display: none; } .mode { margin-right: auto; } }
 @media (prefers-reduced-motion: reduce) { .mode-thumb { transition: none; } }
 html[data-mode="swe"] .card[data-key="email"] > p:not(.stack) { font-size: 1.05rem; max-width: 52ch; }
+.contact-email a.copy { font-size: 0.85rem; font-weight: 500; color: var(--text); text-decoration: none; background: none; letter-spacing: 0; word-break: normal; }
+
+/* LeadFlow card */
+.card-points { margin: 0.2rem 0 0; padding-left: 1.1rem; color: rgb(233 239 234 / 0.78); font-size: 0.95rem; max-width: 60ch; }
+.card-points li + li { margin-top: 0.3rem; }
+html[data-mode="swe"] .card[data-key="leadflow"] { order: -1; }
+html[data-mode="swe"] .card[data-key="credit"] { grid-row: auto; }
